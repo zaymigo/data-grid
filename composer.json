@@ -1,0 +1,37 @@
+{
+  "name": "mte-grid/grid",
+  "description": "mte grid module",
+  "type": "library",
+  "keywords": [
+    "zf2"
+  ],
+  "authors": [
+    {
+      "name": "Roman Malashin",
+      "email": "malashinr@mte-telecom.ru"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:mte-grid/grid.git"
+    }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "zendframework/zendframework": "2.*"
+  },
+  "require-dev":{
+    "fabpot/php-cs-fixer": "1.9.1",
+    "phpunit/phpunit": "4.7.7",
+    "phpunit/phpcov": "2.0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "MteGrid\\Grid": "src/"
+    },
+    "classmap": [
+      "./Module.php"
+    ]
+  }
+}
