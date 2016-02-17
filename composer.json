@@ -28,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "MteGrid\\Grid": "src/"
+      "MteGrid\\Grid\\": "src/"
     },
     "classmap": [
       "./Module.php"

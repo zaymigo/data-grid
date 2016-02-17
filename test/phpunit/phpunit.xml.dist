@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="Bootstrap.php"
+         syntaxCheck="true"
+         colors="true"
+         stopOnError="true"
+         stopOnFailure="true"
+         stopOnIncomplete="true"
+         stopOnSkipped="true"
+         verbose="false"
+         timeoutForSmallTests="10"
+         timeoutForMediumTests="10"
+         timeoutForLargeTests="60"
+        >
+    <testsuites>
+        <testsuite name="MteGridTest">
+            <directory>./</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
