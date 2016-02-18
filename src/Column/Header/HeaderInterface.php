@@ -24,6 +24,12 @@ interface HeaderInterface
     public function setTemplate($template);
 
     /**
+     * возвращает путь до шаблона
+     * @return string
+     */
+    public function getTemplate();
+
+    /**
      * Усанавливает опции для заголовка
      * @param array|Traversable $options
      * @return mixed
@@ -31,11 +37,10 @@ interface HeaderInterface
     public function setOptions(array $options = []);
 
     /**
-     * Устанавливает аттрибуты для заголовка
-     * @param array $attributes
-     * @return $this
+     * Возвращает набор опций для заголовка
+     * @return array
      */
-    public function setAttributes($attributes);
+    public function getOptions();
 
     /**
      * Данные для шаблона заголовка
@@ -43,4 +48,10 @@ interface HeaderInterface
      * @return $this
      */
     public function setData($data);
+
+    /**
+     * Возвращает данные для шаблона
+     * @return array
+     */
+    public function getData();
 }

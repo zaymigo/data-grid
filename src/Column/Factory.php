@@ -7,9 +7,10 @@
 namespace MteGrid\Grid\Column;
 
 use MteGrid\Grid\Column\Exception\InvalidColumnException;
+use MteGrid\Grid\Column\Exception\InvalidNameException;
 use MteGrid\Grid\Column\Exception\InvalidSpecificationException;
 use Traversable;
-use ArrayAccess;
+use Zend\Http\Header\HeaderInterface;
 use Zend\Hydrator\ClassMethods;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
@@ -19,6 +20,7 @@ use Zend\ServiceManager\Exception\ServiceNotFoundException;
  * @package MteGrid\Grid\Column
  */
 class Factory
+    implements FactoryInterface
 {
     /**
      * @var GridColumnPluginManager
@@ -44,19 +46,27 @@ class Factory
     }
 
     /**
-     * @param array | Traversable$spec
+     * @param array | Traversable $spec
      * @throws InvalidColumnException
+     * @throws InvalidNameException
      * @throws InvalidSpecificationException
      */
     protected function validate($spec)
     {
-        if(!is_array($spec) && !$spec instanceof Traversable && !$spec instanceof ArrayAccess) {
-            throw new InvalidSpecificationException(sprintf('Не задан '));
+        if (!is_array($spec) && !$spec instanceof Traversable) {
+            throw new InvalidSpecificationException(
+                sprintf('Передана некорректная спецификация для создания колонки. Ожидается array или %s, прищел: %s',
+                    Traversable::class,
+                    gettype($spec)
+                    )
+            );
         }
-        if(!array_key_exists('type', $spec) || !$spec['type']) {
-            throw new InvalidColumnException(sprintf('Не передан тип создаваемого столбца.'));
+        if (!array_key_exists('type', $spec) || !$spec['type']) {
+            throw new InvalidColumnException('Не передан тип создаваемого столбца.');
         }
-
+        if (!array_key_exists('name', $spec) || !$spec['name']) {
+            throw new InvalidNameException('Не задано имя для колонки.');
+        }
     }
 
     /**
@@ -69,17 +79,30 @@ class Factory
      * @throws ServiceNotCreatedException
      * @throws \Zend\ServiceManager\Exception\RuntimeException
      * @throws \Zend\Hydrator\Exception\BadMethodCallException
+     * @throws \MteGrid\Grid\Column\Exception\InvalidNameException
+     * @throws \MteGrid\Grid\Column\Header\Exception\NoValidSpecificationException
+     * @throws \MteGrid\Grid\Column\Header\Exception\NoValidTemplateException
      */
     public function create($spec)
     {
         $this->validate($spec);
         /** @var ColumnInterface $column */
         $column = $this->getColumnPluginManager()->get($spec['type']);
-        $classMethods = new ClassMethods();
+        /** @var ClassMethods $classMethods */
+        $classMethods =  $this->getColumnPluginManager()
+            ->getServiceLocator()
+            ->get('HydratorManager')
+            ->get('ClassMethods');
         $column = $classMethods->hydrate($spec, $column);
 
-//        $headerFactory = new Header\Factory();
-//        $headerFactory->create($spec['header']);
+        if (array_key_exists('header', $spec)
+            && $spec['header']
+            && !$spec['header'] instanceof HeaderInterface) {
+            $headerFactory = new Header\Factory();
+            $header = $headerFactory->create($spec['header']);
+            $column->setHeader($header);
+        }
+
         return $column;
     }
 }

@@ -9,6 +9,7 @@ namespace MteGrid\Grid\Test\PhpUnit\GridColumn;
 
 use MteGrid\Grid\Column\ColumnInterface;
 use MteGrid\Grid\Column\Exception\InvalidColumnException;
+use MteGrid\Grid\Column\Exception\InvalidNameException;
 use MteGrid\Grid\Column\Exception\InvalidSpecificationException;
 use MteGrid\Grid\Column\Factory;
 use MteGrid\Grid\Column\GridColumnPluginManager;
@@ -22,7 +23,6 @@ use Exception;
  */
 class GridColumnFactoryTest extends AbstractControllerTestCase
 {
-
     /** @var GridColumnPluginManager  */
     protected $gridColumnManager;
 
@@ -37,6 +37,9 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
     }
 
 
+    /**
+     *
+     */
     public function testCreateColumn()
     {
         $factory = new Factory();
@@ -59,7 +62,7 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
     }
 
     /**
-     *
+     * проверяет что возвращается исключение в случае если не задан тип
      */
     public function testEmptyTypeException()
     {
@@ -79,6 +82,10 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
         }
     }
 
+    /**
+     * Проверяет что фабрика возвращает исключение в случае если приходит
+     * не массив
+     */
     public function testEmptySpecificationException()
     {
         $factory = new Factory();
@@ -87,6 +94,28 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
             $factory->create('');
         } catch(Exception $e) {
             self::assertInstanceOf(InvalidSpecificationException::class, $e);
+        }
+    }
+
+    /**
+     * Проверяет что фабрика возвращает исключение в случае если приходит
+     * не массив
+     */
+    public function testEmptyNameException()
+    {
+        $factory = new Factory();
+        $factory->setColumnPluginManager($this->gridColumnManager);
+        $columnSpec = [
+            'type' => 'text',
+            'header' => [],
+            'options' => [],
+            'attributes' => [],
+            'template' => ''
+        ];
+        try {
+            $factory->create($columnSpec);
+        } catch(Exception $e) {
+            self::assertInstanceOf(InvalidNameException::class, $e);
         }
     }
 }

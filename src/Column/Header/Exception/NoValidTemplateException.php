@@ -6,8 +6,10 @@
 
 namespace MteGrid\Grid\Column\Header\Exception;
 
-use MteGrid\Grid\Exception\RuntimeException as MteGridRuntimeException;
-
-class RuntimeException extends MteGridRuntimeException
+/**
+ * Class NoValidTypeException
+ * @package MteGrid\Grid\Column\Header\Exception
+ */
+class NoValidTemplateException extends RuntimeException
 {
 }

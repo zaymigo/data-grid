@@ -7,9 +7,9 @@
 namespace MteGrid\Grid\Column\Exception;
 
 /**
- * Class InvalidSpecificationException
+ * Class InvalidNameException
  * @package MteGrid\Grid\Column\Exception
  */
-class InvalidSpecificationException extends RuntimeException
+class InvalidNameException extends RuntimeException
 {
 }
