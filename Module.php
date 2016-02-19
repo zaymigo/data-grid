@@ -19,13 +19,13 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
  * Class Module
  * @package MteGrid\Grid
  */
-class Module implements
-    ServiceLocatorAwareInterface,
+class Module implements ServiceLocatorAwareInterface,
     ConfigProviderInterface,
     AutoloaderProviderInterface,
     BootstrapListenerInterface,
     ServiceProviderInterface
 {
+
     use ServiceLocatorAwareTrait;
 
 

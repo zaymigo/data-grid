@@ -11,7 +11,7 @@ use MteGrid\Grid\Column\GridColumnProviderInterface;
 
 return array_merge(
     require 'serviceManager.config.php',
-    require 'gridColumns.config.php',
+    require 'grid.config.php',
     [
     'service_listener_options' => [
         [
@@ -19,6 +19,12 @@ return array_merge(
             'config_key' => 'grid_columns',
             'interface' => GridColumnProviderInterface::class,
             'method' => 'getGridColumnConfig'
+        ],
+        [
+            'service_manager' => 'GridManager',
+            'config_key' => 'grids',
+            'interface' => GridProviderInterface::class,
+            'method' => ''
         ]
     ]
 ]);

@@ -19,8 +19,7 @@ use Zend\ServiceManager\Exception\ServiceNotFoundException;
  * Class Factory
  * @package MteGrid\Grid\Column
  */
-class Factory
-    implements FactoryInterface
+final class Factory implements FactoryInterface
 {
     /**
      * @var GridColumnPluginManager

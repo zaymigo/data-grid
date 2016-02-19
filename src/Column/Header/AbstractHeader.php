@@ -13,7 +13,7 @@ use Traversable;
  * Class AbstractHeader
  * @package MteGrid\Grid\Column\Header
  */
-class AbstractHeader implements HeaderInterface
+abstract class AbstractHeader implements HeaderInterface
 {
     /**
      * Путь до шаблона

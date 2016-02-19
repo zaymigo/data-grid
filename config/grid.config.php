@@ -6,6 +6,9 @@
 namespace MteGrid\Grid;
 
 return [
+    'grids' => [
+
+    ],
     'grid_columns' => [
 
     ]

@@ -17,8 +17,7 @@ use Exception;
  * Class HeaderFactoryTest
  * @package MteGrid\Grid\Test\PhpUnit\GridColumn\Header
  */
-class HeaderFactoryTest
-    extends AbstractControllerTestCase
+class HeaderFactoryTest extends AbstractControllerTestCase
 {
     public function setUp()
     {

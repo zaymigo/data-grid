@@ -10,7 +10,6 @@ namespace MteGrid\Grid\Column\Header\Exception;
  * Class NoValidSpecificationException
  * @package MteGrid\Grid\Column\Header\Exception
  */
-class NoValidSpecificationException
-    extends RuntimeException
+class NoValidSpecificationException extends RuntimeException
 {
 }

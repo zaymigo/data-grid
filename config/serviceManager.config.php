@@ -11,10 +11,12 @@ use MteGrid\Grid\Column\GridColumnPluginManagerFactory;
 return [
     'service_manager' => [
         'factories' => [
-            GridColumnPluginManager::class => GridColumnPluginManagerFactory::class
+            GridColumnPluginManager::class => GridColumnPluginManagerFactory::class,
+            GridPluginManager::class => GridPluginManagerFactory::class
         ],
         'aliases' => [
-            'GridColumnManager' => GridColumnPluginManager::class
+            'GridColumnManager' => GridColumnPluginManager::class,
+            'GridManager' => GridPluginManager::class
         ]
     ]
 ];

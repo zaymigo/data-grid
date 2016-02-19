@@ -9,7 +9,7 @@ namespace MteGrid\Grid\Column;
 use MteGrid\Grid\Column\Header\HeaderInterface;
 use Traversable;
 
-class AbstractColumn implements ColumnInterface
+abstract class AbstractColumn implements ColumnInterface
 {
     /**
      * @var HeaderInterface
