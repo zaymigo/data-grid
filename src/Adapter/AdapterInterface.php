@@ -6,6 +6,8 @@
 
 namespace MteGrid\Grid\Adapter;
 
+use MteGrid\Grid\Condition\Conditions;
+
 /**
  * Interface AdapterInterface
  * @package MteGrid\Grid\Adapter
@@ -13,7 +15,7 @@ namespace MteGrid\Grid\Adapter;
 interface AdapterInterface
 {
     /**
-     * @return array
+     * @return array | ArrayCollection
      */
     public function getData();
 
@@ -21,4 +23,15 @@ interface AdapterInterface
      * @return int
      */
     public function getCount();
+
+    /**
+     * @param Conditions $conditions
+     * @return mixed
+     */
+    public function setConditions($conditions);
+
+    /**
+     * @return Conditions
+     */
+    public function getConditions();
 }

@@ -6,12 +6,13 @@
 
 namespace MteGrid\Grid\Column\Header;
 
-use MteGrid\Grid\Column\FactoryInterface;
+use MteGrid\Grid\FactoryInterface;
 use MteGrid\Grid\Column\Header\Exception\NoValidSpecificationException;
 use MteGrid\Grid\Column\Header\Exception\NoValidTemplateException;
 use Traversable;
+
 /**
- * Фабрика заголовков для колнок
+ * Фабрика заголовков для колонок таблицы
  * Class Factory
  * @package MteGrid\Grid\Column\Header
  *

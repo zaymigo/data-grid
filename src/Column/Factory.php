@@ -9,6 +9,7 @@ namespace MteGrid\Grid\Column;
 use MteGrid\Grid\Column\Exception\InvalidColumnException;
 use MteGrid\Grid\Column\Exception\InvalidNameException;
 use MteGrid\Grid\Column\Exception\InvalidSpecificationException;
+use MteGrid\Grid\FactoryInterface;
 use Traversable;
 use Zend\Http\Header\HeaderInterface;
 use Zend\Hydrator\ClassMethods;

@@ -19,7 +19,7 @@ use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 use Exception;
 
 /**
- * Class GridcolumnFactoryTest
+ * Class GridColumnFactoryTest
  * @package MteGrid\Grid\Test\PhpUnit\GridColumn
  */
 class GridColumnFactoryTest extends AbstractControllerTestCase
@@ -34,6 +34,9 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
      */
     protected $factory;
 
+    /**
+     *
+     */
     protected function setUp()
     {
         $config = require TestPath::getApplicationConfigPath();

@@ -110,10 +110,10 @@ abstract class AbstractGrid implements GridInterface
      */
     public function add($column)
     {
-        if(is_array($column) || $column instanceof ArrayAccess) {
+        if (is_array($column) || $column instanceof ArrayAccess) {
             $columnFactory = new Column\Factory();
             $column = $columnFactory->create($column);
-        } else if(!$column instanceof ColumnInterface) {
+        } elseif (!$column instanceof ColumnInterface) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Column должен быть массивом или реализовывать %s', ColumnInterface::class)
             );

@@ -7,26 +7,16 @@
 namespace MteGrid\Grid\Adapter;
 
 /**
- * Class AbstractAdapter 
+ * Class DoctrineDBAL 
  * @package MteGrid\Grid\Adapter
  */
-class  AbstractAdapter implements AdapterInterface
+class DoctrineDBALAdapter extends AbstractAdapter
 {
     /**
-     * @return array
+     * @var
      */
-    public function getData()
-    {
-        // TODO: Implement getData() method.
-    }
+    protected $query;
 
-    /**
-     * @return int
-     */
-    public function getCount()
-    {
-        // TODO: Implement getCount() method.
-    }
 
     public function setConditions($conditions)
     {
