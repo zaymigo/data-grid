@@ -7,7 +7,6 @@
 namespace MteGrid\Grid;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception;
 
 /**
  * Class GridPluginManager 

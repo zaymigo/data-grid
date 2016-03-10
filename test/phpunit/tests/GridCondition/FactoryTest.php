@@ -69,7 +69,7 @@ class FactoryTest extends AbstractHttpControllerTestCase
     /**
      * Проверяет корректность возвращаемого exception в случае пустого ключа
      */
-    public function testCreateConditionInvalidKey()
+    public function testCreateConditionWithInvalidKey()
     {
         $conditionSpec = [
             'type' => DB::class,

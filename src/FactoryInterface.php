@@ -16,7 +16,7 @@ interface FactoryInterface
 {
     /**
      * Создает экземпляр объекта
-     * @param array | Traversable $spec
+     * @param array | Traversable | string $spec
      * @return mixed
      */
     public function create($spec);

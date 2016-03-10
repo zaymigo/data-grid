@@ -82,4 +82,17 @@ interface GridInterface
      * @return array | Traversable
      */
     public function getOptions();
+
+    /**
+     * Устанавливает имя таблицы
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name);
+
+    /**
+     * Возвращает имя таблицы
+     * @return string
+     */
+    public function getName();
 }

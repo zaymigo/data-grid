@@ -53,7 +53,7 @@ class Factory implements FactoryInterface
         if (!$reflection->isInstantiable()) {
             throw new Exception\RuntimeException(sprintf('Невозможно создать экземпляр condition\'a %s', $spec['type']));
         }
-        if(!$reflection->implementsInterface(ConditionInterface::class)) {
+        if (!$reflection->implementsInterface(ConditionInterface::class)) {
             throw new Exception\RuntimeException(sprintf('Condition должен реализовывать %s', ConditionInterface::class));
         }
         return $reflection->newInstanceArgs([$spec['key'], $spec['criteria'], $spec['value']]);

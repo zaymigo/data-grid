@@ -37,6 +37,18 @@ abstract class AbstractColumn implements ColumnInterface
     protected $attributes;
 
     /**
+     * По данному полю осуществляется сортировка колонок при выводе
+     * @var int
+     */
+    protected $order;
+
+    /**
+     * Флаг сортировки данных
+     * @var bool
+     */
+    protected $sortable;
+
+    /**
      * Устанавливает заголовок для колонки
      * @param HeaderInterface | array | Traversable $header
      * @return $this
@@ -134,5 +146,45 @@ abstract class AbstractColumn implements ColumnInterface
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    /**
+     * Возвращает параметр по которому сортируются колонки
+     * @return int
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Устанавливает параметр для сортировки колонок
+     * @param int $order
+     * @return $this
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+        return $this;
+    }
+
+    /**
+     * Флаг сообщающий можно ли сортировать по колонке
+     * @return bool
+     */
+    public function getSortable()
+    {
+        return $this->sortable;
+    }
+
+    /**
+     * Устанавливает флаг информирующий можно сортировать или нет по колонке
+     * @param bool $sortable
+     * @return $this
+     */
+    public function setSortable($sortable)
+    {
+        $this->sortable = $sortable;
+        return $this;
     }
 }

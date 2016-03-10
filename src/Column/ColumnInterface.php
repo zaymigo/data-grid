@@ -79,4 +79,30 @@ interface ColumnInterface
      * @return array
      */
     public function getAttributes();
+
+    /**
+     * Возвращает параметр по которому сортируются колонки
+     * @return int
+     */
+    public function getOrder();
+
+    /**
+     * Устанавливает параметр для сортировки колонок
+     * @param int $order
+     * @return $this
+     */
+    public function setOrder($order);
+
+    /**
+     * Флаг сообщающий можно ли сортировать по колонке
+     * @return bool
+     */
+    public function getSortable();
+
+    /**
+     * Устанавливает флаг информирующий можно сортировать или нет по колонке
+     * @param bool $sortable
+     * @return $this
+     */
+    public function setSortable($sortable);
 }

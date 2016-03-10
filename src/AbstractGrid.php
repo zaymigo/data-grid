@@ -41,6 +41,34 @@ abstract class AbstractGrid implements GridInterface
      */
     protected $options;
 
+    /**
+     * Имя таблицы
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @param array | ArrayAccess $options
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($options = [])
+    {
+        if(!array_key_exists('adapter', $options) || !$options['adapter']) {
+            throw new Exception\InvalidArgumentException(
+                'Для корректной работы таблиц в конструктор необходимо передавать адаптер.'
+            );
+        }
+        $adapter = $options['adapter'];
+        unset($options['adapter']);
+        $this->configure($adapter, $options);
+    }
+
+    protected function configure(AdapterInterface $adapter, $options = [])
+    {
+        $this->setAdapter($adapter);
+        $this->setOptions($options);
+    }
+
 
     /**
      * Условия для фильтрации выбираемых данных
@@ -159,4 +187,30 @@ abstract class AbstractGrid implements GridInterface
     {
         return $this->options;
     }
+
+    /**
+     * Устанавливает имя таблицы
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Возвращает имя таблицы
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Функция инициализации колонок
+     * @return void
+     */
+    abstract public function init();
 }
