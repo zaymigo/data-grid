@@ -48,7 +48,6 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $gridsConfig = null;
         /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $serviceLocator->getServiceLocator();
         /** @var ModuleOptions $moduleOptions */
