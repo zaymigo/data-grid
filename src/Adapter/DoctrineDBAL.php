@@ -68,7 +68,7 @@ class DoctrineDBAL extends AbstractAdapter
             $query = clone $query;
         }
         $order = $this->getOrder();
-        if ($order && (is_array($order) || $order instanceof Traversable)) {
+        if ((is_array($order) || $order instanceof Traversable) && 0 !== count($order)) {
             $query->resetQueryPart('orderBy');
             foreach ($order as $orderPart) {
                 if (array_key_exists('field', $orderPart) && $orderPart['field']) {

@@ -12,7 +12,7 @@ use ArrayAccess;
  * Class Row 
  * @package MteGrid\Grid
  */
-class Row implements  ArrayAccess
+class Row implements ArrayAccess
 {
 
     /**
@@ -114,10 +114,10 @@ class Row implements  ArrayAccess
      */
     public function offsetGet($offset)
     {
-        if(!$offset || !is_string($offset)) {
+        if (!$offset || !is_string($offset)) {
             throw new Exception\InvalidArgumentException('Некооректное имя столбца для получения из строки таблицы');
         }
-        if(!array_key_exists($offset, $this->data)) {
+        if (!array_key_exists($offset, $this->data)) {
             throw new Exception\RuntimeException(sprintf('Не найден столбец с именем %s в строке', $offset));
         }
         return $this->data[$offset];

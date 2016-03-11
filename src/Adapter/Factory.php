@@ -29,7 +29,6 @@ class Factory implements FactoryInterface
      */
     public function create($spec)
     {
-        $adapter = null;
         if (is_string($spec)) {
             if (!class_exists($spec)) {
                 throw new Exception\AdapterNotFoundException(sprintf('Adapter %s не найден.', $spec));
@@ -58,7 +57,7 @@ class Factory implements FactoryInterface
             /** @var AdapterInterface $adapter */
             $adapter = $reflectionAdapter->newInstance();
             if (array_key_exists('options', $spec) && $spec['options']) {
-                $options =& $spec['options'];
+                $options =& $adapter['options'];
                 if (!$options instanceof ArrayAccess && !is_array($options)) {
                     throw new InvalidOptionsException(
                         sprintf('Опции для адаптера должны быть массивом или реализовывать %s', ArrayAccess::class)

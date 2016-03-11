@@ -14,8 +14,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
  * Class ColumnPluginManager
  * @package MteGrid\Grid\Column
  */
-class GridColumnPluginManager
-    extends AbstractPluginManager
+class GridColumnPluginManager extends AbstractPluginManager
 {
 
     /**

@@ -27,7 +27,7 @@ class SimpleGrid extends AbstractGrid
      */
     public function getRowSet()
     {
-        if(!$this->rowSet) {
+        if (empty($this->rowSet)) {
             $data = $this->getAdapter()->getData();
             $this->buildRowSet($data);
         }
@@ -43,7 +43,7 @@ class SimpleGrid extends AbstractGrid
      */
     protected function buildRowSet($data)
     {
-        if(!is_array($data) && $data instanceof Traversable) {
+        if (!is_array($data) && $data instanceof Traversable) {
             throw new Exception\RuntimeException(
                 sprintf('Данные должны быть массивом или %s', ArrayAccess::class)
             );
@@ -70,6 +70,5 @@ class SimpleGrid extends AbstractGrid
      */
     public function init()
     {
-
     }
 }

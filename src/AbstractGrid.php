@@ -53,7 +53,7 @@ abstract class AbstractGrid implements GridInterface
      */
     public function __construct($options = [])
     {
-        if(!array_key_exists('adapter', $options) || !$options['adapter']) {
+        if (!array_key_exists('adapter', $options) || !$options['adapter']) {
             throw new Exception\InvalidArgumentException(
                 'Для корректной работы таблиц в конструктор необходимо передавать адаптер.'
             );

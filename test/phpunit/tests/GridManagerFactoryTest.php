@@ -9,6 +9,7 @@ namespace MteGrid\Grid\Test\PhpUnit;
 use MteGrid\Grid\Adapter\AdapterInterface;
 use MteGrid\Grid\GridInterface;
 use MteGrid\Grid\GridPluginManager;
+use MteGrid\Grid\Options\ModuleOptions;
 use MteGrid\Grid\Row;
 use MteGrid\Grid\SimpleGrid;
 use MteGrid\Grid\Test\PhpUnit\TestData\TestPath;
@@ -64,13 +65,36 @@ class GridManagerFactoryTest extends AbstractControllerTestCase
         self::assertInstanceOf(SimpleGrid::class, $grid);
         self::assertInstanceOf(AdapterInterface::class, $grid->getAdapter());
     }
-//
-//    public function testCreateGridInvalidConfig()
-//    {
-//        $config = $this->getApplication()->getServiceManager()->get('Config');
-////        unset($config['grids']['SimpleGrid']['options']);
-//        echo '<pre>';print_r($config);die;
-//    }
+
+    public function testCreateGridInvalidConfig()
+    {
+        /** @var ModuleOptions $options */
+        $options = $this->getApplication()->getServiceManager()->get('GridModuleOptions');
+        $gridsConfig = $options->getGrids();
+        $options->setGrids([]);
+        /** @var GridPluginManager $gridManager */
+        $gridManager = $this->getApplicationServiceLocator()->get('GridManager');
+        try {
+            /** @var GridInterface $grid */
+            $gridManager->get('grids.SimpleGrid');
+        } catch (\RuntimeException $e) {
+            self::assertInstanceOf(\Zend\ServiceManager\Exception\ServiceNotCreatedException::class, $e);
+        }
+        $options->setGrids($gridsConfig);
+
+    }
+
+    public function testExceptionNotFoundGrid()
+    {
+        /** @var GridPluginManager $gridManager */
+        $gridManager = $this->getApplicationServiceLocator()->get('GridManager');
+        try {
+            /** @var GridInterface $grid */
+            $gridManager->get('grids.Test');
+        } catch (\RuntimeException $e) {
+            self::assertInstanceOf(\Zend\ServiceManager\Exception\ServiceNotCreatedException::class, $e);
+        }
+    }
 
     public function testGridPluginManagerValidate()
     {

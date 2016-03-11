@@ -16,15 +16,4 @@ return [
     'grid_columns' => [
 
     ],
-    'grids' => [
-            'SimpleGrid' => [
-                'class' => SimpleGrid::class,
-                'options' => [
-                    'adapter' => [
-                        'class' => DoctrineDBAL::class,
-                        'options' => []
-                    ],
-                ]
-            ],
-    ]
 ];

@@ -7,8 +7,8 @@
 namespace MteGrid\Grid;
 
 use MteGrid\Grid\Adapter\AdapterInterface;
+use MteGrid\Grid\Options\ModuleOptions;
 use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ArrayAccess;
 
@@ -31,7 +31,7 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $res = false;
-        if(strpos($requestedName,'grids.') === 0) {
+        if (strpos($requestedName, 'grids.') === 0) {
             $res = true;
         }
         return $res;
@@ -49,18 +49,17 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $gridsConfig = null;
-        /** @var  $serviceManager */
+        /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $serviceLocator->getServiceLocator();
-        $config = $serviceManager->get('Config');
-        if(is_array($config) && array_key_exists(self::CONFIG_KEY, $config)) {
-            $gridsConfig = $config[self::CONFIG_KEY];
-        }
-        if(empty($gridsConfig)) {
+        /** @var ModuleOptions $moduleOptions */
+        $moduleOptions = $serviceManager->get('GridModuleOptions');
+        $gridsConfig = $moduleOptions->getGrids();
+        if ((is_array($gridsConfig) && !count($gridsConfig)) || !$gridsConfig) {
             throw new Exception\RuntimeException('В конфигурационном файле нет секции grids');
         }
         $gridName = substr($requestedName, strlen(self::CONFIG_KEY . '.'));
 
-        if(!array_key_exists($gridName, $gridsConfig) || !$gridsConfig[$gridName]) {
+        if (!array_key_exists($gridName, $gridsConfig) || !$gridsConfig[$gridName]) {
             throw new Exception\RuntimeException(
                 sprintf('Таблица с именем %s не найдена в конфиге гридов.', $gridName)
             );
@@ -73,8 +72,8 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         $gridClass =& $gridConfig['class'];
 
         $options = [];
-        if(array_key_exists('options', $gridConfig) && $gridConfig['options']) {
-            if(!is_array($gridConfig['options']) && !$gridConfig['options'] instanceof ArrayAccess) {
+        if (array_key_exists('options', $gridConfig) && $gridConfig['options']) {
+            if (!is_array($gridConfig['options']) && !$gridConfig['options'] instanceof ArrayAccess) {
                 throw new Exception\RuntimeException(
                     sprintf('Опции в секции %s должны быть массивом или %s', $gridName, ArrayAccess::class)
                 );
@@ -82,7 +81,7 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
             $options = $gridConfig['options'];
             $adapter = null;
             if (array_key_exists('adapter', $options) && $options['adapter'] && !is_object($options['adapter'])) {
-                $adapterFactory = new Adapter\Factory();
+                $adapterFactory = $serviceManager->get(Adapter\Factory::class);
                 $adapter = $adapterFactory->create($options['adapter']);
             } elseif (is_object($options['adapter'])) {
                 $adapter = $options['adapter'];
@@ -94,7 +93,5 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         }
 
         return $serviceLocator->get($gridClass, $options);
-
     }
-
 }

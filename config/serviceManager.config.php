@@ -7,6 +7,7 @@ namespace MteGrid\Grid;
 
 use MteGrid\Grid\Column\GridColumnPluginManager;
 use MteGrid\Grid\Column\GridColumnPluginManagerFactory;
+use MteGrid\Grid\Options\ModuleOptions;
 
 return [
     'service_manager' => [
@@ -16,11 +17,15 @@ return [
         'factories' => [
             GridColumnPluginManager::class => GridColumnPluginManagerFactory::class,
             GridPluginManager::class => GridPluginManagerFactory::class,
-            Adapter\Factory::class => Adapter\Factory::class
+            ModuleOptions::class => Options\Factory::class
+        ],
+        'invokables' => [
+            Adapter\Factory::class => Adapter\Factory::class,
         ],
         'aliases' => [
             'GridColumnManager' => GridColumnPluginManager::class,
-            'GridManager' => GridPluginManager::class
+            'GridManager' => GridPluginManager::class,
+            'GridModuleOptions' => ModuleOptions::class
         ]
     ]
 ];

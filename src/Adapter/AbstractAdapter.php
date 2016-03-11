@@ -15,7 +15,7 @@ use Traversable;
  * Class AbstractAdapter 
  * @package MteGrid\Grid\Adapter
  */
-class  AbstractAdapter implements AdapterInterface
+class AbstractAdapter implements AdapterInterface
 {
     /**
      * @var Conditions

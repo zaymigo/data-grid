@@ -12,8 +12,6 @@ use Exception;
  * Class RuntimeException
  * @package MteGrid\Grid\Exception
  */
-class RuntimeException
-    extends Exception
-    implements ExceptionInterface
+class RuntimeException extends Exception implements ExceptionInterface
 {
 }

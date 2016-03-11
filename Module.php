@@ -7,6 +7,7 @@
 namespace MteGrid\Grid;
 
 use MteGrid\Grid\Column\GridColumnProviderInterface;
+use MteGrid\Grid\Options\ModuleOptions;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
@@ -35,6 +36,8 @@ class Module
 {
 
     use ServiceLocatorAwareTrait;
+
+    const CONFIG_KEY = 'mte-grid';
 
 
     /**
@@ -125,5 +128,14 @@ class Module
         );
     }
 
-
+    /**
+     * Возвращает объект с настройками модуля
+     * @return ModuleOptions
+     */
+    public function getModuleOptions()
+    {
+        /** @var ModuleOptions $moduleOptions */
+        $moduleOptions = $this->getServiceLocator()->get('GridModuleOptions');
+        return $moduleOptions;
+    }
 }

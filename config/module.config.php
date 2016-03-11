@@ -7,14 +7,24 @@
 namespace MteGrid\Grid;
 
 
+use MteGrid\Grid\Adapter\DoctrineDBAL;
+
 return array_merge(
     [
-        'service_listener_options' => [
-            [
-
-            ],
-        ],
+        'mte-grid' => [
+            'grids' => [
+                'SimpleGrid' => [
+                    'class' => SimpleGrid::class,
+                    'options' => [
+                        'adapter' => [
+                            'class' => DoctrineDBAL::class,
+                            'options' => []
+                        ],
+                    ]
+                ],
+            ]
+        ]
     ],
-    require 'serviceManager.config.php',
     require 'grid.config.php',
+    require 'serviceManager.config.php',
     require 'assetic.config.php');

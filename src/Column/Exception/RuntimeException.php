@@ -11,7 +11,6 @@ use MteGrid\Grid\Exception\RuntimeException as CommonRuntimeException;
  * Class RuntimeException
  * @package MteGrid\Grid\Column\Exception
  */
-class RuntimeException
-    extends CommonRuntimeException
+class RuntimeException extends CommonRuntimeException
 {
 }
