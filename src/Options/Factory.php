@@ -23,13 +23,14 @@ class Factory implements FactoryInterface
      *
      * @param ServiceLocatorInterface $serviceLocator
      * @return mixed
+     * @throws Exception\RuntimeException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('config');
         $options = [];
-        if(array_key_exists(Module::CONFIG_KEY, $config) && $config[Module::CONFIG_KEY] ) {
-            if(!is_array($config[Module::CONFIG_KEY]) && $config[Module::CONFIG_KEY] instanceof ArrayAccess) {
+        if (array_key_exists(Module::CONFIG_KEY, $config) && $config[Module::CONFIG_KEY]) {
+            if (!is_array($config[Module::CONFIG_KEY]) && $config[Module::CONFIG_KEY] instanceof ArrayAccess) {
                 throw new Exception\RuntimeException(
                     sprintf('Конфиг опции модуля Grid должен быть массивом или %s', ArrayAccess::class)
                 );

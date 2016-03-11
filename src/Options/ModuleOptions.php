@@ -5,6 +5,7 @@
  */
 
 namespace MteGrid\Grid\Options;
+
 use Zend\Stdlib\AbstractOptions;
 
 /**

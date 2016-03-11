@@ -14,21 +14,20 @@ use ArrayAccess;
  */
 class Row implements ArrayAccess
 {
-
     /**
      * Данные строки
-     * @var array | ArrayAccess
+     * @var array|ArrayAccess
      */
     protected $data;
 
     /**
      * Опции строки
-     * @var array | ArrayAccess
+     * @var array
      */
     protected $options;
 
     /**
-     * @param array | ArrayAccess $data
+     * @param array|ArrayAccess $data
      * @param array $options
      */
     public function __construct($data, array $options = [])
@@ -56,7 +55,7 @@ class Row implements ArrayAccess
     }
 
     /**
-     * @return array|ArrayAccess
+     * @return array
      */
     public function getOptions()
     {
@@ -64,7 +63,7 @@ class Row implements ArrayAccess
     }
 
     /**
-     * @param array|ArrayAccess $options
+     * @param array $options
      * @return $this
      */
     public function setOptions($options)

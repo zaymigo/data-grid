@@ -42,7 +42,7 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
         $config = require TestPath::getApplicationConfigPath();
         $this->setApplicationConfig($config);
 
-        /** @var GridColumnPluginManager $gridColumnManager */
+        /** @var GridColumnPluginManager|array $gridColumnManager */
         $this->gridColumnManager = $this->getApplicationServiceLocator()->get('GridColumnManager');
         parent::setUp();
     }

@@ -33,7 +33,7 @@ class Conditions implements \ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return isset($this->conditions[$offset]);
+        return array_key_exists($offset, $this->conditions);
     }
 
     /**

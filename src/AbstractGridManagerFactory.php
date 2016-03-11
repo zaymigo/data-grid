@@ -53,7 +53,7 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         /** @var ModuleOptions $moduleOptions */
         $moduleOptions = $serviceManager->get('GridModuleOptions');
         $gridsConfig = $moduleOptions->getGrids();
-        if ((is_array($gridsConfig) && !count($gridsConfig)) || !$gridsConfig) {
+        if ((is_array($gridsConfig) && 0 === count($gridsConfig)) || $gridsConfig === null) {
             throw new Exception\RuntimeException('В конфигурационном файле нет секции grids');
         }
         $gridName = substr($requestedName, strlen(self::CONFIG_KEY . '.'));
