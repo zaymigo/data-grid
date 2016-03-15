@@ -7,7 +7,6 @@
 namespace MteGrid\Grid\Adapter;
 
 use ArrayAccess;
-use MteBase\Mapper\EntityManagerAwareInterface;
 use MteGrid\Grid\Adapter\Exception\InvalidOptionsException;
 use MteGrid\Grid\FactoryInterface;
 use ReflectionClass;
