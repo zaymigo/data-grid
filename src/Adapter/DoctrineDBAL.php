@@ -9,7 +9,6 @@ namespace MteGrid\Grid\Adapter;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
-use MteBase\Mapper\EntityManagerAwareInterface;
 use Traversable;
 
 /**
@@ -251,7 +250,7 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
      * @param ObjectManager|EntityManagerInterface $entityManager
      * @return $this
      */
-    public function setEntityManager(ObjectManager $entityManager)
+    public function setEntityManager(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         return $this;
