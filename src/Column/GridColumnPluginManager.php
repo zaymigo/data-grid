@@ -8,7 +8,6 @@ namespace MteGrid\Grid\Column;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 /**
  * Class ColumnPluginManager
@@ -29,13 +28,8 @@ class GridColumnPluginManager extends AbstractPluginManager
         'text' => Text::class
     ];
 
-    /**
-     * @var array
-     */
-    protected $factories = [
-        Text::class => InvokableFactory::class,
-
-        'mtegridgridcolumntext' => InvokableFactory::class
+    protected $invokableClasses = [
+        Text::class => Text::class,
     ];
 
     /**

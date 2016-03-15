@@ -19,7 +19,7 @@ return [
                     ],
                     'head_jqgrid_js' => [
                         'assets' => [
-                            'js/jqgrid/i18n/grid.locate-ru.js',
+                            'js/jqgrid/i18n/grid.locale-ru.js',
                             'js/jqgrid/jquery.jqGrid.min.js',
                         ]
                     ],

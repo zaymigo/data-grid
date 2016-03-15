@@ -41,6 +41,13 @@ class AbstractAdapter implements AdapterInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function init()
+    {
+    }
+
+    /**
      * Возвращает количество записей
      * @return int
      */

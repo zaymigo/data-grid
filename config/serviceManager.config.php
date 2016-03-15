@@ -20,7 +20,7 @@ return [
             ModuleOptions::class => Options\Factory::class
         ],
         'invokables' => [
-            Adapter\Factory::class => Adapter\Factory::class,
+            Adapter\Factory::class => Adapter\Factory::class
         ],
         'aliases' => [
             'GridColumnManager' => GridColumnPluginManager::class,

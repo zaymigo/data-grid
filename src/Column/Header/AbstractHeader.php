@@ -34,19 +34,31 @@ abstract class AbstractHeader implements HeaderInterface
     protected $data;
 
     /**
+     * Заголовок
+     * @var string
+     */
+    protected $title;
+
+    /**
+     * @param string $title
      * @param string $template
-     * @param array | Traversable  $data
+     * @param array | Traversable $data
      * @param array | Traversable $options
      * @throws NoValidTemplateException
      */
-    public function __construct($template = '', $data = [], $options = [])
+    public function __construct($title = '', $template = '', array $data = [], array $options = [])
     {
-        if (!is_string($template) || !$template) {
+        if ($template && !is_string($template)) {
             throw new NoValidTemplateException(
                 sprintf('Невалидный путь до шаблона заголовка.')
             );
         }
-        $this->setTemplate($template);
+        if ($template) {
+            $this->setTemplate($template);
+        }
+        if ($title) {
+            $this->setTitle($title);
+        }
         $this->setData($data);
         $this->setOptions($options);
     }
@@ -109,5 +121,23 @@ abstract class AbstractHeader implements HeaderInterface
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
     }
 }

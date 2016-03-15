@@ -6,14 +6,17 @@
 
 namespace MteGrid\Grid\Adapter;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\ORM\EntityManagerInterface;
+use MteBase\Mapper\EntityManagerAwareInterface;
 use Traversable;
 
 /**
  * Class DoctrineDBAL 
  * @package MteGrid\Grid\Adapter
  */
-class DoctrineDBAL extends AbstractAdapter
+class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterface
 {
     /**
      * Запрос данных
@@ -48,6 +51,11 @@ class DoctrineDBAL extends AbstractAdapter
      * @var string
      */
     protected $rootAlias;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
 
 
     /**
@@ -113,6 +121,14 @@ class DoctrineDBAL extends AbstractAdapter
 
         return $res;
     }
+
+    /**
+     * @return mixed
+     */
+    public function init()
+    {
+    }
+
 
     /**
      * @return QueryBuilder
@@ -220,6 +236,24 @@ class DoctrineDBAL extends AbstractAdapter
     public function setRootAlias($rootAlias)
     {
         $this->rootAlias = $rootAlias;
+        return $this;
+    }
+
+    /**
+     * @return EntityManagerInterface
+     */
+    public function getEntityManager()
+    {
+        return $this->entityManager;
+    }
+
+    /**
+     * @param ObjectManager|EntityManagerInterface $entityManager
+     * @return $this
+     */
+    public function setEntityManager(ObjectManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
         return $this;
     }
 }

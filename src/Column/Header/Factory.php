@@ -34,11 +34,16 @@ class Factory implements FactoryInterface
                     Traversable::class)
             );
         }
-        if (!array_key_exists('template', $spec) || !$spec['template']) {
-            throw new NoValidTemplateException(
-                sprintf('Не задан шаблон для заголовка.')
-            );
+    }
+
+
+    protected function checkOption($key, $options)
+    {
+        $option = null;
+        if (array_key_exists($key, $options) && $options[$key]) {
+            $option = $options[$key];
         }
+        return $option;
     }
 
 
@@ -52,16 +57,11 @@ class Factory implements FactoryInterface
     public function create($spec)
     {
         $this->validate($spec);
-
-        $header = new SimpleHeader($spec['template']);
-
-        if (array_key_exists('options', $spec) && $spec['options']) {
-            $header->setOptions($spec['options']);
-        }
-
-        if (array_key_exists('data', $spec) && $spec['data']) {
-            $header->setData($spec['data']);
-        }
+        $options = $this->checkOption('options', $spec);
+        $data = $this->checkOption('data', $spec);
+        $title = $this->checkOption('title', $spec);
+        $template = $this->checkOption('template', $spec);
+        $header = new SimpleHeader($title, $template, ($data ?: []), ($options ?: []));
         return $header;
     }
 }

@@ -37,7 +37,7 @@ class Module
 
     use ServiceLocatorAwareTrait;
 
-    const CONFIG_KEY = 'mte-grid';
+    const CONFIG_KEY = 'mteGrid';
 
 
     /**

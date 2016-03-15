@@ -7,10 +7,12 @@
 namespace MteGrid\Grid;
 
 use MteGrid\Grid\Adapter\AdapterInterface;
+use MteGrid\Grid\Column\GridColumnPluginManagerAwareInterface;
 use MteGrid\Grid\Options\ModuleOptions;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ArrayAccess;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * Class AbstractGridManager 
@@ -38,6 +40,41 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
     }
 
     /**
+     * @param array | ArrayAccess | AdapterInterface $adapterOptions
+     * @param ServiceLocatorInterface $serviceManager
+     * @return AdapterInterface|null
+     * @throws Adapter\Exception\AdapterNotFoundException
+     * @throws Adapter\Exception\InvalidArgumentException
+     * @throws Adapter\Exception\InvalidOptionsException
+     * @throws Adapter\Exception\RuntimeException
+     * @throws Exception\RuntimeException
+     */
+    protected function createAdapter($adapterOptions, ServiceLocatorInterface $serviceManager)
+    {
+        $adapter = null;
+        $moduleOptions = $serviceManager->get('GridModuleOptions');
+        if (is_array($adapterOptions) || $adapterOptions instanceof ArrayAccess) {
+            /** @var Adapter\Factory $adapterFactory */
+            $adapterFactory = $serviceManager->get(Adapter\Factory::class);
+            if (!array_key_exists('doctrine_entity_manager', $adapterOptions)
+                || $adapterOptions['doctrine_entity_manager']
+            ) {
+                $adapterOptions['doctrine_entity_manager'] = $moduleOptions->getDoctrineEntityManager();
+            }
+            $adapter = $adapterFactory->create($adapterOptions);
+        } elseif (is_object($adapterOptions)) {
+            /** @var Adapter\Factory $adapterFactory */
+            $adapter = $adapterOptions;
+            if (!$adapter instanceof AdapterInterface) {
+                throw new Exception\RuntimeException(sprintf('Adapter должен реализовывать %s', AdapterInterface::class));
+            }
+        } else {
+            throw new Exception\RuntimeException('Не задан EntityManager для грида.');
+        }
+        return $adapter;
+    }
+
+    /**
      * Create service with name
      *
      * @param GridPluginManager | ServiceLocatorInterface $serviceLocator
@@ -53,7 +90,8 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         /** @var ModuleOptions $moduleOptions */
         $moduleOptions = $serviceManager->get('GridModuleOptions');
         $gridsConfig = $moduleOptions->getGrids();
-        if ((is_array($gridsConfig) && 0 === count($gridsConfig)) || $gridsConfig === null) {
+        /** @noinspection NotOptimalIfConditionsInspection */
+        if ($gridsConfig === null || count($gridsConfig) === 0) {
             throw new Exception\RuntimeException('В конфигурационном файле нет секции grids');
         }
         $gridName = substr($requestedName, strlen(self::CONFIG_KEY . '.'));
@@ -78,19 +116,17 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
                 );
             }
             $options = $gridConfig['options'];
-            $adapter = null;
-            if (array_key_exists('adapter', $options) && $options['adapter'] && !is_object($options['adapter'])) {
-                $adapterFactory = $serviceManager->get(Adapter\Factory::class);
-                $adapter = $adapterFactory->create($options['adapter']);
-            } elseif (is_object($options['adapter'])) {
-                $adapter = $options['adapter'];
-                if (!$adapter instanceof AdapterInterface) {
-                    throw new Exception\RuntimeException(sprintf('Adapter должен реализовывать %s', AdapterInterface::class));
-                }
-            }
+            $adapter = $this->createAdapter($options['adapter'], $serviceManager);
             $options['adapter'] = $adapter;
         }
-
-        return $serviceLocator->get($gridClass, $options);
+        /** @var GridInterface | AbstractGrid $grid */
+        $grid = $serviceLocator->get($gridClass, $options);
+        if ($grid instanceof GridColumnPluginManagerAwareInterface) {
+            $grid->setColumnPluginManager($serviceManager->get('GridColumnManager'));
+        }
+        if ($grid instanceof InitializableInterface) {
+            $grid->init();
+        }
+        return $grid;
     }
 }

@@ -8,6 +8,8 @@ namespace MteGrid\Grid;
 
 use MteGrid\Grid\Column\ColumnInterface;
 use MteGrid\Grid\Adapter\AdapterInterface;
+use MteGrid\Grid\Column\GridColumnPluginManagerAwareInterface;
+use MteGrid\Grid\Column\GridColumnPluginManagerAwareTrait;
 use Traversable;
 use ArrayAccess;
 
@@ -15,8 +17,10 @@ use ArrayAccess;
  * Class AbstractGrid 
  * @package MteGrid\Grid
  */
-abstract class AbstractGrid implements GridInterface
+abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwareInterface
 {
+    use GridColumnPluginManagerAwareTrait;
+
     /**
      * Условия для фильтрации выбираемых данных
      * @var array | Traversable
@@ -51,7 +55,7 @@ abstract class AbstractGrid implements GridInterface
      * @param array | ArrayAccess $options
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($options = [])
+    public function __construct(array $options = [])
     {
         if (!array_key_exists('adapter', $options) || !$options['adapter']) {
             throw new Exception\InvalidArgumentException(
@@ -60,11 +64,20 @@ abstract class AbstractGrid implements GridInterface
         }
         $adapter = $options['adapter'];
         unset($options['adapter']);
-        $this->configure($adapter, $options);
+        $name = array_key_exists('name', $options) ? $options['name'] : null;
+        unset($options['name']);
+        $this->configure($name, $adapter, $options);
     }
 
-    protected function configure(AdapterInterface $adapter, $options = [])
+    /**
+     * Конфигурируем адаптер грида
+     * @param string $name
+     * @param AdapterInterface $adapter
+     * @param array $options \
+     */
+    protected function configure($name, AdapterInterface $adapter, array $options = [])
     {
+        $this->setName($name);
         $this->setAdapter($adapter);
         $this->setOptions($options);
     }
@@ -139,7 +152,14 @@ abstract class AbstractGrid implements GridInterface
     public function add($column)
     {
         if (is_array($column) || $column instanceof ArrayAccess) {
+            /**
+             * @TODO переделать чтобы вызывалось через ServiceLocator
+             *
+             *
+             * @var Column\Factory $columnFactory
+             */
             $columnFactory = new Column\Factory();
+            $columnFactory->setColumnPluginManager($this->getColumnPluginManager());
             $column = $columnFactory->create($column);
         } elseif (!$column instanceof ColumnInterface) {
             throw new Exception\InvalidArgumentException(

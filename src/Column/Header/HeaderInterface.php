@@ -54,4 +54,17 @@ interface HeaderInterface
      * @return array
      */
     public function getData();
+
+    /**
+     * Возвращает текст заголовка
+     * @return string
+     */
+    public function getTitle();
+
+    /**
+     * Устанавливает текст заголовка
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle($title);
 }

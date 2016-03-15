@@ -11,14 +11,14 @@ use MteGrid\Grid\Adapter\DoctrineDBAL;
 
 return array_merge(
     [
-        'mte-grid' => [
+        'mteGrid' => [
+            'doctrine_entity_manager' => 'doctrine.entitymanager.orm_default',
             'grids' => [
                 'SimpleGrid' => [
                     'class' => SimpleGrid::class,
                     'options' => [
                         'adapter' => [
                             'class' => DoctrineDBAL::class,
-                            'options' => []
                         ],
                     ]
                 ],
@@ -27,4 +27,6 @@ return array_merge(
     ],
     require 'grid.config.php',
     require 'serviceManager.config.php',
-    require 'assetic.config.php');
+    require 'assetic.config.php',
+    require 'viewHelpers.config.php'
+);

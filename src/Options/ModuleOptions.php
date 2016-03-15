@@ -21,6 +21,11 @@ class ModuleOptions extends AbstractOptions
     protected $grids;
 
     /**
+     * @var string
+     */
+    protected $doctrineEntityManager;
+
+    /**
      * Возвращает массив настроек таблиц
      * @return array
      */
@@ -37,6 +42,24 @@ class ModuleOptions extends AbstractOptions
     public function setGrids($grids)
     {
         $this->grids = $grids;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDoctrineEntityManager()
+    {
+        return $this->doctrineEntityManager;
+    }
+
+    /**
+     * @param string $doctrineEntityManager
+     * @return $this
+     */
+    public function setDoctrineEntityManager($doctrineEntityManager)
+    {
+        $this->doctrineEntityManager = $doctrineEntityManager;
         return $this;
     }
 }

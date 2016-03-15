@@ -5,7 +5,7 @@
  */
 namespace MteGrid\Grid;
 
-use MteGrid\Grid\Adapter\DoctrineDBAL;
+
 
 return [
     'grid_manager' => [
@@ -14,6 +14,8 @@ return [
         ],
     ],
     'grid_columns' => [
+        'invokables' => [
 
+        ]
     ],
 ];

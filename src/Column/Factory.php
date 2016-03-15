@@ -12,38 +12,17 @@ use MteGrid\Grid\Column\Exception\InvalidSpecificationException;
 use MteGrid\Grid\FactoryInterface;
 use Traversable;
 use Zend\Http\Header\HeaderInterface;
-use Zend\Hydrator\ClassMethods;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 /**
  * Class Factory
  * @package MteGrid\Grid\Column
  */
-final class Factory implements FactoryInterface
+final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInterface
 {
-    /**
-     * @var GridColumnPluginManager
-     */
-    protected $columnPluginManager;
-
-    /**
-     * @return GridColumnPluginManager
-     */
-    public function getColumnPluginManager()
-    {
-        return $this->columnPluginManager;
-    }
-
-    /**
-     * @param GridColumnPluginManager $columnPluginManager
-     * @return $this
-     */
-    public function setColumnPluginManager($columnPluginManager)
-    {
-        $this->columnPluginManager = $columnPluginManager;
-        return $this;
-    }
+    use GridColumnPluginManagerAwareTrait;
 
     /**
      * @param array | Traversable $spec
@@ -78,7 +57,6 @@ final class Factory implements FactoryInterface
      * @throws ServiceNotFoundException
      * @throws ServiceNotCreatedException
      * @throws \Zend\ServiceManager\Exception\RuntimeException
-     * @throws \Zend\Hydrator\Exception\BadMethodCallException
      * @throws \MteGrid\Grid\Column\Exception\InvalidNameException
      * @throws \MteGrid\Grid\Column\Header\Exception\NoValidSpecificationException
      * @throws \MteGrid\Grid\Column\Header\Exception\NoValidTemplateException
@@ -89,20 +67,22 @@ final class Factory implements FactoryInterface
         /** @var ColumnInterface $column */
         $column = $this->getColumnPluginManager()->get($spec['type']);
         /** @var ClassMethods $classMethods */
-        $classMethods =  $this->getColumnPluginManager()
+        $classMethods = $this->getColumnPluginManager()
             ->getServiceLocator()
             ->get('HydratorManager')
             ->get('ClassMethods');
         $column = $classMethods->hydrate($spec, $column);
-
         if (array_key_exists('header', $spec)
             && $spec['header']
-            && !$spec['header'] instanceof HeaderInterface) {
-            $headerFactory = new Header\Factory();
-            $header = $headerFactory->create($spec['header']);
+        ) {
+            if (!$spec['header'] instanceof HeaderInterface) {
+                $headerFactory = new Header\Factory();
+                $header = $headerFactory->create($spec['header']);
+            } else {
+                $header = $spec['header'];
+            }
             $column->setHeader($header);
         }
-
         return $column;
     }
 }

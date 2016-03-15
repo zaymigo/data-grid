@@ -10,12 +10,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use MteGrid\Grid\Condition\Conditions;
 use ArrayAccess;
 use Traversable;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * Interface AdapterInterface
  * @package MteGrid\Grid\Adapter
  */
-interface AdapterInterface
+interface AdapterInterface extends InitializableInterface
 {
     /**
      * @return array | ArrayCollection

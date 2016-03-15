@@ -10,12 +10,13 @@ use MteGrid\Grid\Adapter\AdapterInterface;
 use MteGrid\Grid\Column\ColumnInterface;
 use Traversable;
 use ArrayAccess;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * Interface GridInterface
  * @package MteGrid\Grid
  */
-interface GridInterface
+interface GridInterface extends InitializableInterface
 {
     /**
      * Условия для фильтрации выбираемых данных
