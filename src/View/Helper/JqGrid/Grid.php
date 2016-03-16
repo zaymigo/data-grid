@@ -51,15 +51,32 @@ class Grid extends AbstractHelper
         $res = '<table id="grid-' . $escape($grid->getName()) . '"></table>';
         /** @var PhpRenderer $view */
         $view = $this->getView();
-        $columnsJqOptions = [];
+        $config = $this->getGridConfig($grid);
         foreach ($columns as $column) {
             /** @var string $columnsJqOptions */
-            $columnsJqOptions[] = $view->mteGridJqGridColumn($column);
+            $config['colModel'][] = $view->mteGridJqGridColumn($column);
         }
+//        $config['data'] = $grid->getRowset();
+//        echo '<pre>'; \Doctrine\Common\Util\Debug::dump($config['data']);die;
         $view->headScript()->appendScript('$(function(){'
-            . '$("#grid-' . $grid->getName() . '").jqGrid({'
-            . '"colModel":[' . implode(',', $columnsJqOptions) . ']'
-            . '});});');
+            . '$("#grid-' . $grid->getName() . '").jqGrid(' . json_encode((object)$config) . ');});');
         return $res;
+    }
+
+    /**
+     * @param GridInterface $grid
+     * @return array
+     */
+    protected function getGridConfig(GridInterface $grid)
+    {
+        $attributes = $grid->getAttributes();
+        $config = [];
+        if (array_key_exists('width', $attributes) && $attributes['width']) {
+            $config['width'] = $attributes['width'];
+        }
+        if (!array_key_exists('width', $config) && !array_key_exists('autowidth', $attributes)) {
+            $config['autowidth'] = true;
+        }
+        return $config;
     }
 }

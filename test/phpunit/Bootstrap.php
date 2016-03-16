@@ -9,9 +9,6 @@ use Zend\Loader\AutoloaderFactory;
 use Zend\Loader\StandardAutoloader;
 use RuntimeException;
 
-error_reporting(E_ALL | E_STRICT);
-chdir(__DIR__);
-
 /**
  * Test bootstrap, for setting up autoloading
  *
@@ -102,4 +99,6 @@ class Bootstrap
     }
 }
 
+error_reporting(E_ALL | E_STRICT);
+chdir(__DIR__);
 Bootstrap::init();

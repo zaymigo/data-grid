@@ -29,12 +29,12 @@ abstract class AbstractColumn implements ColumnInterface
     /**
      * @var array | Traversable
      */
-    protected $options;
+    protected $options = [];
 
     /**
      * @var array | Traversable
      */
-    protected $attributes;
+    protected $attributes = [];
 
     /**
      * По данному полю осуществляется сортировка колонок при выводе

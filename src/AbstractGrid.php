@@ -52,6 +52,11 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
     protected $name;
 
     /**
+     * @var array
+     */
+    protected $attributes = [];
+
+    /**
      * @param array | ArrayAccess $options
      * @throws Exception\InvalidArgumentException
      */
@@ -229,8 +234,36 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
     }
 
     /**
+     * Возвращает атрибуты используемые при отображении грида
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Устанавливает используемые для отображения грида
+     * @param array $attributes
+     * @return $this
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
      * Функция инициализации колонок
      * @return void
      */
     abstract public function init();
+
+    /**
+     * Возвращает массив строк
+     * @return array
+     */
+    abstract public function getRowset();
+
+
 }

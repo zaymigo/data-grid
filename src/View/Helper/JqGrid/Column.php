@@ -24,10 +24,12 @@ class Column extends AbstractHelper
         /** @var  $escaper */
         $escape = $this->getView()->plugin('escapeHtml');
         $name = $escape($column->getName());
-        return '{'
-        . '"label": "' . $escape($column->getHeader()->getTitle()) . '",'
-        . '"index": "' . $name . '",'
-        . '"name": "' . $name . '"'
-        . '}';
+        $config = [
+            'label' => $escape($column->getHeader()->getTitle()),
+            'index' => $name,
+            'name' => $name,
+        ];
+        $config = array_merge($config, $column->getAttributes());
+        return (object)$config;
     }
 }

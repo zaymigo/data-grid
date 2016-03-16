@@ -96,4 +96,23 @@ interface GridInterface extends InitializableInterface
      * @return string
      */
     public function getName();
+
+    /**
+     * Возвращает атрибуты используемые при отображении грида
+     * @return array
+     */
+    public function getAttributes();
+
+    /**
+     * Устанавливает используемые для отображения грида
+     * @param array $attributes
+     * @return $this
+     */
+    public function setAttributes(array $attributes);
+
+    /**
+     * Возвращает массив строк
+     * @return array
+     */
+    public function getRowset();
 }
