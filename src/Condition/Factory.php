@@ -45,7 +45,7 @@ class Factory implements FactoryInterface
 
         $this->checkRequiredKey('type', $spec, 'Не задан тип Condition');
         $this->checkRequiredKey('key', $spec, 'Не задан ключ для Condition');
-        $this->checkRequiredKey('type', $spec, 'Не задано значение для Condition');
+        $this->checkRequiredKey('value', $spec, 'Не задано значение для Condition');
     }
 
     /**
@@ -57,6 +57,7 @@ class Factory implements FactoryInterface
      */
     public function create($spec)
     {
+        $this->validate($spec);
         if (!array_key_exists('criteria', $spec) || !$spec['criteria']) {
             $spec['criteria'] = SimpleCondition::CRITERIA_TYPE_EQUAL;
         }

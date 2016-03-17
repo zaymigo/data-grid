@@ -6,6 +6,8 @@
 
 return [
     'modules' => [
+        'DoctrineModule',
+        'DoctrineORMModule',
         'MteGrid\\Grid'
     ],
     'module_listener_options' => [
