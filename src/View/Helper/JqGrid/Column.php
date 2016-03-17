@@ -8,6 +8,7 @@ namespace MteGrid\Grid\View\Helper\JqGrid;
 
 use Zend\View\Helper\AbstractHelper;
 use MteGrid\Grid\Column\ColumnInterface;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Class Column
@@ -22,14 +23,34 @@ class Column extends AbstractHelper
     public function __invoke(ColumnInterface $column)
     {
         /** @var  $escaper */
-        $escape = $this->getView()->plugin('escapeHtml');
+        $config = $this->getColumnConfig($column);
+        $config = array_merge($config, $column->getAttributes());
+        return (object)$config;
+    }
+
+    /**
+     * Возвращает конфигурацию колонки
+     * @param ColumnInterface $column
+     * @return array
+     */
+    protected function getColumnConfig(ColumnInterface $column)
+    {
+        /** @var PhpRenderer $view */
+        $view = $this->getView();
+        /** @var \Zend\View\Helper\EscapeHtml $escape */
+        $escape = $view->plugin('escapeHtml');
         $name = $escape($column->getName());
         $config = [
             'label' => $escape($column->getHeader()->getTitle()),
-            'index' => $name,
-            'name' => $name,
+            'index' => strtolower($name),
+            'name' => strtolower($name),
+            'align' => 'center'
         ];
-        $config = array_merge($config, $column->getAttributes());
-        return (object)$config;
+        return $config;
+    }
+
+    protected function getAttrValue($key, $attributes, $default = null)
+    {
+        return array_key_exists($key, $attributes) ? $attributes[$key] : $default;
     }
 }

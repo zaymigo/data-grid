@@ -6,8 +6,10 @@
 
 namespace MteGrid\Grid\View\Helper\JqGrid;
 
+use MteGrid\Grid\Row;
 use Zend\View\Helper\AbstractHelper;
 use MteGrid\Grid\GridInterface;
+use Zend\View\Helper\EscapeHtml;
 use Zend\View\Renderer\PhpRenderer;
 use MteGrid\Grid\View\Helper\Exception;
 
@@ -46,8 +48,10 @@ class Grid extends AbstractHelper
 //            }
 //            return $res;
 //        });
-        /** @var callable $escaper */
-        $escape = $this->getView()->plugin('escapeHtml');
+        /** @var PhpRenderer $view */
+        $view = $this->getView();
+        /** @var EscapeHtml $escape */
+        $escape = $view->plugin('escapeHtml');
         $res = '<table id="grid-' . $escape($grid->getName()) . '"></table>';
         /** @var PhpRenderer $view */
         $view = $this->getView();
@@ -56,8 +60,13 @@ class Grid extends AbstractHelper
             /** @var string $columnsJqOptions */
             $config['colModel'][] = $view->mteGridJqGridColumn($column);
         }
-//        $config['data'] = $grid->getRowset();
-//        echo '<pre>'; \Doctrine\Common\Util\Debug::dump($config['data']);die;
+        $data = $grid->getRowset();
+
+        $config['data'] = array_map(function ($item) {
+            /** @var Row $item */
+            $item = $item->getData();
+            return $item;
+        }, $data);
         $view->headScript()->appendScript('$(function(){'
             . '$("#grid-' . $grid->getName() . '").jqGrid(' . json_encode((object)$config) . ');});');
         return $res;
@@ -70,13 +79,27 @@ class Grid extends AbstractHelper
     protected function getGridConfig(GridInterface $grid)
     {
         $attributes = $grid->getAttributes();
-        $config = [];
-        if (array_key_exists('width', $attributes) && $attributes['width']) {
-            $config['width'] = $attributes['width'];
-        }
-        if (!array_key_exists('width', $config) && !array_key_exists('autowidth', $attributes)) {
+        $config = [
+            'shrinkToFit' => false
+        ];
+        $config['width'] = $this->getConfigVal('width', $attributes, '100%');
+        if (!array_key_exists('width', $attributes) && !array_key_exists('autowidth', $attributes)) {
             $config['autowidth'] = true;
         }
+
+        $config['datatype'] = $this->getConfigVal('datatype', $attributes, 'local');
+        $config = array_merge($config, $attributes);
         return $config;
+    }
+
+    /**
+     * @param string $key
+     * @param array $options
+     * @param mixed $default
+     * @return null | string | array
+     */
+    protected function getConfigVal($key, array $options, $default = null)
+    {
+        return array_key_exists($key, $options) ? $options[$key] : $default;
     }
 }

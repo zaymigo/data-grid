@@ -6,6 +6,8 @@
 
 namespace MteGrid\Grid\Entity;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 
@@ -18,25 +20,33 @@ use Doctrine\ORM\Mapping\MappedSuperclass;
 class NestedSet
 {
     /**
-     * @Id()
-     *
      * @var int
+     *
+     * @Id()
+     * @Column(name="id",type="integer"),
+     * @GeneratedValue(strategy = "IDENTITY")
      */
     protected $id;
 
     /**
      * @var int
      *
+     * @Column(name="left", type="integer")
+     *
      */
     protected $left;
 
     /**
      * @var int
+     *
+     * @Column(name="right", type="integer")
      */
     protected $right;
 
     /**
      * @var int
+     *
+     * @Column(name="level", type="integer")
      */
     protected $level;
 

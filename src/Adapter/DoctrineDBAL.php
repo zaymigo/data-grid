@@ -57,13 +57,11 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
      */
     protected $entityManager;
 
-
     /**
-     * Возвращает данные для грида
-     * @return array
+     * Проверяет корректность запроса
      * @throws Exception\RuntimeException
      */
-    public function getData()
+    protected function validateQuery()
     {
         if (!$this->getQuery()) {
             throw new Exception\RuntimeException('Не задан query');
@@ -72,6 +70,17 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
         if (!$query instanceof QueryBuilder) {
             throw new Exception\RuntimeException(sprintf('Query должен наследоваться от %s', QueryBuilder::class));
         }
+    }
+
+    /**
+     * Возвращает данные для грида
+     * @return array
+     * @throws Exception\RuntimeException
+     */
+    public function getData()
+    {
+        $this->validateQuery();
+        $query = $this->getQuery();
         if ($this->getCount()) {
             $query = clone $query;
         }

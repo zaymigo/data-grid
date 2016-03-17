@@ -264,6 +264,4 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
      * @return array
      */
     abstract public function getRowset();
-
-
 }

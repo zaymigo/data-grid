@@ -17,8 +17,39 @@ use ReflectionClass;
  */
 class Factory implements FactoryInterface
 {
+    /**
+     * Проверяет обязательные параметры для создания Condition
+     * @param string $key
+     * @param array $spec
+     * @param string $errorText
+     * @throws Exception\RuntimeException
+     */
+    protected function checkRequiredKey($key, array $spec, $errorText)
+    {
+        if (!array_key_exists($key, $spec) || !$spec[$key]) {
+            throw new Exception\RuntimeException($errorText);
+        }
+    }
 
     /**
+     * Валидируем пришедшие параметры
+     * @param array $spec
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
+     */
+    protected function validate($spec)
+    {
+        if (!is_array($spec) && !$spec instanceof ArrayAccess) {
+            throw new Exception\InvalidArgumentException('Для создания Condition в фабрику должен приходить массив или ArrayAccess');
+        }
+
+        $this->checkRequiredKey('type', $spec, 'Не задан тип Condition');
+        $this->checkRequiredKey('key', $spec, 'Не задан ключ для Condition');
+        $this->checkRequiredKey('type', $spec, 'Не задано значение для Condition');
+    }
+
+    /**
+     * Создает критерий
      * @param array|Traversable $spec
      * @return ConditionInterface
      * @throws Exception\InvalidArgumentException
@@ -26,26 +57,9 @@ class Factory implements FactoryInterface
      */
     public function create($spec)
     {
-        if (!is_array($spec) && !$spec instanceof ArrayAccess) {
-            throw new Exception\InvalidArgumentException('Для создания Condition в фабрику должен приходить массив или ArrayAccess');
-        }
-
-        if (!array_key_exists('type', $spec) || !$spec['type']) {
-            throw new Exception\RuntimeException('Не задан тип Condition');
-        }
-
-        if (!array_key_exists('key', $spec) || !$spec['key']) {
-            throw new Exception\RuntimeException('Не задан ключ для Condition');
-        }
-
-        if (!array_key_exists('value', $spec)) {
-            throw new Exception\RuntimeException('Не задано значение для Condition');
-        }
-
         if (!array_key_exists('criteria', $spec) || !$spec['criteria']) {
             $spec['criteria'] = SimpleCondition::CRITERIA_TYPE_EQUAL;
         }
-
         if (!class_exists($spec['type'])) {
             throw new Exception\RuntimeException(sprintf('Класс condition\'a %s не найден', $spec['type']));
         }

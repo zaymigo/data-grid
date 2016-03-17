@@ -51,7 +51,6 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
      */
     protected function createAdapter($adapterOptions, ServiceLocatorInterface $serviceManager)
     {
-        $adapter = null;
         $moduleOptions = $serviceManager->get('GridModuleOptions');
         if (is_array($adapterOptions) || $adapterOptions instanceof ArrayAccess) {
             /** @var Adapter\Factory $adapterFactory */
