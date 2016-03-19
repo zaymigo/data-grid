@@ -30,24 +30,6 @@ class Grid extends AbstractHelper
         if (count($columns) === 0) {
             throw new Exception\RuntimeException('В гриде нет колонок!');
         }
-
-//        uasort($columns, function ($new, $old) {
-//            /**
-//             * @var ColumnInterface $new
-//             * @var ColumnInterface $old
-//             */
-//            switch (true) {
-//                case $new->getOrder() < $old->getOrder():
-//                    $res = -1;
-//                    break;
-//                case $new->getOrder() > $old->getOrder():
-//                    $res = 1;
-//                    break;
-//                default:
-//                    $res = 0;
-//            }
-//            return $res;
-//        });
         /** @var PhpRenderer $view */
         $view = $this->getView();
         /** @var EscapeHtml $escape */
@@ -80,14 +62,14 @@ class Grid extends AbstractHelper
     {
         $attributes = $grid->getAttributes();
         $config = [
-            'shrinkToFit' => false
+            'shrinkToFit' => false,
+            'width' => $this->getConfigVal('width', $attributes, '100%'),
+            'datatype' => $this->getConfigVal('datatype', $attributes, 'local')
         ];
-        $config['width'] = $this->getConfigVal('width', $attributes, '100%');
         if (!array_key_exists('width', $attributes) && !array_key_exists('autowidth', $attributes)) {
             $config['autowidth'] = true;
         }
 
-        $config['datatype'] = $this->getConfigVal('datatype', $attributes, 'local');
         $config = array_merge($config, $attributes);
         return $config;
     }
@@ -96,7 +78,7 @@ class Grid extends AbstractHelper
      * @param string $key
      * @param array $options
      * @param mixed $default
-     * @return null | string | array
+     * @return null|string|array
      */
     protected function getConfigVal($key, array $options, $default = null)
     {

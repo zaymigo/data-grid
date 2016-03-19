@@ -7,31 +7,17 @@
 namespace MteGrid\Grid\Entity;
 
 use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\GeneratedValue;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\MappedSuperclass;
 
 /**
- * Класс используется для построения деревьев
- * Class NestedSet 
+ * Trait NestedSetTrait
  * @package MteGrid\Grid\Entity
- * @MappedSuperclass()
  */
-class NestedSet
+trait NestedSetTrait
 {
     /**
      * @var int
      *
-     * @Id()
-     * @Column(name="id",type="integer"),
-     * @GeneratedValue(strategy = "IDENTITY")
-     */
-    protected $id;
-
-    /**
-     * @var int
-     *
-     * @Column(name="left", type="integer")
+     * @Column(name="left", type="integer", nullable=true)
      *
      */
     protected $left;
@@ -39,14 +25,14 @@ class NestedSet
     /**
      * @var int
      *
-     * @Column(name="right", type="integer")
+     * @Column(name="right", type="integer", nullable=true)
      */
     protected $right;
 
     /**
      * @var int
      *
-     * @Column(name="level", type="integer")
+     * @Column(name="level", type="integer", nullable=true)
      */
     protected $level;
 
@@ -101,24 +87,6 @@ class NestedSet
     public function setLevel($level)
     {
         $this->level = $level;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
         return $this;
     }
 }
