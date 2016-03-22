@@ -5,14 +5,17 @@
  */
 namespace MteGrid\Grid;
 
+use MteGrid\Grid\View\Helper\JqGrid\Column\Hidden;
+use MteGrid\Grid\View\Helper\JqGrid\Column\Text;
 use MteGrid\Grid\View\Helper\JqGrid\Grid;
-use MteGrid\Grid\View\Helper\JqGrid\Column;
+
 
 return [
     'view_helpers' => [
         'invokables' => [
             'mteGridJqGrid' => Grid::class,
-            'mteGridJqGridColumn' => Column::class
+            'mteGridJqGridText' => Text::class,
+            'mteGridJqGridHidden' => Hidden::class
         ],
     ]
 ];

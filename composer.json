@@ -1,5 +1,5 @@
 {
-  "name": "mte-grid/grid",
+  "name": "nnx-company/grid",
   "description": "mte grid module",
   "type": "library",
   "keywords": [
@@ -14,7 +14,7 @@
   "repositories": [
     {
       "type": "git",
-      "url": "git@github.com:mte-grid/grid.git"
+      "url": "https://github.com/nnx-company/grid.git"
     }
   ],
   "require": {

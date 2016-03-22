@@ -4,7 +4,7 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\View\Helper\JqGrid;
+namespace MteGrid\Grid\View\Helper\JqGrid\Column;
 
 use Zend\View\Helper\AbstractHelper;
 use MteGrid\Grid\Column\ColumnInterface;
@@ -14,7 +14,7 @@ use Zend\View\Renderer\PhpRenderer;
  * Class Column
  * @package MteGrid\Grid\View\Helper
  */
-class Column extends AbstractHelper
+class Text extends AbstractHelper
 {
     /**
      * @param ColumnInterface $column
@@ -40,8 +40,9 @@ class Column extends AbstractHelper
         /** @var \Zend\View\Helper\EscapeHtml $escape */
         $escape = $view->plugin('escapeHtml');
         $name = $escape($column->getName());
+        $header = $column->getHeader();
         $config = [
-            'label' => $escape($column->getHeader()->getTitle()),
+            'label' => $header ? $escape($header->getTitle()) : null,
             'index' => strtolower($name),
             'name' => strtolower($name),
             'align' => 'center'

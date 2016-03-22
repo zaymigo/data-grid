@@ -32,7 +32,7 @@ trait NestedSetTrait
     /**
      * @var int
      *
-     * @Column(name="level", type="integer", nullable=true)
+     * @Column(name="level", type="integer",  nullable=true)
      */
     protected $level;
 

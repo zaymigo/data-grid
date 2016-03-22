@@ -17,5 +17,8 @@ class Header extends AbstractHelper
 
     public function __invoke($header)
     {
+        return (object)[
+            ''
+        ];
     }
 }

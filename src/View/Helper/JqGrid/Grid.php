@@ -39,18 +39,30 @@ class Grid extends AbstractHelper
         $view = $this->getView();
         $config = $this->getGridConfig($grid);
         foreach ($columns as $column) {
+            $columnClass = get_class($column);
+            $columnPath = explode('\\', $columnClass);
+            $colName = array_pop($columnPath);
+            $helperName = 'mteGridJqGrid' . $colName;
             /** @var string $columnsJqOptions */
-            $config['colModel'][] = $view->mteGridJqGridColumn($column);
+            $config['colModel'][] = $view->$helperName($column);
         }
         $data = $grid->getRowset();
 
-        $config['data'] = array_map(function ($item) {
+        $data = array_map(function ($item) {
             /** @var Row $item */
             $item = $item->getData();
             return $item;
         }, $data);
         $view->headScript()->appendScript('$(function(){'
-            . '$("#grid-' . $grid->getName() . '").jqGrid(' . json_encode((object)$config) . ');});');
+            . 'var grid = $("#grid-' . $grid->getName() . '");
+            grid.jqGrid(' . json_encode((object)$config) . ');
+            grid[0].addJSONData({
+total: 1,
+page: 1,
+records: ' . count($data) . ',
+rows: ' . json_encode($data) . '
+});
+            });');
         return $res;
     }
 
