@@ -6,7 +6,6 @@
 
 namespace MteGrid\Grid;
 
-
 /**
  * Interface AjaxProviderInterface
  * @package MteGrid\Grid

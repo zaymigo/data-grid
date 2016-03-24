@@ -59,5 +59,4 @@ class Factory implements FactoryInterface, ServiceLocatorAwareInterface
         $mutator = $mutatorManager->get($spec['type'], $options);
         return $mutator;
     }
-
 }

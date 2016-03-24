@@ -5,6 +5,7 @@
  */
 
 namespace MteGrid\Grid\Adapter;
+
 use Doctrine\ORM\EntityManagerInterface;
 
 /**

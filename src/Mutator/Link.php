@@ -54,7 +54,6 @@ class Link extends AbstractMutator
         if (array_key_exists('routeOptions', $options)) {
             $this->setRouteOptions($options['routeOptions']);
         }
-
     }
 
 
@@ -174,6 +173,4 @@ class Link extends AbstractMutator
         $this->routeOptions = $routeOptions;
         return $this;
     }
-
-
 }

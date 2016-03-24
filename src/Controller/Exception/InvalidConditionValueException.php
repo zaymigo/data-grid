@@ -12,5 +12,4 @@ namespace MteGrid\Grid\Controller\Exception;
  */
 class InvalidConditionValueException extends RuntimeException
 {
-
 }

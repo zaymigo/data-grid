@@ -6,7 +6,6 @@
 
 namespace MteGrid\Grid\Column;
 
-
 /**
  * Class Link
  * @package MteGrid\Grid\Column

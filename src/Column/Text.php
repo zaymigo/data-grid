@@ -12,5 +12,4 @@ namespace MteGrid\Grid\Column;
  */
 class Text extends AbstractColumn
 {
-
 }

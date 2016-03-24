@@ -42,5 +42,4 @@ class LinkFactory implements FactoryInterface, MutableCreationOptionsInterface
         $linkMutator = new Link($options);
         return $linkMutator;
     }
-
 }
