@@ -89,7 +89,7 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
             foreach ($order as $orderPart) {
                 if (array_key_exists('field', $orderPart) && $orderPart['field']) {
                     $query->addOrderBy($orderPart['field'],
-                        array_key_exists('order', $orderPart) && $orderPart['order'] ? $orderPart['orderPart'] : null);
+                        array_key_exists('order', $orderPart) && $orderPart['order'] ? $orderPart['order'] : null);
                 }
             }
         }
@@ -98,6 +98,28 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
             ->execute();
 
         return $result->fetchAll();
+    }
+
+    /**
+     * @param QueryBuilder $query
+     * @return mixed
+     */
+    protected function prepareConditions($query)
+    {
+        $i = 0;
+        if (count($this->getConditions()) !== 0) {
+            foreach ($this->getConditions() as $condition) {
+                if ($i === 0) {
+                    $query->where($condition->getKey() . ' ' . $condition->getCriteria() . ' ?');
+                } else {
+                    $query->andWhere($condition->getKey() . ' ' . $condition->getCriteria() . ' ?');
+                }
+                $query->setParameter($i, $condition->getValue());
+                $i++;
+            }
+        }
+
+        return $query;
     }
 
     /**

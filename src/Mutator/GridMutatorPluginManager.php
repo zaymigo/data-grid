@@ -4,16 +4,16 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace MteGrid\Grid\Mutator;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 
 /**
- * Class ColumnPluginManager
+ * Class GridMutatorPluginManager
  * @package MteGrid\Grid\Column
  */
-class GridColumnPluginManager extends AbstractPluginManager
+class GridMutatorPluginManager extends AbstractPluginManager
 {
 
     /**
@@ -25,15 +25,15 @@ class GridColumnPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $aliases = [
-        'text' => Text::class,
-        'hidden' => Hidden::class,
         'link' => Link::class
     ];
 
     protected $invokableClasses = [
-        Text::class => Text::class,
-        Hidden::class => Hidden::class,
-        Link::class => Link::class
+
+    ];
+
+    protected $factories = [
+        Link::class => LinkFactory::class
     ];
 
     /**
@@ -48,10 +48,10 @@ class GridColumnPluginManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        if ($plugin instanceof ColumnInterface) {
+        if ($plugin instanceof MutatorInterface) {
             return;
         }
 
-        throw new Exception\RuntimeException('Column должен реализовывать %s', ColumnInterface::class);
+        throw new Exception\RuntimeException('Mutator должен реализовывать %s', MutatorInterface::class);
     }
 }

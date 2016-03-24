@@ -17,7 +17,7 @@ trait NestedSetTrait
     /**
      * @var int
      *
-     * @Column(name="left", type="integer", nullable=true)
+     * @Column(name="lft", type="integer", nullable=true)
      *
      */
     protected $left;
@@ -25,7 +25,7 @@ trait NestedSetTrait
     /**
      * @var int
      *
-     * @Column(name="right", type="integer", nullable=true)
+     * @Column(name="rgt", type="integer", nullable=true)
      */
     protected $right;
 

@@ -111,6 +111,13 @@ interface GridInterface extends InitializableInterface
     public function setAttributes(array $attributes);
 
     /**
+     * @param $key
+     * @param $value
+     * @return mixed\
+     */
+    public function addAttribute($key, $value);
+
+    /**
      * Возвращает массив строк
      * @return array
      */

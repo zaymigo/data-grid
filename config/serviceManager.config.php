@@ -7,6 +7,8 @@ namespace MteGrid\Grid;
 
 use MteGrid\Grid\Column\GridColumnPluginManager;
 use MteGrid\Grid\Column\GridColumnPluginManagerFactory;
+use MteGrid\Grid\Mutator\GridMutatorPluginManagerFactory;
+use MteGrid\Grid\Mutator\GridMutatorPluginManager;
 use MteGrid\Grid\Options\ModuleOptions;
 
 return [
@@ -16,6 +18,7 @@ return [
         ],
         'factories' => [
             GridColumnPluginManager::class => GridColumnPluginManagerFactory::class,
+            GridMutatorPluginManager::class => GridMutatorPluginManagerFactory::class,
             GridPluginManager::class => GridPluginManagerFactory::class,
             ModuleOptions::class => Options\Factory::class
         ],
@@ -23,6 +26,7 @@ return [
             Adapter\Factory::class => Adapter\Factory::class
         ],
         'aliases' => [
+            'GridMutatorManager' => GridMutatorPluginManager::class,
             'GridColumnManager' => GridColumnPluginManager::class,
             'GridManager' => GridPluginManager::class,
             'GridModuleOptions' => ModuleOptions::class

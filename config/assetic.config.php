@@ -12,9 +12,20 @@ return [
             'MteGrid\Grid' => [
                 'root_path' => __DIR__ . '/../assets',
                 'collections' => [
+                    'mtegrid_grid_images' => array(
+                        'assets' => array(
+                            'images/grid/*.png',
+                            'images/grid/*.gif',
+                        ),
+                        'options' => array(
+                            'move_raw' => true,
+                        )
+                    ),
                     'head_jqgrid_css' => [
                         'assets' => [
-                            'css/jqgrid/ui.jqgrid.css'
+                            'css/jqgrid/jquery-ui.min.css',
+                            'css/jqgrid/ui.jqgrid.css',
+                            'css/jqgrid/wordwrap.css'
                         ]
                     ],
                     'head_jqgrid_js' => [

@@ -1,0 +1,97 @@
+<?php
+/**
+ * @company MTE Telecom, Ltd.
+ * @author Roman Malashin <malashinr@mte-telecom.ru>
+ */
+
+namespace MteGrid\Grid\Controller;
+
+use MteGrid\Grid\Adapter\DoctrineDBAL;
+use MteGrid\Grid\Condition\Conditions;
+use Zend\Mvc\Controller\AbstractActionController;
+use MteGrid\Grid\GridInterface;
+use MteGrid\Grid\Condition\SimpleCondition;
+use Zend\View\Model\ViewModel;
+
+/**
+ * Class DataController
+ * @package MteGrid\Grid\Controller
+ */
+class DataController extends AbstractActionController
+{
+    /**
+     * Возвращает данные для таблиц
+     * @return ViewModel
+     * @throws Exception\InvalidConditionNameException
+     * @throws Exception\InvalidConditionValueException
+     * @throws Exception\InvalidGridNameException
+     */
+    public function getAction()
+    {
+        /** @var \ZF\ContentNegotiation\Request $request */
+        $request = $this->getRequest();
+        $gridName = $request->getQuery('grid');
+        $limit = (int)$request->getQuery('limit', 25);
+        $offset = (int)$request->getQuery('offset', 0);
+        $orderField = $request->getQuery('sidx', 'id');
+        $orderType = $request->getQuery('sorder', 'asc');
+        /**
+         * $conditions => [
+         *      [
+         *          'key' => $name,
+         *          'value' => $value
+         *      ]
+         * ];
+         */
+        $conditions = $request->getQuery('conditions', []);
+        if (!$gridName) {
+            throw new Exception\InvalidGridNameException('Не задано имя таблицы для получения данных');
+        }
+        /** @var GridInterface $grid */
+        $grid = $this->getServiceLocator()->get('GridManager')->get('grids.' . $gridName);
+
+        $adapter = $grid->getAdapter();
+        if ($adapter instanceof DoctrineDBAL) {
+            $adapter->setLimit($limit);
+            $adapter->setOffset($offset);
+            $adapter->setOrder([
+                [
+                    'field' => $orderField,
+                    'order' => $orderType
+                ]
+            ]);
+        }
+
+        $conditionsObj = new Conditions();
+        foreach ($conditions as $cond) {
+            if (is_array($cond)) {
+                $condition = $this->getCondition($cond);
+                $conditionsObj[] = $condition;
+            }
+        }
+        $grid->setConditions($conditionsObj);
+        $result = new ViewModel(['grid' => $grid]);
+        $result->setTerminal(true);
+        return $result;
+    }
+
+    /**
+     * @param array $conditionData
+     * @return SimpleCondition
+     * @throws Exception\InvalidConditionNameException
+     * @throws Exception\InvalidConditionValueException
+     */
+    protected function getCondition(array $conditionData)
+    {
+        if (!array_key_exists('key', $conditionData) || !$conditionData['key']) {
+            throw new Exception\InvalidConditionNameException('Не задано имя условия для выборки');
+        }
+
+        if (!array_key_exists('value', $conditionData)) {
+            throw new Exception\InvalidConditionValueException('Не передано значение для условия выборки.');
+        }
+
+        $conditionType = SimpleCondition::CRITERIA_TYPE_EQUAL;
+        return new SimpleCondition($conditionData['key'], $conditionType, $conditionData['value']);
+    }
+}

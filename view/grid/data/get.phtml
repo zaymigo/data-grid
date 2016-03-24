@@ -1,0 +1,22 @@
+<?php
+/**
+ * @company MTE Telecom, Ltd.
+ * @author Roman Malashin <malashinr@mte-telecom.ru>
+ */
+/** @var \MteGrid\Grid\GridInterface $grid */
+$grid = $this->grid;
+
+$data = $grid->getRowset();
+
+$rows = [];
+foreach ($data as $item) {
+    /** @var \MteGrid\Grid\Row $item */
+    $item = $item->getData();
+    $rows[] = $item;
+}
+
+echo json_encode((object)[
+    'rows' => $rows,
+    'total' => 0,
+    'page' => 1
+]);

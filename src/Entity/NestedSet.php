@@ -31,7 +31,7 @@ class NestedSet
     /**
      * @var int
      *
-     * @Column(name="left", type="integer", nullable=true)
+     * @Column(name="lft", type="integer", nullable=true)
      *
      */
     protected $left;
@@ -39,7 +39,7 @@ class NestedSet
     /**
      * @var int
      *
-     * @Column(name="right", type="integer", nullable=true)
+     * @Column(name="rgt", type="integer", nullable=true)
      */
     protected $right;
 
@@ -119,24 +119,6 @@ class NestedSet
     public function setLevel($level)
     {
         $this->level = $level;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
         return $this;
     }
 }

@@ -6,6 +6,8 @@
 
 namespace MteGrid\Grid;
 
+use MteGrid\Grid\Column\ColumnInterface;
+use MteGrid\Grid\Mutator\MutatorInterface;
 use Traversable;
 use ArrayAccess;
 
@@ -29,6 +31,8 @@ class SimpleGrid extends AbstractGrid
     {
         if (empty($this->rowSet)) {
             $data = $this->getAdapter()->getData();
+
+
             $this->buildRowSet($data);
         }
 
@@ -48,7 +52,22 @@ class SimpleGrid extends AbstractGrid
                 sprintf('Данные должны быть массивом или %s', ArrayAccess::class)
             );
         }
+        $columns = $this->getColumns();
         foreach ($data as $item) {
+            /** @var ColumnInterface $column */
+            foreach ($columns as $column) {
+                $columnName = $column->getName();
+                $mutators = $column->getMutators();
+                if (array_key_exists($columnName, $item)) {
+                    /** @var MutatorInterface $mutator */
+                    foreach ($mutators as $mutator) {
+                        if ($mutator instanceof MutatorInterface) {
+                            $mutator->setRowData($item);
+                        }
+                        $item[$columnName] = $mutator->change($item[$columnName]);
+                    }
+                }
+            }
             $this->rowSet[] = new Row($item);
         }
         return $this;

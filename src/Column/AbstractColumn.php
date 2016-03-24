@@ -7,6 +7,7 @@
 namespace MteGrid\Grid\Column;
 
 use MteGrid\Grid\Column\Header\HeaderInterface;
+use MteGrid\Grid\Mutator\MutatorInterface;
 use Traversable;
 
 abstract class AbstractColumn implements ColumnInterface
@@ -47,6 +48,16 @@ abstract class AbstractColumn implements ColumnInterface
      * @var bool
      */
     protected $sortable;
+
+    /**
+     * @var array|Traversable
+     */
+    protected $mutators;
+
+    /**
+     * @var array|Traversable
+     */
+    protected $invokableMutators;
 
     /**
      * Устанавливает заголовок для колонки
@@ -185,6 +196,53 @@ abstract class AbstractColumn implements ColumnInterface
     public function setSortable($sortable)
     {
         $this->sortable = $sortable;
+        return $this;
+    }
+
+    /**
+     * @return array|Traversable
+     */
+    public function getMutators()
+    {
+        return $this->mutators;
+    }
+
+    /**
+     * @param array|Traversable $mutators
+     * @return $this
+     */
+    public function setMutators($mutators)
+    {
+        $this->mutators = $mutators;
+        return $this;
+    }
+
+    /**
+     * Добавляет мутьатор для ячеек данных
+     * @param MutatorInterface $mutator
+     * @return mixed
+     */
+    public function addMutator(MutatorInterface $mutator)
+    {
+        $this->mutators[] = $mutator;
+        return $this;
+    }
+
+    /**
+     * @return array|Traversable
+     */
+    public function getInvokableMutators()
+    {
+        return $this->invokableMutators;
+    }
+
+    /**
+     * @param array|Traversable $invokableMutators
+     * @return $this
+     */
+    public function setInvokableMutators($invokableMutators)
+    {
+        $this->invokableMutators = $invokableMutators;
         return $this;
     }
 }

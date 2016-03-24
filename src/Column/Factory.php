@@ -10,11 +10,14 @@ use MteGrid\Grid\Column\Exception\InvalidColumnException;
 use MteGrid\Grid\Column\Exception\InvalidNameException;
 use MteGrid\Grid\Column\Exception\InvalidSpecificationException;
 use MteGrid\Grid\FactoryInterface;
+use MteGrid\Grid\Mutator\MutatorInterface;
 use Traversable;
 use Zend\Http\Header\HeaderInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use MteGrid\Grid\Mutator\Factory as MutatorFactory;
+
 
 /**
  * Class Factory
@@ -46,6 +49,53 @@ final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInt
         if (!array_key_exists('name', $spec) || !$spec['name']) {
             throw new InvalidNameException('Не задано имя для колонки.');
         }
+    }
+
+    /**
+     * Возвращщает набор мутаторов
+     * @param array $spec
+     * @return array
+     */
+    protected function getMutators($spec)
+    {
+        $mutators = [];
+        if (array_key_exists('mutators', $spec) && $spec['mutators']) {
+            $mutatorFactory = new MutatorFactory($this->getColumnPluginManager()->getServiceLocator());
+            foreach ($spec['mutators'] as $mutator) {
+                if (!$mutator instanceof MutatorInterface) {
+                    $mutator = $mutatorFactory->create($mutator);
+                }
+                $mutators[] = $mutator;
+            }
+        }
+        return $mutators;
+    }
+
+    /**
+     * @param ColumnInterface $column
+     * @param array | Traversable $spec
+     * @return array | Traversable
+     */
+    protected function prepareMutatorsSpecification(ColumnInterface $column, $spec)
+    {
+        $mutatorsNames = $column->getInvokableMutators();
+        if (count($mutatorsNames)) {
+            if (array_key_exists('options', $spec)
+                && is_array($spec['options'])
+                && array_key_exists('mutatorsOptions', $spec['options'])
+            ) {
+                $mutatorsOptions = $spec['options']['mutatorsOptions'];
+                foreach ($mutatorsNames as $k => $mutator) {
+                    $spec['mutators'][] = [
+                        'type' => $mutator,
+                        'options' => $mutatorsOptions[$k]
+                    ];
+                }
+                unset($spec['options']['mutatorsOptions']);
+            }
+        }
+
+        return $spec;
     }
 
     /**
@@ -83,6 +133,9 @@ final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInt
             }
             $column->setHeader($header);
         }
+        $spec = $this->prepareMutatorsSpecification($column, $spec);
+        $column->setMutators($this->getMutators($spec));
+
         return $column;
     }
 }

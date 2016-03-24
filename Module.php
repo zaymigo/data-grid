@@ -126,6 +126,12 @@ class Module
             GridColumnProviderInterface::class,
             'getGridColumnConfig'
         );
+        $serviceListener->addServiceManager(
+            'GridMutatorManager',
+            'grid_mutators',
+            GridMutatorProviderInterface::class,
+            'getGridMutatorConfig'
+        );
     }
 
     /**

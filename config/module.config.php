@@ -8,6 +8,7 @@ namespace MteGrid\Grid;
 
 
 use MteGrid\Grid\Adapter\DoctrineDBAL;
+use MteGrid\Grid\Controller\DataController;
 
 return array_merge(
     [
@@ -23,10 +24,28 @@ return array_merge(
                     ]
                 ],
             ]
+        ],
+        'controllers' => array(
+            'invokables' => array(
+                'MteGrid\Grid\Controller\Data' => DataController::class,
+            ),
+        ),
+        'view_manager' => [
+            'template_map' => include __DIR__ . '/../template_map.php',
+            'template_path_stack' => [
+                'mteGridGrid' => __DIR__ . '/../view',
+            ],
+            'strategies' => [
+                'ViewJsonStrategy'
+            ],
+            'controller_map' => [
+                'MteGrid\Grid' => 'Grid',
+            ],
         ]
     ],
     require 'grid.config.php',
     require 'serviceManager.config.php',
     require 'assetic.config.php',
-    require 'viewHelpers.config.php'
+    require 'viewHelpers.config.php',
+    require 'routes.config.php'
 );

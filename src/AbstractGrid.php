@@ -96,6 +96,7 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
     public function setConditions($conditions)
     {
         $this->conditions = $conditions;
+        $this->getAdapter()->setConditions($conditions);
         return $this;
     }
 
@@ -250,6 +251,17 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function addAttribute($key, $value)
+    {
+        $this->attributes[$key] = $value;
         return $this;
     }
 

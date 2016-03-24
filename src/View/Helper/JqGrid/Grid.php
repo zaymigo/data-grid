@@ -6,7 +6,6 @@
 
 namespace MteGrid\Grid\View\Helper\JqGrid;
 
-use MteGrid\Grid\Row;
 use Zend\View\Helper\AbstractHelper;
 use MteGrid\Grid\GridInterface;
 use Zend\View\Helper\EscapeHtml;
@@ -46,23 +45,8 @@ class Grid extends AbstractHelper
             /** @var string $columnsJqOptions */
             $config['colModel'][] = $view->$helperName($column);
         }
-        $data = $grid->getRowset();
-
-        $data = array_map(function ($item) {
-            /** @var Row $item */
-            $item = $item->getData();
-            return $item;
-        }, $data);
         $view->headScript()->appendScript('$(function(){'
-            . 'var grid = $("#grid-' . $grid->getName() . '");
-            grid.jqGrid(' . json_encode((object)$config) . ');
-            grid[0].addJSONData({
-total: 1,
-page: 1,
-records: ' . count($data) . ',
-rows: ' . json_encode($data) . '
-});
-            });');
+            . 'var grid = $("#grid-' . $grid->getName() . '").jqGrid(' . json_encode((object)$config) . ');});');
         return $res;
     }
 

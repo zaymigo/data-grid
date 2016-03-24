@@ -7,6 +7,7 @@
 namespace MteGrid\Grid\Column;
 
 use MteGrid\Grid\Column\Header\HeaderInterface;
+use MteGrid\Grid\Mutator\MutatorInterface;
 use Traversable;
 
 /**
@@ -105,4 +106,35 @@ interface ColumnInterface
      * @return $this
      */
     public function setSortable($sortable);
+
+    /**
+     * @param array|Traversable $mutators
+     * @return mixed
+     */
+    public function setMutators($mutators);
+
+    /**
+     * @return array|Traversable
+     */
+    public function getMutators();
+
+    /**
+     * Добавляет мутьатор для ячеек данных
+     * @param MutatorInterface $mutator
+     * @return mixed
+     */
+    public function addMutator(MutatorInterface $mutator);
+
+    /**
+     * Возвращает массив наименований мутаторов которые по дефолту вызываются для колонки
+     * @return array|Traversable
+     */
+    public function getInvokableMutators();
+
+    /**
+     * Устанавливает массив наименований мутаторов
+     * @param array|Traversable $invokableMutators
+     * @return $this
+     */
+    public function setInvokableMutators($invokableMutators);
 }

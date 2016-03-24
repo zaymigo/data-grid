@@ -6,11 +6,17 @@
 
 namespace MteGrid\Grid\Column;
 
+
 /**
- * Class Text
+ * Class Link
  * @package MteGrid\Grid\Column
  */
-class Text extends AbstractColumn
+class Link extends AbstractColumn
 {
-
+    /**
+     * @var array
+     */
+    protected $invokableMutators = [
+        'link'
+    ];
 }
