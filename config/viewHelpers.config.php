@@ -5,6 +5,7 @@
  */
 namespace MteGrid\Grid;
 
+use MteGrid\Grid\View\Helper\JqGrid\Column\Action;
 use MteGrid\Grid\View\Helper\JqGrid\Column\Hidden;
 use MteGrid\Grid\View\Helper\JqGrid\Column\Link;
 use MteGrid\Grid\View\Helper\JqGrid\Column\Text;
@@ -17,7 +18,8 @@ return [
             'mteGridJqGrid' => Grid::class,
             'mteGridJqGridText' => Text::class,
             'mteGridJqGridHidden' => Hidden::class,
-            'mteGridJqGridLink' => Link::class
+            'mteGridJqGridLink' => Link::class,
+            'mteGridJqGridAction' => Action::class
         ],
     ]
 ];
