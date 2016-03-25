@@ -93,6 +93,7 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
                 }
             }
         }
+        $query = $this->prepareConditions($query);
         $result = $query->setMaxResults($this->getLimit())
             ->setFirstResult($this->getOffset())
             ->execute();
