@@ -27,13 +27,18 @@ class GridColumnPluginManager extends AbstractPluginManager
     protected $aliases = [
         'text' => Text::class,
         'hidden' => Hidden::class,
-        'link' => Link::class
+        'link' => Link::class,
+        'money' => Money::class
     ];
 
+    /**
+     * @var array
+     */
     protected $invokableClasses = [
         Text::class => Text::class,
         Hidden::class => Hidden::class,
-        Link::class => Link::class
+        Link::class => Link::class,
+        Money::class => Money::class
     ];
 
     /**

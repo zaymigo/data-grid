@@ -1,14 +1,15 @@
 <?php
 /**
- * @author Deller myogogo@gmail.com
+ * @company MTE Telecom, Ltd.
+ * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
 namespace MteGrid\Grid\View\Helper\JqGrid\Column;
 
 /**
- * Class Action
+ * Class Money
  * @package MteGrid\Grid\View\Helper\JqGrid\Column
  */
-class Action extends Text
+class Money extends Text
 {
 }

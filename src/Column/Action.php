@@ -11,6 +11,4 @@ namespace MteGrid\Grid\Column;
  */
 class Action extends AbstractColumn
 {
-
-
 }

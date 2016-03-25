@@ -25,15 +25,17 @@ class GridMutatorPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $aliases = [
-        'link' => Link::class
+        'link' => Link::class,
+        'money' => Money::class
     ];
 
     protected $invokableClasses = [
-
+        Money::class => Money::class
     ];
 
     protected $factories = [
-        Link::class => LinkFactory::class
+        Link::class => LinkFactory::class,
+
     ];
 
     /**

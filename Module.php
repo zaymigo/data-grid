@@ -7,6 +7,7 @@
 namespace MteGrid\Grid;
 
 use MteGrid\Grid\Column\GridColumnProviderInterface;
+use MteGrid\Grid\Mutator\GridMutatorProviderInterface;
 use MteGrid\Grid\Options\ModuleOptions;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;

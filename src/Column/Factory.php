@@ -79,20 +79,21 @@ final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInt
     protected function prepareMutatorsSpecification(ColumnInterface $column, $spec)
     {
         $mutatorsNames = $column->getInvokableMutators();
+        $mutatorsOptions = [];
         if (count($mutatorsNames)) {
             if (array_key_exists('options', $spec)
                 && is_array($spec['options'])
                 && array_key_exists('mutatorsOptions', $spec['options'])
             ) {
                 $mutatorsOptions = $spec['options']['mutatorsOptions'];
-                foreach ($mutatorsNames as $k => $mutator) {
-                    $spec['mutators'][] = [
-                        'type' => $mutator,
-                        'options' => $mutatorsOptions[$k]
-                    ];
-                }
-                unset($spec['options']['mutatorsOptions']);
             }
+            foreach ($mutatorsNames as $k => $mutator) {
+                $spec['mutators'][] = [
+                    'type' => $mutator,
+                    'options' => array_key_exists($k, $mutatorsOptions) ? $mutatorsOptions[$k] : []
+                ];
+            }
+            unset($spec['options']['mutatorsOptions']);
         }
 
         return $spec;
