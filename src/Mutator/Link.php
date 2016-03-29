@@ -35,6 +35,11 @@ class Link extends AbstractMutator
      */
     protected $routeOptions = [];
 
+    /**
+     * @var string
+     */
+    protected $url;
+
 
     public function __construct(array $options = [])
     {
@@ -78,7 +83,20 @@ class Link extends AbstractMutator
      */
     public function getUrl($urlTemplate)
     {
-        return preg_replace_callback('/:([a-zA-Z_]+)/', [$this, 'replaceCallback'], $urlTemplate);
+        if (!$this->url) {
+            $this->url = preg_replace_callback('/:([a-zA-Z_]+)/', [$this, 'replaceCallback'], $urlTemplate);
+        }
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     * @return $this
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+        return $this;
     }
 
     /**

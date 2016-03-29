@@ -28,7 +28,8 @@ class GridColumnPluginManager extends AbstractPluginManager
         'text' => Text::class,
         'hidden' => Hidden::class,
         'link' => Link::class,
-        'money' => Money::class
+        'money' => Money::class,
+        'action' => Action::class
     ];
 
     /**
@@ -39,6 +40,10 @@ class GridColumnPluginManager extends AbstractPluginManager
         Hidden::class => Hidden::class,
         Link::class => Link::class,
         Money::class => Money::class
+    ];
+
+    protected $factories = [
+        Action::class => ActionFactory::class
     ];
 
     /**

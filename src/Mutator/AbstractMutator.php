@@ -7,13 +7,17 @@
 namespace MteGrid\Grid\Mutator;
 
 use ArrayAccess;
+use MteGrid\Grid\RowDataAwareInterface;
 
 /**
  * Class AbstractMutator
  * @package MteGrid\Grid\Mutator
  */
-abstract class AbstractMutator implements MutatorInterface
+abstract class AbstractMutator implements MutatorInterface, RowDataAwareInterface
 {
+    /**
+     * @var array|ArrayAccess
+     */
     protected $rowData;
 
     public function __construct(array $options = [])

@@ -60,6 +60,31 @@ abstract class AbstractColumn implements ColumnInterface
     protected $invokableMutators;
 
     /**
+     * @param string $key
+     * @param array $options
+     */
+    protected function setProperty($key, &$options)
+    {
+        if (array_key_exists($key, $options)) {
+            $setter = 'set' . ucfirst($key);
+            if (method_exists($this, $setter)) {
+                $this->$setter($options[$key]);
+                unset($options[$key]);
+            }
+        }
+    }
+
+    /**
+     * @param array $options
+     */
+    public function __construct(array $options = [])
+    {
+        foreach ($options as $key => $option) {
+            $this->setProperty($key, $options);
+        }
+    }
+
+    /**
      * Устанавливает заголовок для колонки
      * @param HeaderInterface | array | Traversable $header
      * @return $this

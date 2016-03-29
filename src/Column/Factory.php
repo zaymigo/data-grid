@@ -15,7 +15,6 @@ use Traversable;
 use Zend\Http\Header\HeaderInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
-use Zend\Stdlib\Hydrator\ClassMethods;
 use MteGrid\Grid\Mutator\Factory as MutatorFactory;
 
 
@@ -116,13 +115,7 @@ final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInt
     {
         $this->validate($spec);
         /** @var ColumnInterface $column */
-        $column = $this->getColumnPluginManager()->get($spec['type']);
-        /** @var ClassMethods $classMethods */
-        $classMethods = $this->getColumnPluginManager()
-            ->getServiceLocator()
-            ->get('HydratorManager')
-            ->get('ClassMethods');
-        $column = $classMethods->hydrate($spec, $column);
+        $column = $this->getColumnPluginManager()->get($spec['type'], $spec);
         if (array_key_exists('header', $spec)
             && $spec['header']
         ) {
