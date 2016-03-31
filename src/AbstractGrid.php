@@ -159,7 +159,7 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
     {
         if (is_array($column) || $column instanceof ArrayAccess) {
             /**
-             * @TODO переделать чтобы вызывалось через ServiceLocator
+             * @TODO пробрасывать через конструктор
              *
              *
              * @var Column\Factory $columnFactory

@@ -63,8 +63,8 @@ class SimpleGrid extends AbstractGrid
                     foreach ($mutators as $mutator) {
                         if ($mutator instanceof MutatorInterface) {
                             $mutator->setRowData($item);
+                            $item[$columnName] = $mutator->change($item[$columnName]);
                         }
-                        $item[$columnName] = $mutator->change($item[$columnName]);
                     }
                 }
             }

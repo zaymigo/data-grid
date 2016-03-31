@@ -10,41 +10,42 @@ $data = $grid->getRowset();
 $columns = $grid->getColumns();
 $rows = [];
 $escaper = $this->plugin('escapeHtml');
-foreach ($data as $item) {
-    /** @var \MteGrid\Grid\Row $item */
-    $item = $item->getData();
-    /**
-     * @var string $name
-     * @var \MteGrid\Grid\Column\ColumnInterface $column
-     */
-    foreach ($columns as $name => $column) {
-        if ($column instanceof \MteGrid\Grid\Column\ActionAwareInterface) {
-            $item[$column->getName()] = '';
-            $actions = $column->getActions();
-            /** @var \MteGrid\Grid\Column\Action\ActionInterface $action */
-            foreach ($actions as $action) {
-                $keys = array_keys($action->getAttributes());
-                $attributes = implode(' ', array_map(function ($k, $v) {
-                    return $k . '="' . $v . '"';
-                }, (count($keys) !== 0 ? $keys : []), $action->getAttributes()));
-                if ($action instanceof \MteGrid\Grid\RowDataAwareInterface) {
-                    $action->setRowData($item);
-                }
-                if ($action->validate()) {
-                    $item[$column->getName()] .= '<a href="'
-                        . $action->getUrl()
-                        . '" '
-                        . $attributes
-                        . '>'
-                        . ($action->getTitle())
-                        . '</a>';
+if (count($data) !== 0) {
+    foreach ($data as $item) {
+        /** @var \MteGrid\Grid\Row $item */
+        $item = $item->getData();
+        /**
+         * @var string $name
+         * @var \MteGrid\Grid\Column\ColumnInterface $column
+         */
+        foreach ($columns as $name => $column) {
+            if ($column instanceof \MteGrid\Grid\Column\ActionAwareInterface) {
+                $item[$column->getName()] = '';
+                $actions = $column->getActions();
+                /** @var \MteGrid\Grid\Column\Action\ActionInterface $action */
+                foreach ($actions as $action) {
+                    $keys = array_keys($action->getAttributes());
+                    $attributes = implode(' ', array_map(function ($k, $v) {
+                        return $k . '="' . $v . '"';
+                    }, (count($keys) !== 0 ? $keys : []), $action->getAttributes()));
+                    if ($action instanceof \MteGrid\Grid\RowDataAwareInterface) {
+                        $action->setRowData($item);
+                    }
+                    if ($action->validate()) {
+                        $item[$column->getName()] .= '<a href="'
+                            . $action->getUrl()
+                            . '" '
+                            . $attributes
+                            . '>'
+                            . ($action->getTitle())
+                            . '</a>';
+                    }
                 }
             }
         }
+        $rows[] = $item;
     }
-    $rows[] = $item;
 }
-
 
 echo json_encode((object)[
     'rows' => $rows,
