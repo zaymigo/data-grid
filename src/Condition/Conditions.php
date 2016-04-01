@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Condition;
+namespace NNX\DataGrid\Condition;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Conditions
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 class Conditions extends ArrayCollection
 {

@@ -4,7 +4,7 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -13,7 +13,7 @@ use Zend\ServiceManager\MutableCreationOptionsTrait;
 
 /**
  * Class ActionFactory
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 class ActionFactory implements FactoryInterface, MutableCreationOptionsInterface
 {

@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Mutator;
+namespace NNX\DataGrid\Mutator;
 
 /**
  * Class Money
- * @package MteGrid\Grid\Mutator
+ * @package NNX\DataGrid\Mutator
  *
  * Класс для мутации данных чисел. Приводит числа к денежному формату
  */

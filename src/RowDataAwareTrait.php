@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
 use ArrayAccess;
 
 /**
  * Trait RowDataAwareTrait
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 trait RowDataAwareTrait
 {

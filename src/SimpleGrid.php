@@ -4,16 +4,16 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
-use MteGrid\Grid\Column\ColumnInterface;
-use MteGrid\Grid\Mutator\MutatorInterface;
+use NNX\DataGrid\Column\ColumnInterface;
+use NNX\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 use ArrayAccess;
 
 /**
  * Class SimpleGrid 
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 class SimpleGrid extends AbstractGrid
 {

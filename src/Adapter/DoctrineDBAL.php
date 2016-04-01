@@ -4,7 +4,7 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Adapter;
+namespace NNX\DataGrid\Adapter;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -13,7 +13,7 @@ use Traversable;
 
 /**
  * Class DoctrineDBAL 
- * @package MteGrid\Grid\Adapter
+ * @package NNX\DataGrid\Adapter
  */
 class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterface
 {

@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Exception;
+namespace NNX\DataGrid\Column\Exception;
 
 /**
  * Class InvalidColumnException
- * @package MteGrid\Grid\Column\Exception
+ * @package NNX\DataGrid\Column\Exception
  */
 class InvalidColumnException extends RuntimeException
 {

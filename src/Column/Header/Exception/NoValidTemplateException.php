@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Header\Exception;
+namespace NNX\DataGrid\Column\Header\Exception;
 
 /**
  * Class NoValidTypeException
- * @package MteGrid\Grid\Column\Header\Exception
+ * @package NNX\DataGrid\Column\Header\Exception
  */
 class NoValidTemplateException extends RuntimeException
 {

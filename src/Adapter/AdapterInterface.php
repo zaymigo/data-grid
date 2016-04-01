@@ -4,17 +4,17 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Adapter;
+namespace NNX\DataGrid\Adapter;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use MteGrid\Grid\Condition\Conditions;
+use NNX\DataGrid\Condition\Conditions;
 use ArrayAccess;
 use Traversable;
 use Zend\Stdlib\InitializableInterface;
 
 /**
  * Interface AdapterInterface
- * @package MteGrid\Grid\Adapter
+ * @package NNX\DataGrid\Adapter
  */
 interface AdapterInterface extends InitializableInterface
 {

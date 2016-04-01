@@ -11,7 +11,7 @@ return [
                 'options' => [
                     'route' => '/grid',
                     'defaults' => [
-                        'controller' => 'MteGrid\Grid\Controller\Data',
+                        'controller' => 'NNX\DataGrid\Controller\Data',
                         'action' => 'get',
                     ],
                     'constraints' => [

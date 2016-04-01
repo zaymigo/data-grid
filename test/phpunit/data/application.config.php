@@ -8,11 +8,11 @@ return [
     'modules' => [
         'DoctrineModule',
         'DoctrineORMModule',
-        'MteGrid\\Grid'
+        'NNX\\DataGrid'
     ],
     'module_listener_options' => [
         'module_paths' => [
-            'MteGrid\\Grid' => __DIR__ . '/../../'
+            'NNX\\DataGrid' => __DIR__ . '/../../'
         ]
     ]
 ];

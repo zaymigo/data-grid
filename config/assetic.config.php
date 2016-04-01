@@ -4,12 +4,12 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
 return [
     'assetic_configuration' => [
         'modules' => [
-            'MteGrid\Grid' => [
+            'NNX\DataGrid' => [
                 'root_path' => __DIR__ . '/../assets',
                 'collections' => [
                     'mtegrid_grid_images' => array(

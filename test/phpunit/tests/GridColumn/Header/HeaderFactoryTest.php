@@ -4,18 +4,18 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Test\PhpUnit\GridColumn\Header;
+namespace NNX\DataGrid\Test\PhpUnit\GridColumn\Header;
 
-use MteGrid\Grid\Column\Header\Exception\NoValidSpecificationException;
-use MteGrid\Grid\Column\Header\Factory;
-use MteGrid\Grid\Column\Header\HeaderInterface;
-use MteGrid\Grid\Test\PhpUnit\TestData\TestPath;
+use NNX\DataGrid\Column\Header\Exception\NoValidSpecificationException;
+use NNX\DataGrid\Column\Header\Factory;
+use NNX\DataGrid\Column\Header\HeaderInterface;
+use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 use Exception;
 
 /**
  * Class HeaderFactoryTest
- * @package MteGrid\Grid\Test\PhpUnit\GridColumn\Header
+ * @package NNX\DataGrid\Test\PhpUnit\GridColumn\Header
  */
 class HeaderFactoryTest extends AbstractControllerTestCase
 {

@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Action;
+namespace NNX\DataGrid\Column\Action;
 
-use MteGrid\Grid\RowDataAwareInterface;
-use MteGrid\Grid\RowDataAwareTrait;
+use NNX\DataGrid\RowDataAwareInterface;
+use NNX\DataGrid\RowDataAwareTrait;
 
 /**
  * Class SimpleAction
- * @package MteGrid\Grid\Column\Action
+ * @package NNX\DataGrid\Column\Action
  */
 class SimpleAction extends AbstractAction implements RowDataAwareInterface
 {

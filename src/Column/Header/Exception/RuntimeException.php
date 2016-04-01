@@ -4,9 +4,9 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Header\Exception;
+namespace NNX\DataGrid\Column\Header\Exception;
 
-use MteGrid\Grid\Exception\RuntimeException as MteGridRuntimeException;
+use NNX\DataGrid\Exception\RuntimeException as MteGridRuntimeException;
 
 class RuntimeException extends MteGridRuntimeException
 {

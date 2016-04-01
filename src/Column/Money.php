@@ -4,14 +4,18 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
 /**
  * Class Money
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 class Money extends AbstractColumn
 {
+    /**
+     * Предустановленные мутаторы
+     * @var array
+     */
     protected $invokableMutators = [
         'money'
     ];

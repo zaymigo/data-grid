@@ -4,17 +4,17 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\View\Helper\JqGrid;
+namespace NNX\DataGrid\View\Helper\JqGrid;
 
 use Zend\View\Helper\AbstractHelper;
-use MteGrid\Grid\GridInterface;
+use NNX\DataGrid\GridInterface;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Renderer\PhpRenderer;
-use MteGrid\Grid\View\Helper\Exception;
+use NNX\DataGrid\View\Helper\Exception;
 
 /**
  * Class Grid
- * @package MteGrid\Grid\View\Helper
+ * @package NNX\DataGrid\View\Helper
  */
 class Grid extends AbstractHelper
 {

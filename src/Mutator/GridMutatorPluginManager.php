@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Mutator;
+namespace NNX\DataGrid\Mutator;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 
 /**
  * Class GridMutatorPluginManager
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 class GridMutatorPluginManager extends AbstractPluginManager
 {

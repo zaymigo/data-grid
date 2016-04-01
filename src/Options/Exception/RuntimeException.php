@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\OPtions\Exception;
+namespace NNX\DataGrid\OPtions\Exception;
 
-use MteGrid\Grid\Exception\RuntimeException as BaseRuntimeException;
+use NNX\DataGrid\Exception\RuntimeException as BaseRuntimeException;
 
 /**
  * Class RuntimeException 
- * @package MteGrid\Grid\OPtions\Exception
+ * @package NNX\DataGrid\OPtions\Exception
  */
 class RuntimeException extends BaseRuntimeException
 {

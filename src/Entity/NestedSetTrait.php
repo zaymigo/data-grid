@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Entity;
+namespace NNX\DataGrid\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 
 /**
  * Trait NestedSetTrait
- * @package MteGrid\Grid\Entity
+ * @package NNX\DataGrid\Entity
  */
 trait NestedSetTrait
 {

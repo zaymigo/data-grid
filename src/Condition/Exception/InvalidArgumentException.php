@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Condition\Exception;
+namespace NNX\DataGrid\Condition\Exception;
 
-use MteGrid\Grid\Exception\InvalidArgumentException as BaseInvalidArgumentException;
+use NNX\DataGrid\Exception\InvalidArgumentException as BaseInvalidArgumentException;
 
 /**
  * Class InvalidArgumentException 
- * @package MteGrid\Grid\Condition\Exception
+ * @package NNX\DataGrid\Condition\Exception
  */
 class InvalidArgumentException extends BaseInvalidArgumentException
 {

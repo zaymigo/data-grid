@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
 use ArrayAccess;
 
 /**
  * Class Row 
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 class Row implements ArrayAccess
 {

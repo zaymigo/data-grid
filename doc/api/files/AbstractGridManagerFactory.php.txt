@@ -1,0 +1,132 @@
+<?php
+/**
+ * @company MTE Telecom, Ltd.
+ * @author Roman Malashin <malashinr@mte-telecom.ru>
+ */
+
+namespace NNX\DataGrid;
+
+use NNX\DataGrid\Adapter\AdapterInterface;
+use NNX\DataGrid\Column\GridColumnPluginManagerAwareInterface;
+use NNX\DataGrid\Options\ModuleOptions;
+use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use ArrayAccess;
+use Zend\Stdlib\InitializableInterface;
+
+/**
+ * Class AbstractGridManager 
+ * @package NNX\DataGrid
+ */
+class AbstractGridManagerFactory implements AbstractFactoryInterface
+{
+
+    const CONFIG_KEY = 'grids';
+    /**
+     * Determine if we can create a service with name
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @param $name
+     * @param $requestedName
+     * @return bool
+     */
+    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    {
+        $res = false;
+        if (strpos($requestedName, 'grids.') === 0) {
+            $res = true;
+        }
+        return $res;
+    }
+
+    /**
+     * @param array | ArrayAccess | AdapterInterface $adapterOptions
+     * @param ServiceLocatorInterface $serviceManager
+     * @return AdapterInterface|null
+     * @throws Adapter\Exception\AdapterNotFoundException
+     * @throws Adapter\Exception\InvalidArgumentException
+     * @throws Adapter\Exception\InvalidOptionsException
+     * @throws Adapter\Exception\RuntimeException
+     * @throws Exception\RuntimeException
+     */
+    protected function createAdapter($adapterOptions, ServiceLocatorInterface $serviceManager)
+    {
+        $moduleOptions = $serviceManager->get('GridModuleOptions');
+        if (is_array($adapterOptions) || $adapterOptions instanceof ArrayAccess) {
+            /** @var Adapter\Factory $adapterFactory */
+            $adapterFactory = $serviceManager->get(Adapter\Factory::class);
+            if (!array_key_exists('doctrine_entity_manager', $adapterOptions)
+                || $adapterOptions['doctrine_entity_manager']
+            ) {
+                $adapterOptions['doctrine_entity_manager'] = $moduleOptions->getDoctrineEntityManager();
+            }
+            $adapter = $adapterFactory->create($adapterOptions);
+        } elseif (is_object($adapterOptions)) {
+            /** @var Adapter\Factory $adapterFactory */
+            $adapter = $adapterOptions;
+            if (!$adapter instanceof AdapterInterface) {
+                throw new Exception\RuntimeException(sprintf('Adapter должен реализовывать %s', AdapterInterface::class));
+            }
+        } else {
+            throw new Exception\RuntimeException('Не задан EntityManager для грида.');
+        }
+        return $adapter;
+    }
+
+    /**
+     * Create service with name
+     *
+     * @param GridPluginManager | ServiceLocatorInterface $serviceLocator
+     * @param $name
+     * @param $requestedName
+     * @return mixed
+     * @throws Exception\RuntimeException
+     */
+    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    {
+        /** @var ServiceLocatorInterface $serviceManager */
+        $serviceManager = $serviceLocator->getServiceLocator();
+        /** @var ModuleOptions $moduleOptions */
+        $moduleOptions = $serviceManager->get('GridModuleOptions');
+        $gridsConfig = $moduleOptions->getGrids();
+        /** @noinspection NotOptimalIfConditionsInspection */
+        if ($gridsConfig === null || count($gridsConfig) === 0) {
+            throw new Exception\RuntimeException('В конфигурационном файле нет секции grids');
+        }
+        $gridName = substr($requestedName, strlen(self::CONFIG_KEY . '.'));
+
+        if (!array_key_exists($gridName, $gridsConfig) || !$gridsConfig[$gridName]) {
+            throw new Exception\RuntimeException(
+                sprintf('Таблица с именем %s не найдена в конфиге гридов.', $gridName)
+            );
+        }
+        $gridConfig =& $gridsConfig[$gridName];
+
+        if (!array_key_exists('class', $gridConfig) || !$gridConfig['class']) {
+            throw new Exception\RuntimeException('Необходимо задать класс таблицы в конфиге.');
+        }
+        $gridClass =& $gridConfig['class'];
+
+        $options = [];
+        if (array_key_exists('options', $gridConfig) && $gridConfig['options']) {
+            if (!is_array($gridConfig['options']) && !$gridConfig['options'] instanceof ArrayAccess) {
+                throw new Exception\RuntimeException(
+                    sprintf('Опции в секции %s должны быть массивом или %s', $gridName, ArrayAccess::class)
+                );
+            }
+            $options = $gridConfig['options'];
+            $adapter = $this->createAdapter($options['adapter'], $serviceManager);
+            $options['adapter'] = $adapter;
+        }
+        /** @var GridInterface | AbstractGrid $grid */
+        $grid = $serviceLocator->get($gridClass, $options);
+        if ($grid instanceof GridColumnPluginManagerAwareInterface) {
+            $grid->setColumnPluginManager($serviceManager->get('GridColumnManager'));
+        }
+        if ($grid instanceof InitializableInterface) {
+            $grid->init();
+        }
+        return $grid;
+    }
+}
+

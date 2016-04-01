@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Condition;
+namespace NNX\DataGrid\Condition;
 
 /**
  * Class AbstractCondition
- * @package MteGrid\Grid\Condition
+ * @package NNX\DataGrid\Condition
  */
 abstract class AbstractCondition implements ConditionInterface
 {

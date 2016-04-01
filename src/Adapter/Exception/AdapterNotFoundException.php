@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Adapter\Exception;
+namespace NNX\DataGrid\Adapter\Exception;
 
 /**
  * Class AdapterNotFound 
- * @package MteGrid\Grid\Exception
+ * @package NNX\DataGrid\Exception
  */
 class AdapterNotFoundException extends RuntimeException
 {

@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
 use Traversable;
 
 /**
  * Interface GridColumnProviderInterface
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 interface GridColumnProviderInterface
 {

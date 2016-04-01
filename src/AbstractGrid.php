@@ -4,18 +4,18 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
-use MteGrid\Grid\Column\ColumnInterface;
-use MteGrid\Grid\Adapter\AdapterInterface;
-use MteGrid\Grid\Column\GridColumnPluginManagerAwareInterface;
-use MteGrid\Grid\Column\GridColumnPluginManagerAwareTrait;
+use NNX\DataGrid\Column\ColumnInterface;
+use NNX\DataGrid\Adapter\AdapterInterface;
+use NNX\DataGrid\Column\GridColumnPluginManagerAwareInterface;
+use NNX\DataGrid\Column\GridColumnPluginManagerAwareTrait;
 use Traversable;
 use ArrayAccess;
 
 /**
  * Class AbstractGrid 
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwareInterface
 {
@@ -52,11 +52,13 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
     protected $name;
 
     /**
+     * Массив атрибутов таблицы для отображения
      * @var array
      */
     protected $attributes = [];
 
     /**
+     * Конструкто класса
      * @param array | ArrayAccess $options
      * @throws Exception\InvalidArgumentException
      */

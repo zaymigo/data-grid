@@ -4,23 +4,23 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
-use MteGrid\Grid\Column\Exception\InvalidColumnException;
-use MteGrid\Grid\Column\Exception\InvalidNameException;
-use MteGrid\Grid\Column\Exception\InvalidSpecificationException;
-use MteGrid\Grid\FactoryInterface;
-use MteGrid\Grid\Mutator\MutatorInterface;
+use NNX\DataGrid\Column\Exception\InvalidColumnException;
+use NNX\DataGrid\Column\Exception\InvalidNameException;
+use NNX\DataGrid\Column\Exception\InvalidSpecificationException;
+use NNX\DataGrid\FactoryInterface;
+use NNX\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 use Zend\Http\Header\HeaderInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
-use MteGrid\Grid\Mutator\Factory as MutatorFactory;
+use NNX\DataGrid\Mutator\Factory as MutatorFactory;
 
 
 /**
  * Class Factory
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInterface
 {
@@ -71,6 +71,8 @@ final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInt
     }
 
     /**
+     * Метод осуществляет подготовку данных предустановленных мутаторов по умолчанию.
+     * Преобразует массив данных для предустановленных мутаторов в общий формат.
      * @param ColumnInterface $column
      * @param array | Traversable $spec
      * @return array | Traversable
@@ -107,9 +109,9 @@ final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInt
      * @throws ServiceNotFoundException
      * @throws ServiceNotCreatedException
      * @throws \Zend\ServiceManager\Exception\RuntimeException
-     * @throws \MteGrid\Grid\Column\Exception\InvalidNameException
-     * @throws \MteGrid\Grid\Column\Header\Exception\NoValidSpecificationException
-     * @throws \MteGrid\Grid\Column\Header\Exception\NoValidTemplateException
+     * @throws \NNX\DataGrid\Column\Exception\InvalidNameException
+     * @throws \NNX\DataGrid\Column\Header\Exception\NoValidSpecificationException
+     * @throws \NNX\DataGrid\Column\Header\Exception\NoValidTemplateException
      */
     public function create($spec)
     {

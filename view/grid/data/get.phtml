@@ -3,7 +3,7 @@
  * @company MTE Telecom, Ltd.
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
-/** @var \MteGrid\Grid\GridInterface $grid */
+/** @var \NNX\DataGrid\GridInterface $grid */
 $grid = $this->grid;
 
 $data = $grid->getRowset();
@@ -12,23 +12,23 @@ $rows = [];
 $escaper = $this->plugin('escapeHtml');
 if (count($data) !== 0) {
     foreach ($data as $item) {
-        /** @var \MteGrid\Grid\Row $item */
+        /** @var \NNX\DataGrid\Row $item */
         $item = $item->getData();
         /**
          * @var string $name
-         * @var \MteGrid\Grid\Column\ColumnInterface $column
+         * @var \NNX\DataGrid\Column\ColumnInterface $column
          */
         foreach ($columns as $name => $column) {
-            if ($column instanceof \MteGrid\Grid\Column\ActionAwareInterface) {
+            if ($column instanceof \NNX\DataGrid\Column\ActionAwareInterface) {
                 $item[$column->getName()] = '';
                 $actions = $column->getActions();
-                /** @var \MteGrid\Grid\Column\Action\ActionInterface $action */
+                /** @var \NNX\DataGrid\Column\Action\ActionInterface $action */
                 foreach ($actions as $action) {
                     $keys = array_keys($action->getAttributes());
                     $attributes = implode(' ', array_map(function ($k, $v) {
                         return $k . '="' . $v . '"';
                     }, (count($keys) !== 0 ? $keys : []), $action->getAttributes()));
-                    if ($action instanceof \MteGrid\Grid\RowDataAwareInterface) {
+                    if ($action instanceof \NNX\DataGrid\RowDataAwareInterface) {
                         $action->setRowData($item);
                     }
                     if ($action->validate()) {

@@ -3,11 +3,11 @@
  * @author Deller myogogo@gmail.com
  */
 
-namespace MteGrid\Grid\View\Helper\JqGrid\Column;
+namespace NNX\DataGrid\View\Helper\JqGrid\Column;
 
 /**
  * Class Action
- * @package MteGrid\Grid\View\Helper\JqGrid\Column
+ * @package NNX\DataGrid\View\Helper\JqGrid\Column
  */
 class Action extends Text
 {

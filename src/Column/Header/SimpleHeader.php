@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Header;
+namespace NNX\DataGrid\Column\Header;
 
 /**
  * Class SimpleHeader
- * @package MteGrid\Grid\Column\Header
+ * @package NNX\DataGrid\Column\Header
  */
 class SimpleHeader extends AbstractHeader
 {

@@ -4,24 +4,24 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Test\PhpUnit;
+namespace NNX\DataGrid\Test\PhpUnit;
 
-use MteGrid\Grid\Adapter\AdapterInterface;
-use MteGrid\Grid\GridInterface;
-use MteGrid\Grid\GridPluginManager;
-use MteGrid\Grid\Options\ModuleOptions;
-use MteGrid\Grid\Row;
-use MteGrid\Grid\SimpleGrid;
-use MteGrid\Grid\Test\PhpUnit\TestData\TestPath;
+use NNX\DataGrid\Adapter\AdapterInterface;
+use NNX\DataGrid\GridInterface;
+use NNX\DataGrid\GridPluginManager;
+use NNX\DataGrid\Options\ModuleOptions;
+use NNX\DataGrid\Row;
+use NNX\DataGrid\SimpleGrid;
+use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 use Exception;
-use MteGrid\Grid\Exception\RuntimeException;
+use NNX\DataGrid\Exception\RuntimeException;
 
 
 /**
  * Class GridManagerFactoryTest 
- * @package MteGrid\Grid\Test\PhpUnit
+ * @package NNX\DataGrid\Test\PhpUnit
  */
 class GridManagerFactoryTest extends AbstractControllerTestCase
 {

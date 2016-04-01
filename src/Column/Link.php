@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
 /**
  * Class Link
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 class Link extends AbstractColumn
 {

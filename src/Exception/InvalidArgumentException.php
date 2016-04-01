@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Exception;
+namespace NNX\DataGrid\Exception;
 
 use Exception;
 
 /**
  * Class InvalidArgumentException 
- * @package MteGrid\Grid\Exception
+ * @package NNX\DataGrid\Exception
  */
 class InvalidArgumentException extends Exception implements ExceptionInterface
 {

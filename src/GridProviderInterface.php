@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
 /**
  * Interface GridPluginManagerProviderInterface
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 interface GridProviderInterface
 {

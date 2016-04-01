@@ -3,13 +3,13 @@
  * @company MTE Telecom, Ltd.
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
-use MteGrid\Grid\Column\GridColumnPluginManager;
-use MteGrid\Grid\Column\GridColumnPluginManagerFactory;
-use MteGrid\Grid\Mutator\GridMutatorPluginManagerFactory;
-use MteGrid\Grid\Mutator\GridMutatorPluginManager;
-use MteGrid\Grid\Options\ModuleOptions;
+use NNX\DataGrid\Column\GridColumnPluginManager;
+use NNX\DataGrid\Column\GridColumnPluginManagerFactory;
+use NNX\DataGrid\Mutator\GridMutatorPluginManagerFactory;
+use NNX\DataGrid\Mutator\GridMutatorPluginManager;
+use NNX\DataGrid\Options\ModuleOptions;
 
 return [
     'service_manager' => [

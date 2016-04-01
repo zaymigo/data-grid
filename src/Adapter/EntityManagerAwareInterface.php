@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Adapter;
+namespace NNX\DataGrid\Adapter;
 
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Interface EntityManagerAwareInterface
- * @package MteGrid\Grid\Adapter
+ * @package NNX\DataGrid\Adapter
  */
 interface EntityManagerAwareInterface
 {

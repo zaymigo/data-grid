@@ -4,17 +4,17 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Header;
+namespace NNX\DataGrid\Column\Header;
 
-use MteGrid\Grid\FactoryInterface;
-use MteGrid\Grid\Column\Header\Exception\NoValidSpecificationException;
-use MteGrid\Grid\Column\Header\Exception\NoValidTemplateException;
+use NNX\DataGrid\FactoryInterface;
+use NNX\DataGrid\Column\Header\Exception\NoValidSpecificationException;
+use NNX\DataGrid\Column\Header\Exception\NoValidTemplateException;
 use Traversable;
 
 /**
  * Фабрика заголовков для колонок таблицы
  * Class Factory
- * @package MteGrid\Grid\Column\Header
+ * @package NNX\DataGrid\Column\Header
  *
  */
 class Factory implements FactoryInterface

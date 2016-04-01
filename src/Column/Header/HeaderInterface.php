@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Header;
+namespace NNX\DataGrid\Column\Header;
 
 use \Traversable;
 
 /**
  * Interface HeaderInterface
- * @package MteGrid\Grid\Column\Header
+ * @package NNX\DataGrid\Column\Header
  *
  * Интерфейс для заголовков
  */

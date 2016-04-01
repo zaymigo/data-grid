@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/NNX.html">\NNX</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">249</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1340814637"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1340814637" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-655048132"></a>
+                                <a href="../namespaces/NNX.html" style="margin-left: 30px; padding-left: 0">NNX</a>
+            </div>
+            <div id="namespace-655048132" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1667977117"></a>
+                                <a href="../namespaces/NNX.DataGrid.html" style="margin-left: 30px; padding-left: 0">DataGrid</a>
+            </div>
+            <div id="namespace-1667977117" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-381487883"></a>
+                                <a href="../namespaces/NNX.DataGrid.Adapter.html" style="margin-left: 30px; padding-left: 0">Adapter</a>
+            </div>
+            <div id="namespace-381487883" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1652846592"></a>
+                                <a href="../namespaces/NNX.DataGrid.Adapter.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1652846592" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Adapter.Exception.AdapterNotFoundException.html">AdapterNotFoundException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Adapter.Exception.InvalidArgumentException.html">InvalidArgumentException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Adapter.Exception.InvalidOptionsException.html">InvalidOptionsException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Adapter.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Adapter.AdapterInterface.html">AdapterInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Adapter.EntityManagerAwareInterface.html">EntityManagerAwareInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Adapter.AbstractAdapter.html">AbstractAdapter</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Adapter.DoctrineDBAL.html">DoctrineDBAL</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Adapter.Factory.html">Factory</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1298594712"></a>
+                                <a href="../namespaces/NNX.DataGrid.Column.html" style="margin-left: 30px; padding-left: 0">Column</a>
+            </div>
+            <div id="namespace-1298594712" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1074905533"></a>
+                                <a href="../namespaces/NNX.DataGrid.Column.Action.html" style="margin-left: 30px; padding-left: 0">Action</a>
+            </div>
+            <div id="namespace-1074905533" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-942722783"></a>
+                                <a href="../namespaces/NNX.DataGrid.Column.Action.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-942722783" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Action.Exception.NameNotDefinedException.html">NameNotDefinedException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Action.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Column.Action.ActionInterface.html">ActionInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Action.AbstractAction.html">AbstractAction</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Action.Factory.html">Factory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Action.SimpleAction.html">SimpleAction</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1543672472"></a>
+                                <a href="../namespaces/NNX.DataGrid.Column.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1543672472" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Exception.InvalidArgumentException.html">InvalidArgumentException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Exception.InvalidColumnException.html">InvalidColumnException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Exception.InvalidNameException.html">InvalidNameException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Exception.InvalidSpecificationException.html">InvalidSpecificationException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1020339644"></a>
+                                <a href="../namespaces/NNX.DataGrid.Column.Header.html" style="margin-left: 30px; padding-left: 0">Header</a>
+            </div>
+            <div id="namespace-1020339644" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1369489589"></a>
+                                <a href="../namespaces/NNX.DataGrid.Column.Header.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1369489589" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Header.Exception.NoValidSpecificationException.html">NoValidSpecificationException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Header.Exception.NoValidTemplateException.html">NoValidTemplateException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Header.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Column.Header.HeaderInterface.html">HeaderInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Header.AbstractHeader.html">AbstractHeader</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Header.Factory.html">Factory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Header.SimpleHeader.html">SimpleHeader</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Column.ActionAwareInterface.html">ActionAwareInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Column.ColumnInterface.html">ColumnInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Column.GridColumnPluginManagerAwareInterface.html">GridColumnPluginManagerAwareInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Column.GridColumnProviderInterface.html">GridColumnProviderInterface</a></li>
+                                                                            <li class="trait"><a href="../classes/NNX.DataGrid.Column.GridColumnPluginManagerAwareTrait.html">GridColumnPluginManagerAwareTrait</a></li>
+                                                                            <li class="class"><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html">AbstractColumn</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Action.html">Action</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.ActionFactory.html">ActionFactory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Factory.html">Factory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.GridColumnPluginManager.html">GridColumnPluginManager</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.GridColumnPluginManagerFactory.html">GridColumnPluginManagerFactory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Hidden.html">Hidden</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Link.html">Link</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Money.html">Money</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Column.Text.html">Text</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1229526436"></a>
+                                <a href="../namespaces/NNX.DataGrid.Condition.html" style="margin-left: 30px; padding-left: 0">Condition</a>
+            </div>
+            <div id="namespace-1229526436" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1228097158"></a>
+                                <a href="../namespaces/NNX.DataGrid.Condition.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1228097158" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Condition.Exception.InvalidArgumentException.html">InvalidArgumentException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Condition.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Condition.ConditionInterface.html">ConditionInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Condition.AbstractCondition.html">AbstractCondition</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Condition.Conditions.html">Conditions</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Condition.DB.html">DB</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Condition.Factory.html">Factory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Condition.SimpleCondition.html">SimpleCondition</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1945403956"></a>
+                                <a href="../namespaces/NNX.DataGrid.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
+            </div>
+            <div id="namespace-1945403956" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-447217956"></a>
+                                <a href="../namespaces/NNX.DataGrid.Controller.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-447217956" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Controller.Exception.InvalidConditionNameException.html">InvalidConditionNameException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Controller.Exception.InvalidConditionValueException.html">InvalidConditionValueException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Controller.Exception.InvalidGridNameException.html">InvalidGridNameException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Controller.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Controller.DataController.html">DataController</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Controller.TestController.html">TestController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-895816098"></a>
+                                <a href="../namespaces/NNX.DataGrid.Entity.html" style="margin-left: 30px; padding-left: 0">Entity</a>
+            </div>
+            <div id="namespace-895816098" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/NNX.DataGrid.Entity.NestedSetTrait.html">NestedSetTrait</a></li>
+                                                                            <li class="class"><a href="../classes/NNX.DataGrid.Entity.NestedSet.html">NestedSet</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1128911908"></a>
+                                <a href="../namespaces/NNX.DataGrid.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1128911908" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Exception.ExceptionInterface.html">ExceptionInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Exception.GridClassNotFoundException.html">GridClassNotFoundException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Exception.InvalidArgumentException.html">InvalidArgumentException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-415866334"></a>
+                                <a href="../namespaces/NNX.DataGrid.Mutator.html" style="margin-left: 30px; padding-left: 0">Mutator</a>
+            </div>
+            <div id="namespace-415866334" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1180772566"></a>
+                                <a href="../namespaces/NNX.DataGrid.Mutator.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1180772566" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.Exception.InvalidArgumentException.html">InvalidArgumentException</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Mutator.GridMutatorProviderInterface.html">GridMutatorProviderInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.Mutator.MutatorInterface.html">MutatorInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.AbstractMutator.html">AbstractMutator</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.Factory.html">Factory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.GridMutatorPluginManager.html">GridMutatorPluginManager</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.GridMutatorPluginManagerFactory.html">GridMutatorPluginManagerFactory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.Link.html">Link</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.LinkFactory.html">LinkFactory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Mutator.Money.html">Money</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-485944684"></a>
+                                <a href="../namespaces/NNX.DataGrid.Options.html" style="margin-left: 30px; padding-left: 0">Options</a>
+            </div>
+            <div id="namespace-485944684" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.Options.Factory.html">Factory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Options.ModuleOptions.html">ModuleOptions</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-818545573"></a>
+                                <a href="../namespaces/NNX.DataGrid.OPtions.html" style="margin-left: 30px; padding-left: 0">OPtions</a>
+            </div>
+            <div id="namespace-818545573" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-843764666"></a>
+                                <a href="../namespaces/NNX.DataGrid.OPtions.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-843764666" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.OPtions.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1723025320"></a>
+                                <a href="../namespaces/NNX.DataGrid.View.html" style="margin-left: 30px; padding-left: 0">View</a>
+            </div>
+            <div id="namespace-1723025320" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1859402802"></a>
+                                <a href="../namespaces/NNX.DataGrid.View.Helper.html" style="margin-left: 30px; padding-left: 0">Helper</a>
+            </div>
+            <div id="namespace-1859402802" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1234932611"></a>
+                                <a href="../namespaces/NNX.DataGrid.View.Helper.Column.html" style="margin-left: 30px; padding-left: 0">Column</a>
+            </div>
+            <div id="namespace-1234932611" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.View.Helper.Column.Header.html">Header</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1079053364"></a>
+                                <a href="../namespaces/NNX.DataGrid.View.Helper.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1079053364" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.View.Helper.Exception.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1702528003"></a>
+                                <a href="../namespaces/NNX.DataGrid.View.Helper.JqGrid.html" style="margin-left: 30px; padding-left: 0">JqGrid</a>
+            </div>
+            <div id="namespace-1702528003" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-787579271"></a>
+                                <a href="../namespaces/NNX.DataGrid.View.Helper.JqGrid.Column.html" style="margin-left: 30px; padding-left: 0">Column</a>
+            </div>
+            <div id="namespace-787579271" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.View.Helper.JqGrid.Column.Action.html">Action</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.View.Helper.JqGrid.Column.Hidden.html">Hidden</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.View.Helper.JqGrid.Column.Link.html">Link</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.View.Helper.JqGrid.Column.Money.html">Money</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.View.Helper.JqGrid.Column.Text.html">Text</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NNX.DataGrid.View.Helper.JqGrid.Grid.html">Grid</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.AjaxProviderInterface.html">AjaxProviderInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.FactoryInterface.html">FactoryInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.GridInterface.html">GridInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.GridProviderInterface.html">GridProviderInterface</a></li>
+                                                    <li class="interface"><a href="../classes/NNX.DataGrid.RowDataAwareInterface.html">RowDataAwareInterface</a></li>
+                                                                            <li class="trait"><a href="../classes/NNX.DataGrid.RowDataAwareTrait.html">RowDataAwareTrait</a></li>
+                                                                            <li class="class"><a href="../classes/NNX.DataGrid.AbstractGrid.html">AbstractGrid</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.AbstractGridManagerFactory.html">AbstractGridManagerFactory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.GridPluginManager.html">GridPluginManager</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.GridPluginManagerFactory.html">GridPluginManagerFactory</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.Row.html">Row</a></li>
+                                                    <li class="class"><a href="../classes/NNX.DataGrid.SimpleGrid.html">SimpleGrid</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/NNX.DataGrid.Column.html">\NNX\DataGrid\Column</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\NNX\DataGrid\Column</small>Action</h1>
+                    <p><em>Class Action</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/NNX.DataGrid.Column.Action.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setHeader" class="">setHeader()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getHeader" class="">getHeader()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setTemplate" class="">setTemplate()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getTemplate" class="">getTemplate()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setName" class="">setName()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getName" class="">getName()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setOptions" class="">setOptions()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getOptions" class="">getOptions()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setAttributes" class="">setAttributes()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getAttributes" class="">getAttributes()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getOrder" class="">getOrder()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setOrder" class="">setOrder()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getSortable" class="">getSortable()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setSortable" class="">setSortable()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getMutators" class="">getMutators()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setMutators" class="">setMutators()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_addMutator" class="">addMutator()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_getInvokableMutators" class="">getInvokableMutators()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setInvokableMutators" class="">setInvokableMutators()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.Action.html#method_getActions" class="">getActions()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.Action.html#method_setActions" class="">setActions()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.Action.html#method_addAction" class="">addAction()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.Action.html#method_getUrlHelper" class="">getUrlHelper()</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.Action.html#method_setUrlHelper" class="">setUrlHelper()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#method_setProperty" class="">setProperty()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_header" class="">$header</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_template" class="">$template</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_name" class="">$name</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_options" class="">$options</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_attributes" class="">$attributes</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_order" class="">$order</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_sortable" class="">$sortable</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_mutators" class="">$mutators</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.AbstractColumn.html#property_invokableMutators" class="">$invokableMutators</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.Action.html#property_actions" class="">$actions</a><br />
+                                                                    <a href="../classes/NNX.DataGrid.Column.Action.html#property_urlHelper" class="">$urlHelper</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Column.Action.html"><div class="path-wrapper">Column/Action.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">DataGrid\Column</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper"><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html">\NNX\DataGrid\Column\AbstractColumn</a></div>
+                                                                                                    <div class="namespace-wrapper">\NNX\DataGrid\Column\Action</div>
+                            </dd>
+
+                                                                            <dt>Implements</dt>
+                                                        <dd><a href="../classes/NNX.DataGrid.Column.ActionAwareInterface.html"><div class="namespace-wrapper">\NNX\DataGrid\Column\ActionAwareInterface</div></a></dd>
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_header" name="property_header" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$header</h3>
+                <pre class="signature">$header : \NNX\DataGrid\Column\Header\HeaderInterface</pre>
+                <p><em>Заголовок колонки</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/NNX.DataGrid.Column.Header.HeaderInterface.html">\NNX\DataGrid\Column\Header\HeaderInterface</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_template" name="property_template" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$template</h3>
+                <pre class="signature">$template : string</pre>
+                <p><em>Шаблон колонки</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_name" name="property_name" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$name</h3>
+                <pre class="signature">$name : string</pre>
+                <p><em>Наименование колонки. По данному полю осуществляется маппинг данных из БД при отображении</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_options" name="property_options" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$options</h3>
+                <pre class="signature">$options : array</pre>
+                <p><em>Опции колонки</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; | Traversable                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_attributes" name="property_attributes" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$attributes</h3>
+                <pre class="signature">$attributes : array</pre>
+                <p><em>Атрибуты колонки необходимые для отображения</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; | Traversable                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_order" name="property_order" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$order</h3>
+                <pre class="signature">$order : integer</pre>
+                <p><em>По данному полю осуществляется сортировка колонок при выводе</em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sortable" name="property_sortable" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$sortable</h3>
+                <pre class="signature">$sortable : boolean</pre>
+                <p><em>Флаг сортировки данных</em></p>
+                
+
+                                <h4>Type</h4>
+                boolean
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_mutators" name="property_mutators" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$mutators</h3>
+                <pre class="signature">$mutators : array|\Traversable</pre>
+                <p><em>Массив мутаторов данных для данной колонки</em></p>
+                
+
+                                <h4>Type</h4>
+                array|\Traversable
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_invokableMutators" name="property_invokableMutators" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$invokableMutators</h3>
+                <pre class="signature">$invokableMutators : array|\Traversable</pre>
+                <p><em>Предустановленные для данной колонки мутаторы</em></p>
+                
+
+                                <h4>Type</h4>
+                array|\Traversable
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_actions" name="property_actions" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$actions</h3>
+                <pre class="signature">$actions : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_urlHelper" name="property_urlHelper" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$urlHelper</h3>
+                <pre class="signature">$urlHelper : \Zend\View\Helper\Url</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \Zend\View\Helper\Url
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(array  <span class="argument">$options = array()</span>) </pre>
+                <p><em>Конструктор класса</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setHeader" name="method_setHeader" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setHeader()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setHeader(  <span class="argument">$header</span>) : $this</pre>
+                <p><em>Устанавливает заголовок для колонки</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$header </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getHeader" name="method_getHeader" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getHeader()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getHeader() : \NNX\DataGrid\Column\Header\HeaderInterface</pre>
+                <p><em>Возвращает объект заголовка для колонки</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/NNX.DataGrid.Column.Header.HeaderInterface.html">\NNX\DataGrid\Column\Header\HeaderInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setTemplate" name="method_setTemplate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setTemplate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setTemplate(string  <span class="argument">$template</span>) : $this</pre>
+                <p><em>Устанавливает путь до шаблона строки</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$template </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTemplate" name="method_getTemplate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTemplate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTemplate() : string</pre>
+                <p><em>Возвраащет путь до шаблона</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setName" name="method_setName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setName(string  <span class="argument">$name</span>) : $this</pre>
+                <p><em>Имя колонки</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getName" name="method_getName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getName() : string</pre>
+                <p><em>Возвращает индекс по которому будут выбираться для колонки данные предоставленные адаптером</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setOptions" name="method_setOptions" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setOptions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setOptions(array  <span class="argument">$options = array()</span>) : $this</pre>
+                <p><em>Опции и настройки колонки</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOptions" name="method_getOptions" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOptions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOptions() : array</pre>
+                <p><em>Возвращает опции колонки</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setAttributes" name="method_setAttributes" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setAttributes()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setAttributes(array  <span class="argument">$attributes = array()</span>) : $this</pre>
+                <p><em>Аттрибуты колонки</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attributes </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getAttributes" name="method_getAttributes" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getAttributes()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getAttributes() : array</pre>
+                <p><em>Возвращает атрибуты колонки</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOrder" name="method_getOrder" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOrder()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOrder() : integer</pre>
+                <p><em>Возвращает параметр по которому сортируются колонки</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setOrder" name="method_setOrder" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setOrder()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setOrder(integer  <span class="argument">$order</span>) : $this</pre>
+                <p><em>Устанавливает параметр для сортировки колонок</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$order </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSortable" name="method_getSortable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSortable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSortable() : boolean</pre>
+                <p><em>Флаг сообщающий можно ли сортировать по колонке</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSortable" name="method_setSortable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSortable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSortable(boolean  <span class="argument">$sortable</span>) : $this</pre>
+                <p><em>Устанавливает флаг информирующий можно сортировать или нет по колонке</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$sortable </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getMutators" name="method_getMutators" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getMutators()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getMutators() : array|\Traversable</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array|\Traversable
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setMutators" name="method_setMutators" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setMutators()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setMutators(array|\Traversable  <span class="argument">$mutators</span>) : $this</pre>
+                <p><em>Устанавливает мутаторы для колонки</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array|\Traversable</td>
+                                <td>$mutators </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addMutator" name="method_addMutator" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addMutator()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addMutator(\NNX\DataGrid\Mutator\MutatorInterface  <span class="argument">$mutator</span>) : mixed</pre>
+                <p><em>Добавляет мутьатор для ячеек данных</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/NNX.DataGrid.Mutator.MutatorInterface.html">\NNX\DataGrid\Mutator\MutatorInterface</a></td>
+                                <td>$mutator </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getInvokableMutators" name="method_getInvokableMutators" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getInvokableMutators()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getInvokableMutators() : array|\Traversable</pre>
+                <p><em>Возвращает предустановленные мутаторы</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array|\Traversable
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setInvokableMutators" name="method_setInvokableMutators" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setInvokableMutators()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setInvokableMutators(array|\Traversable  <span class="argument">$invokableMutators</span>) : $this</pre>
+                <p><em>Устанавливает мутаторы по умолчнию</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array|\Traversable</td>
+                                <td>$invokableMutators </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getActions" name="method_getActions" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getActions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getActions() : array</pre>
+                <p><em>Возвращает набор действий в колонке</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setActions" name="method_setActions" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setActions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setActions(array  <span class="argument">$actions</span>) : $this</pre>
+                <p><em>Устанавливает набор действий в колонку</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$actions </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addAction" name="method_addAction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addAction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addAction(\NNX\DataGrid\Column\Action\ActionInterface|array  <span class="argument">$action</span>) : $this</pre>
+                <p><em>Добавляет действие в колонку</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/NNX.DataGrid.Column.Action.ActionInterface.html">\NNX\DataGrid\Column\Action\ActionInterface</a>|array</td>
+                                <td>$action </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getUrlHelper" name="method_getUrlHelper" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getUrlHelper()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getUrlHelper() : \Zend\View\Helper\Url</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \Zend\View\Helper\Url
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setUrlHelper" name="method_setUrlHelper" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setUrlHelper()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setUrlHelper(\Zend\View\Helper\Url  <span class="argument">$urlHelper</span>) : $this</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Zend\View\Helper\Url</td>
+                                <td>$urlHelper </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProperty" name="method_setProperty" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">setProperty()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProperty(string  <span class="argument">$key</span>, array  <span class="argument">$options</span>) </pre>
+                <p><em>Устанавливает свойства класса</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$key </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NNX.DataGrid.Column.AbstractColumn.html"><div class="path-wrapper">\NNX\DataGrid\Column\AbstractColumn</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">Action.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Column/Action.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/NNX.html">\NNX</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on April 1st, 2016 at 14:52.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -4,35 +4,40 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
-use MteGrid\Grid\Column\Header\HeaderInterface;
-use MteGrid\Grid\Mutator\MutatorInterface;
+use NNX\DataGrid\Column\Header\HeaderInterface;
+use NNX\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 
 abstract class AbstractColumn implements ColumnInterface
 {
     /**
+     * Заголовок колонки
      * @var HeaderInterface
      */
     protected $header;
 
     /**
+     * Шаблон колонки
      * @var string
      */
     protected $template;
 
     /**
+     * Наименование колонки. По данному полю осуществляется маппинг данных из БД при отображении
      * @var string
      */
     protected $name;
 
     /**
+     * Опции колонки
      * @var array | Traversable
      */
     protected $options = [];
 
     /**
+     * Атрибуты колонки необходимые для отображения
      * @var array | Traversable
      */
     protected $attributes = [];
@@ -50,16 +55,19 @@ abstract class AbstractColumn implements ColumnInterface
     protected $sortable;
 
     /**
+     * Массив мутаторов данных для данной колонки
      * @var array|Traversable
      */
     protected $mutators;
 
     /**
+     * Предустановленные для данной колонки мутаторы
      * @var array|Traversable
      */
     protected $invokableMutators;
 
     /**
+     * Устанавливает свойства класса
      * @param string $key
      * @param array $options
      */
@@ -75,6 +83,7 @@ abstract class AbstractColumn implements ColumnInterface
     }
 
     /**
+     * Конструктор класса
      * @param array $options
      */
     public function __construct(array $options = [])
@@ -233,6 +242,7 @@ abstract class AbstractColumn implements ColumnInterface
     }
 
     /**
+     * Устанавливает мутаторы для колонки
      * @param array|Traversable $mutators
      * @return $this
      */
@@ -254,6 +264,7 @@ abstract class AbstractColumn implements ColumnInterface
     }
 
     /**
+     * Возвращает предустановленные мутаторы
      * @return array|Traversable
      */
     public function getInvokableMutators()
@@ -262,6 +273,7 @@ abstract class AbstractColumn implements ColumnInterface
     }
 
     /**
+     * Устанавливает мутаторы по умолчнию
      * @param array|Traversable $invokableMutators
      * @return $this
      */

@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 
 /**
  * Class ColumnPluginManager
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 class GridColumnPluginManager extends AbstractPluginManager
 {

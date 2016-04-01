@@ -4,23 +4,23 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Test\PhpUnit\GridColumn;
+namespace NNX\DataGrid\Test\PhpUnit\GridColumn;
 
 
-use MteGrid\Grid\Column\ColumnInterface;
-use MteGrid\Grid\Column\Exception\InvalidColumnException;
-use MteGrid\Grid\Column\Exception\InvalidNameException;
-use MteGrid\Grid\Column\Exception\InvalidSpecificationException;
-use MteGrid\Grid\Column\Factory;
-use MteGrid\Grid\Column\GridColumnPluginManager;
-use MteGrid\Grid\Column\Header\HeaderInterface;
-use MteGrid\Grid\Test\PhpUnit\TestData\TestPath;
+use NNX\DataGrid\Column\ColumnInterface;
+use NNX\DataGrid\Column\Exception\InvalidColumnException;
+use NNX\DataGrid\Column\Exception\InvalidNameException;
+use NNX\DataGrid\Column\Exception\InvalidSpecificationException;
+use NNX\DataGrid\Column\Factory;
+use NNX\DataGrid\Column\GridColumnPluginManager;
+use NNX\DataGrid\Column\Header\HeaderInterface;
+use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 use Exception;
 
 /**
  * Class GridColumnFactoryTest
- * @package MteGrid\Grid\Test\PhpUnit\GridColumn
+ * @package NNX\DataGrid\Test\PhpUnit\GridColumn
  */
 class GridColumnFactoryTest extends AbstractControllerTestCase
 {

@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Exception;
+namespace NNX\DataGrid\Exception;
 
 /**
  * Class GridClassNotFoundException 
- * @package MteGrid\Grid\Exception
+ * @package NNX\DataGrid\Exception
  */
 class GridClassNotFoundException extends RuntimeException
 {

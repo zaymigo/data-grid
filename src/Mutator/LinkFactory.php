@@ -4,7 +4,7 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Mutator;
+namespace NNX\DataGrid\Mutator;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -14,7 +14,7 @@ use Zend\ServiceManager\MutableCreationOptionsInterface;
 
 /**
  * Class LinkFactory
- * @package MteGrid\Grid\Mutator
+ * @package NNX\DataGrid\Mutator
  */
 class LinkFactory implements FactoryInterface, MutableCreationOptionsInterface
 {

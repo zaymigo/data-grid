@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
-use MteGrid\Grid\Adapter\AdapterInterface;
-use MteGrid\Grid\Column\GridColumnPluginManagerAwareInterface;
-use MteGrid\Grid\Options\ModuleOptions;
+use NNX\DataGrid\Adapter\AdapterInterface;
+use NNX\DataGrid\Column\GridColumnPluginManagerAwareInterface;
+use NNX\DataGrid\Options\ModuleOptions;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ArrayAccess;
@@ -16,7 +16,7 @@ use Zend\Stdlib\InitializableInterface;
 
 /**
  * Class AbstractGridManager 
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 class AbstractGridManagerFactory implements AbstractFactoryInterface
 {

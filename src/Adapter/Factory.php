@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Adapter;
+namespace NNX\DataGrid\Adapter;
 
 use ArrayAccess;
-use MteGrid\Grid\Adapter\Exception\InvalidOptionsException;
-use MteGrid\Grid\FactoryInterface;
+use NNX\DataGrid\Adapter\Exception\InvalidOptionsException;
+use NNX\DataGrid\FactoryInterface;
 use ReflectionClass;
 use Traversable;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -17,7 +17,7 @@ use Zend\Stdlib\InitializableInterface;
 
 /**
  * Class Factory 
- * @package MteGrid\Grid\Adapter
+ * @package NNX\DataGrid\Adapter
  */
 class Factory implements FactoryInterface, ServiceLocatorAwareInterface
 {

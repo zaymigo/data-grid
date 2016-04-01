@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Exception;
+namespace NNX\DataGrid\Exception;
 
 use Exception;
 
 /**
  * Class RuntimeException
- * @package MteGrid\Grid\Exception
+ * @package NNX\DataGrid\Exception
  */
 class RuntimeException extends Exception implements ExceptionInterface
 {

@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
 use Traversable;
 
 /**
  * Interface FactoryInterface
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 interface FactoryInterface
 {

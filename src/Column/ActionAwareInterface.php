@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
-use MteGrid\Grid\Column\Action\ActionInterface;
+use NNX\DataGrid\Column\Action\ActionInterface;
 
 /**
  * Interface ActionAwareInterface
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 interface ActionAwareInterface
 {

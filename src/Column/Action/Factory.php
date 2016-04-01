@@ -4,15 +4,15 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Action;
+namespace NNX\DataGrid\Column\Action;
 
-use MteGrid\Grid\FactoryInterface;
+use NNX\DataGrid\FactoryInterface;
 use Traversable;
 
 
 /**
  * Class Factory
- * @package MteGrid\Grid\Column\Action
+ * @package NNX\DataGrid\Column\Action
  */
 class Factory implements FactoryInterface
 {

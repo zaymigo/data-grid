@@ -4,17 +4,17 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Test\PhpUnit\GridColumn;
+namespace NNX\DataGrid\Test\PhpUnit\GridColumn;
 
 
-use MteGrid\Grid\Column\ColumnInterface;
-use MteGrid\Grid\Column\GridColumnPluginManager;
-use MteGrid\Grid\Test\PhpUnit\TestData\TestPath;
+use NNX\DataGrid\Column\ColumnInterface;
+use NNX\DataGrid\Column\GridColumnPluginManager;
+use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 
 /**
  * Class GridColumnManagerFactory
- * @package MteGrid\Grid\Test\PhpUnit\GridColumnManager
+ * @package NNX\DataGrid\Test\PhpUnit\GridColumnManager
  */
 class GridColumnManagerFactoryTest extends AbstractControllerTestCase
 {

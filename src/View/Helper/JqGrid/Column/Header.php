@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\View\Helper\Column;
+namespace NNX\DataGrid\View\Helper\Column;
 
 use Zend\View\Helper\AbstractHelper;
 
 /**
  * Class Header
- * @package MteGrid\Grid\View\Helper\Column
+ * @package NNX\DataGrid\View\Helper\Column
  */
 class Header extends AbstractHelper
 {

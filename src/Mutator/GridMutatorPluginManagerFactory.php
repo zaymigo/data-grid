@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Mutator;
+namespace NNX\DataGrid\Mutator;
 
 use Zend\Mvc\Service\AbstractPluginManagerFactory;
 
 /**
  * Class ColumnPluginManagerFactory
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 class GridMutatorPluginManagerFactory extends AbstractPluginManagerFactory
 {

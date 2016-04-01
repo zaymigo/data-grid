@@ -4,15 +4,15 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column;
+namespace NNX\DataGrid\Column;
 
-use MteGrid\Grid\Column\Header\HeaderInterface;
-use MteGrid\Grid\Mutator\MutatorInterface;
+use NNX\DataGrid\Column\Header\HeaderInterface;
+use NNX\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 
 /**
  * Interface ColumnInterface
- * @package MteGrid\Grid\Column
+ * @package NNX\DataGrid\Column
  */
 interface ColumnInterface
 {

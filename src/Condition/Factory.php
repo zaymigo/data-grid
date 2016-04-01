@@ -4,16 +4,16 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Condition;
+namespace NNX\DataGrid\Condition;
 
-use MteGrid\Grid\FactoryInterface;
+use NNX\DataGrid\FactoryInterface;
 use Traversable;
 use ArrayAccess;
 use ReflectionClass;
 
 /**
  * Class ConditionFactory
- * @package MteGrid\Grid\Condition
+ * @package NNX\DataGrid\Condition
  */
 class Factory implements FactoryInterface
 {

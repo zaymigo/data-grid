@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Test\PhpUnit\TestData;
+namespace NNX\DataGrid\Test\PhpUnit\TestData;
 
 /**
  * Class TestPath
- * @package MteGrid\Grid\Test\PhpUnit\TestData
+ * @package NNX\DataGrid\Test\PhpUnit\TestData
  */
 final class TestPath
 {

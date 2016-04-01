@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Condition;
+namespace NNX\DataGrid\Condition;
 
 /**
  * Interface ConditionInterface
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 interface ConditionInterface
 {

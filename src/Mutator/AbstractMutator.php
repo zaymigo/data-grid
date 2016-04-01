@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Mutator;
+namespace NNX\DataGrid\Mutator;
 
 use ArrayAccess;
-use MteGrid\Grid\RowDataAwareInterface;
+use NNX\DataGrid\RowDataAwareInterface;
 
 /**
  * Class AbstractMutator
- * @package MteGrid\Grid\Mutator
+ * @package NNX\DataGrid\Mutator
  */
 abstract class AbstractMutator implements MutatorInterface, RowDataAwareInterface
 {

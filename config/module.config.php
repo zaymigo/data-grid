@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
 
-use MteGrid\Grid\Adapter\DoctrineDBAL;
-use MteGrid\Grid\Controller\DataController;
+use NNX\DataGrid\Adapter\DoctrineDBAL;
+use NNX\DataGrid\Controller\DataController;
 
 return array_merge(
     [
@@ -27,7 +27,7 @@ return array_merge(
         ],
         'controllers' => array(
             'invokables' => array(
-                'MteGrid\Grid\Controller\Data' => DataController::class,
+                'NNX\DataGrid\Controller\Data' => DataController::class,
             ),
         ),
         'view_manager' => [
@@ -39,7 +39,7 @@ return array_merge(
                 'ViewJsonStrategy'
             ],
             'controller_map' => [
-                'MteGrid\Grid' => 'Grid',
+                'NNX\DataGrid' => 'Grid',
             ],
         ]
     ],

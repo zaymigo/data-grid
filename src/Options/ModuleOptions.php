@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Options;
+namespace NNX\DataGrid\Options;
 
 use Zend\Stdlib\AbstractOptions;
 
 /**
  * Class ModuleOptions 
- * @package MteGrid\Grid\Options
+ * @package NNX\DataGrid\Options
  */
 class ModuleOptions extends AbstractOptions
 {

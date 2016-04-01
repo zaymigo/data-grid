@@ -4,12 +4,12 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Exception;
+namespace NNX\DataGrid\Column\Exception;
 
-use MteGrid\Grid\Exception\RuntimeException as CommonRuntimeException;
+use NNX\DataGrid\Exception\RuntimeException as CommonRuntimeException;
 /**
  * Class RuntimeException
- * @package MteGrid\Grid\Column\Exception
+ * @package NNX\DataGrid\Column\Exception
  */
 class RuntimeException extends CommonRuntimeException
 {

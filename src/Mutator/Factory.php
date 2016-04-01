@@ -4,9 +4,9 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Mutator;
+namespace NNX\DataGrid\Mutator;
 
-use MteGrid\Grid\FactoryInterface;
+use NNX\DataGrid\FactoryInterface;
 use Traversable;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -14,7 +14,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class Factory
- * @package MteGrid\Grid\Mutator
+ * @package NNX\DataGrid\Mutator
  */
 class Factory implements FactoryInterface, ServiceLocatorAwareInterface
 {

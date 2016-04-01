@@ -4,17 +4,17 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
-use MteGrid\Grid\Adapter\AdapterInterface;
-use MteGrid\Grid\Column\ColumnInterface;
+use NNX\DataGrid\Adapter\AdapterInterface;
+use NNX\DataGrid\Column\ColumnInterface;
 use Traversable;
 use ArrayAccess;
 use Zend\Stdlib\InitializableInterface;
 
 /**
  * Interface GridInterface
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 interface GridInterface extends InitializableInterface
 {
@@ -104,15 +104,16 @@ interface GridInterface extends InitializableInterface
     public function getAttributes();
 
     /**
-     * Устанавливает используемые для отображения грида
+     * Устанавливает используемые для отображения таблицы атрибуты
      * @param array $attributes
      * @return $this
      */
     public function setAttributes(array $attributes);
 
     /**
-     * @param $key
-     * @param $value
+     * Добавляет атрибут таблицы
+     * @param string $key
+     * @param mixed $value
      * @return mixed
      */
     public function addAttribute($key, $value);

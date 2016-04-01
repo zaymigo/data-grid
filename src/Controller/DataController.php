@@ -4,18 +4,18 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Controller;
+namespace NNX\DataGrid\Controller;
 
-use MteGrid\Grid\Adapter\DoctrineDBAL;
-use MteGrid\Grid\Condition\Conditions;
+use NNX\DataGrid\Adapter\DoctrineDBAL;
+use NNX\DataGrid\Condition\Conditions;
 use Zend\Mvc\Controller\AbstractActionController;
-use MteGrid\Grid\GridInterface;
-use MteGrid\Grid\Condition\SimpleCondition;
+use NNX\DataGrid\GridInterface;
+use NNX\DataGrid\Condition\SimpleCondition;
 use Zend\View\Model\ViewModel;
 
 /**
  * Class DataController
- * @package MteGrid\Grid\Controller
+ * @package NNX\DataGrid\Controller
  */
 class DataController extends AbstractActionController
 {

@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Header;
+namespace NNX\DataGrid\Column\Header;
 
-use MteGrid\Grid\Column\Header\Exception\NoValidTemplateException;
+use NNX\DataGrid\Column\Header\Exception\NoValidTemplateException;
 use Traversable;
 
 /**
  * Class AbstractHeader
- * @package MteGrid\Grid\Column\Header
+ * @package NNX\DataGrid\Column\Header
  */
 abstract class AbstractHeader implements HeaderInterface
 {

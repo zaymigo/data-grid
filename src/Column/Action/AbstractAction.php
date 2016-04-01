@@ -4,13 +4,12 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Column\Action;
-
-use MteBase\View\Helper\Url;
+namespace NNX\DataGrid\Column\Action;
+use Zend\View\Helper\Url;
 
 /**
  * Class AbstractAction
- * @package MteGrid\Grid\Column\Action
+ * @package NNX\DataGrid\Column\Action
  */
 abstract class AbstractAction implements ActionInterface
 {
@@ -31,12 +30,6 @@ abstract class AbstractAction implements ActionInterface
     protected $attributes = [];
 
     /**
-     * Ссылка на которую ведет действие
-     * @var string
-     */
-    protected $url;
-
-    /**
      * Роут для построения линки
      * @var array
      */
@@ -55,11 +48,17 @@ abstract class AbstractAction implements ActionInterface
     protected $options;
 
     /**
+     * Функция валидирующая необходимость отображения действия
      * @var callback | array
      */
     protected $validationFunction;
 
 
+    /**
+     * Конструктор класса
+     * @param array $options
+     * @throws Exception\NameNotDefinedException
+     */
     public function __construct(array $options = [])
     {
         if (!array_key_exists('name', $options)) {
@@ -84,6 +83,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Возвращает заголовок действия
      * @return string
      */
     public function getTitle()
@@ -92,6 +92,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Устнаваливает заголовок действия
      * @param string $title
      * @return $this
      */
@@ -102,29 +103,18 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Возвращает готовую ссылку на которую ведет действие
      * @return string
      */
     public function getUrl()
     {
-        if (!$this->url) {
-            $urlHelper = $this->getUrlHelper();
-            $route = $this->getRoute();
-            $this->url = $urlHelper($route['routeName'], $route['routeParams'], $route['routeOptions']);
-        }
-        return $this->url;
+        $urlHelper = $this->getUrlHelper();
+        $route = $this->getRoute();
+        return $urlHelper($route['routeName'], $route['routeParams'], $route['routeOptions']);
     }
 
     /**
-     * @param string $url
-     * @return $this
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-        return $this;
-    }
-
-    /**
+     * Возвращает роут для действия
      * @return array
      */
     public function getRoute()
@@ -133,6 +123,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Устанавливает route для действия
      * @param array $route
      * @return $this
      */
@@ -143,7 +134,8 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
-     * @return \MteBase\View\Helper\Url
+     * Возвращает хелпер который преобразует route в url
+     * @return Url
      */
     public function getUrlHelper()
     {
@@ -151,7 +143,8 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
-     * @param \MteBase\View\Helper\Url $urlHelper
+     * Устанавливает хелпер который преобразует route в url
+     * @param Url $urlHelper
      * @return $this
      */
     public function setUrlHelper($urlHelper)
@@ -161,11 +154,13 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Функция непосредственно валидирующая необходимость отображения действия
      * @return bool
      */
     abstract public function validate();
 
     /**
+     * Возвращает имя действия
      * @return string
      */
     public function getName()
@@ -174,6 +169,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Устанавливает имя действия
      * @param string $name
      * @return $this
      */
@@ -184,6 +180,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Возвращает набор опций для действия
      * @return array
      */
     public function getOptions()
@@ -192,6 +189,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Устнаваливает набор опций для действия
      * @param array $options
      * @return $this
      */
@@ -202,6 +200,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Возвращает набор атрибутов действия
      * @return array
      */
     public function getAttributes()
@@ -210,6 +209,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Устанавливаем атрибуты для действия
      * @param array $attributes
      * @return $this
      */
@@ -220,6 +220,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Возвращает функцию которая сообщает отображать или не отображать действие.
      * @return array|callable
      */
     public function getValidationFunction()
@@ -228,6 +229,7 @@ abstract class AbstractAction implements ActionInterface
     }
 
     /**
+     * Устнаваливает функцию которая сообщает отображать или не отображать действие.
      * @param array|callable $validationFunction
      * @return $this
      */

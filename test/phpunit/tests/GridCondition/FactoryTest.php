@@ -4,18 +4,18 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Test\PhpUnit\GridCondition;
-use MteGrid\Grid\Condition\ConditionInterface;
-use MteGrid\Grid\Condition\SimpleCondition;
-use MteGrid\Grid\Test\PhpUnit\TestData\TestPath;
+namespace NNX\DataGrid\Test\PhpUnit\GridCondition;
+use NNX\DataGrid\Condition\ConditionInterface;
+use NNX\DataGrid\Condition\SimpleCondition;
+use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use MteGrid\Grid\Condition\Factory;
-use MteGrid\Grid\Condition\DB;
-use MteGrid\Grid\Condition\Exception;
+use NNX\DataGrid\Condition\Factory;
+use NNX\DataGrid\Condition\DB;
+use NNX\DataGrid\Condition\Exception;
 
 /**
  * Class FactoryTest 
- * @package MteGrid\Grid\Test\PhpUnit\GridCondition
+ * @package NNX\DataGrid\Test\PhpUnit\GridCondition
  */
 class FactoryTest extends AbstractHttpControllerTestCase
 {
@@ -34,8 +34,8 @@ class FactoryTest extends AbstractHttpControllerTestCase
     }
 
     /**
-     * @throws \MteGrid\Grid\Condition\Exception\InvalidArgumentException
-     * @throws \MteGrid\Grid\Condition\Exception\RuntimeException
+     * @throws \NNX\DataGrid\Condition\Exception\InvalidArgumentException
+     * @throws \NNX\DataGrid\Condition\Exception\RuntimeException
      */
     public function testCreateCondition()
     {

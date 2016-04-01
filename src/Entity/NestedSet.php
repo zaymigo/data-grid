@@ -4,7 +4,7 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid\Entity;
+namespace NNX\DataGrid\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\MappedSuperclass;
 /**
  * Класс используется для построения деревьев
  * Class NestedSet 
- * @package MteGrid\Grid\Entity
+ * @package NNX\DataGrid\Entity
  * @MappedSuperclass()
  */
 class NestedSet

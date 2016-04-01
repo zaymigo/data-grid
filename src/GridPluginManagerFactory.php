@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace MteGrid\Grid;
+namespace NNX\DataGrid;
 
 use Zend\Mvc\Service\AbstractPluginManagerFactory;
 
 /**
  * Class GridPluginManagerFactory 
- * @package MteGrid\Grid
+ * @package NNX\DataGrid
  */
 class GridPluginManagerFactory extends AbstractPluginManagerFactory
 {
