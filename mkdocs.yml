@@ -1,0 +1,13 @@
+docs_dir: doc/book/ru
+pages:
+    - index.md
+    - 'Описание модуля': 'data-grid-description.md'
+    - 'Функционал адаптеров': 'data-grid-adapters.md'
+    - 'Функционал работы с колонками': 'data-grid-columns.md'
+    - 'Условия для выборок (Conditions)': 'data-grid-conditions.md'
+    - 'Мутация данных при отображении': 'data-grid-mutators.md'
+    - 'Helper'ы для отображения данных': 'data-grid-view-helpers.md'
+site_name: data-grid
+site_description: 'Абстрактный функционал таблиц'
+repo_url: 'https://github.com/nnx-framework/data-grid'
+copyright: 'Copyright (c) 2016 <a href="https://github.com/nnx-framework">NNX</a>'
