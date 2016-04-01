@@ -255,6 +255,7 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
     }
 
     /**
+     * Добавляет атрибут для таблицы
      * @param string $key
      * @param mixed $value
      * @return $this
@@ -275,5 +276,5 @@ abstract class AbstractGrid implements GridInterface, GridColumnPluginManagerAwa
      * Возвращает массив строк
      * @return array
      */
-    abstract public function getRowset();
+    abstract public function getRowSet();
 }

@@ -9,20 +9,25 @@ namespace MteGrid\Grid\Mutator;
 /**
  * Class Money
  * @package MteGrid\Grid\Mutator
+ *
+ * Класс для мутации данных чисел. Приводит числа к денежному формату
  */
 class Money extends AbstractMutator
 {
     /**
+     * Количество знаков после запятой
      * @var int
      */
     protected $decimals = 2;
 
     /**
+     * Разделитель десятых
      * @var string
      */
     protected $decPoint = '.';
 
     /**
+     * Разделитель сотен
      * @var string
      */
     protected $thousandSeparator = ' ';
@@ -56,6 +61,7 @@ class Money extends AbstractMutator
     }
 
     /**
+     * Возвращает значение decimals для числа
      * @return int
      */
     public function getDecimals()
@@ -64,6 +70,7 @@ class Money extends AbstractMutator
     }
 
     /**
+     * Устанавливает значение decimals для числа
      * @param int $decimals
      * @return $this
      */
@@ -74,6 +81,7 @@ class Money extends AbstractMutator
     }
 
     /**
+     * Возвращает разделитель
      * @return string
      */
     public function getThousandSeparator()
@@ -82,6 +90,7 @@ class Money extends AbstractMutator
     }
 
     /**
+     * Устанавливает разделитель
      * @param string $thousandSeparator
      * @return $this
      */
@@ -92,6 +101,7 @@ class Money extends AbstractMutator
     }
 
     /**
+     * Возвращает DecPoint
      * @return string
      */
     public function getDecPoint()
@@ -100,6 +110,7 @@ class Money extends AbstractMutator
     }
 
     /**
+     * Устанавливает DecPoint
      * @param string $decPoint
      * @return $this
      */

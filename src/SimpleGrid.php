@@ -21,7 +21,7 @@ class SimpleGrid extends AbstractGrid
      * Данные в гриде
      * @var array
      */
-    protected $rowSet;
+    protected $rowSet = [];
 
     /**
      * Возвращает массив строк таблицы
@@ -29,10 +29,8 @@ class SimpleGrid extends AbstractGrid
      */
     public function getRowSet()
     {
-        if (empty($this->rowSet)) {
+        if (count($this->rowSet) === 0) {
             $data = $this->getAdapter()->getData();
-
-
             $this->buildRowSet($data);
         }
 
@@ -63,7 +61,9 @@ class SimpleGrid extends AbstractGrid
                     foreach ($mutators as $mutator) {
                         if ($mutator instanceof MutatorInterface) {
                             $mutator->setRowData($item);
-                            $item[$columnName] = $mutator->change($item[$columnName]);
+                            if ($mutator->validate()) {
+                                $item[$columnName] = $mutator->change($item[$columnName]);
+                            }
                         }
                     }
                 }

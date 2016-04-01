@@ -32,6 +32,7 @@ return [
                         'assets' => [
                             'js/jqgrid/i18n/grid.locale-ru.js',
                             'js/jqgrid/jquery.jqGrid.min.js',
+                            'js/jqgrid/jqGrid.extends.js',
                         ]
                     ],
                 ],

@@ -113,7 +113,7 @@ interface GridInterface extends InitializableInterface
     /**
      * @param $key
      * @param $value
-     * @return mixed\
+     * @return mixed
      */
     public function addAttribute($key, $value);
 
@@ -121,5 +121,5 @@ interface GridInterface extends InitializableInterface
      * Возвращает массив строк
      * @return array
      */
-    public function getRowset();
+    public function getRowSet();
 }
