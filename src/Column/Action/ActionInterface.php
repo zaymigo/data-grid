@@ -42,13 +42,6 @@ interface ActionInterface
     public function getUrl();
 
     /**
-     * Устанавливает ссылку на действие
-     * @param string $url
-     * @return $this
-     */
-    public function setUrl($url);
-
-    /**
      * Возвращает true если проверка прошла и false если проверка не пройдена
      * @return bool
      */

@@ -15,6 +15,7 @@ use NNX\DataGrid\RowDataAwareTrait;
  */
 class SimpleAction extends AbstractAction implements RowDataAwareInterface
 {
+
     use RowDataAwareTrait;
 
     /**
