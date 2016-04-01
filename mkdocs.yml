@@ -6,7 +6,7 @@ pages:
     - 'Функционал работы с колонками': 'data-grid-columns.md'
     - 'Условия для выборок (Conditions)': 'data-grid-conditions.md'
     - 'Мутация данных при отображении': 'data-grid-mutators.md'
-    - 'Helper\'ы для отображения данных': 'data-grid-view-helpers.md'
+    - 'Helper для отображения данных': 'data-grid-view-helpers.md'
 site_name: data-grid
 site_description: 'Абстрактный функционал таблиц'
 repo_url: 'https://github.com/nnx-framework/data-grid'
