@@ -45,7 +45,6 @@ class Text extends AbstractHelper
             'label' => $header ? $escape($header->getTitle()) : null,
             'index' => strtolower($name),
             'name' => strtolower($name),
-            'align' => 'center'
         ];
         return $config;
     }
