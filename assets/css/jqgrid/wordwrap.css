@@ -24,3 +24,13 @@ th.ui-th-column div {
     padding-top: 3px;
     padding-bottom: 3px;
 }
+
+.ui-jqgrid tr.jqgrow td .cell-wrapper {
+    display: block;
+    vertical-align: middle;
+}
+
+.ui-jqgrid tr.jqgrow td .cell-wrapperleaf {
+    display: block;
+    vertical-align: middle;
+}
