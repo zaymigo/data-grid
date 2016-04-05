@@ -4,18 +4,18 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Test\PhpUnit\GridColumn\Header;
+namespace Nnx\DataGrid\Test\PhpUnit\GridColumn\Header;
 
-use NNX\DataGrid\Column\Header\Exception\NoValidSpecificationException;
-use NNX\DataGrid\Column\Header\Factory;
-use NNX\DataGrid\Column\Header\HeaderInterface;
-use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
+use Nnx\DataGrid\Column\Header\Exception\NoValidSpecificationException;
+use Nnx\DataGrid\Column\Header\Factory;
+use Nnx\DataGrid\Column\Header\HeaderInterface;
+use Nnx\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 use Exception;
 
 /**
  * Class HeaderFactoryTest
- * @package NNX\DataGrid\Test\PhpUnit\GridColumn\Header
+ * @package Nnx\DataGrid\Test\PhpUnit\GridColumn\Header
  */
 class HeaderFactoryTest extends AbstractControllerTestCase
 {

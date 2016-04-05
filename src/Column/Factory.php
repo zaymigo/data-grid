@@ -4,27 +4,40 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column;
+namespace Nnx\DataGrid\Column;
 
-use NNX\DataGrid\Column\Exception\InvalidColumnException;
-use NNX\DataGrid\Column\Exception\InvalidNameException;
-use NNX\DataGrid\Column\Exception\InvalidSpecificationException;
-use NNX\DataGrid\FactoryInterface;
-use NNX\DataGrid\Mutator\MutatorInterface;
+use Nnx\DataGrid\Column\Exception\InvalidColumnException;
+use Nnx\DataGrid\Column\Exception\InvalidNameException;
+use Nnx\DataGrid\Column\Exception\InvalidSpecificationException;
+use Zend\ServiceManager\FactoryInterface;
+use Nnx\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 use Zend\Http\Header\HeaderInterface;
-use Zend\ServiceManager\Exception\ServiceNotCreatedException;
-use Zend\ServiceManager\Exception\ServiceNotFoundException;
-use NNX\DataGrid\Mutator\Factory as MutatorFactory;
+use Zend\ServiceManager\MutableCreationOptionsInterface;
+use Zend\ServiceManager\MutableCreationOptionsTrait;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use ReflectionClass;
+use Nnx\DataGrid\Mutator\Exception\RuntimeException;
 
 
 /**
  * Class Factory
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
-final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInterface
+class Factory implements MutableCreationOptionsInterface, FactoryInterface
 {
     use GridColumnPluginManagerAwareTrait;
+    use MutableCreationOptionsTrait;
+
+
+    /**
+     * Конструктор класса
+     * @param array $options
+     */
+    public function __construct(array $options)
+    {
+        $this->setCreationOptions($options);
+    }
 
     /**
      * @param array | Traversable $spec
@@ -59,14 +72,19 @@ final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInt
     {
         $mutators = [];
         if (array_key_exists('mutators', $spec) && $spec['mutators']) {
-            $mutatorFactory = new MutatorFactory($this->getColumnPluginManager()->getServiceLocator());
+            $mutatorPluginManager = $this->getColumnPluginManager()->getServiceLocator()->get('GridMutatorManager');
             foreach ($spec['mutators'] as $mutator) {
                 if (!$mutator instanceof MutatorInterface) {
-                    $mutator = $mutatorFactory->create($mutator);
+                    if (!array_key_exists('type', $mutator) || !$mutator['type']) {
+                        throw new RuntimeException('Для создания экземпляра мутатора должен быть передан его type');
+                    }
+                    $mutator['options'] = array_key_exists('options', $mutator) ? $mutator['options'] : [];
+                    $mutator = $mutatorPluginManager->get($mutator['type'], $mutator['options']);
                 }
                 $mutators[] = $mutator;
             }
         }
+
         return $mutators;
     }
 
@@ -100,35 +118,44 @@ final class Factory implements FactoryInterface, GridColumnPluginManagerAwareInt
         return $spec;
     }
 
-    /**
-     * Метод фабрики создающий непосредственно колонку
-     * @param array | Traversable $spec
-     * @return ColumnInterface
-     * @throws InvalidColumnException
-     * @throws InvalidSpecificationException
-     * @throws ServiceNotFoundException
-     * @throws ServiceNotCreatedException
-     * @throws \Zend\ServiceManager\Exception\RuntimeException
-     * @throws \NNX\DataGrid\Column\Exception\InvalidNameException
-     * @throws \NNX\DataGrid\Column\Header\Exception\NoValidSpecificationException
-     * @throws \NNX\DataGrid\Column\Header\Exception\NoValidTemplateException
-     */
-    public function create($spec)
+    protected function createHeader($spec)
     {
-        $this->validate($spec);
-        /** @var ColumnInterface $column */
-        $column = $this->getColumnPluginManager()->get($spec['type'], $spec);
+        $header = null;
         if (array_key_exists('header', $spec)
             && $spec['header']
         ) {
             if (!$spec['header'] instanceof HeaderInterface) {
-                $headerFactory = new Header\Factory();
+                /** @var Header\Factory $headerFactory */
+                $headerFactory = $this->getColumnPluginManager()->getServiceLocator()->get(Header\Factory::class);
                 $header = $headerFactory->create($spec['header']);
             } else {
                 $header = $spec['header'];
             }
-            $column->setHeader($header);
+
         }
+        return $header;
+    }
+
+    /**
+     * Create service
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return mixed
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $spec = $this->getCreationOptions();
+        $this->setColumnPluginManager($serviceLocator);
+        $this->validate($spec);
+        $className = __NAMESPACE__ . '\\' . ucfirst($spec['type']);
+        $reflectionColumn = new ReflectionClass($className);
+        if (!$reflectionColumn->isInstantiable()) {
+            throw new Exception\RuntimeException(sprintf('Класс %s не найден', $className));
+        }
+        unset($spec['columnPluginManager']);
+        $column = $reflectionColumn->newInstance($spec);
+        $header = $this->createHeader($spec);
+        $column->setHeader($header);
         $spec = $this->prepareMutatorsSpecification($column, $spec);
         $column->setMutators($this->getMutators($spec));
 

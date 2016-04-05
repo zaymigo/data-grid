@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Test\PhpUnit\TestData;
+namespace Nnx\DataGrid\Test\PhpUnit\TestData;
 
 /**
  * Class TestPath
- * @package NNX\DataGrid\Test\PhpUnit\TestData
+ * @package Nnx\DataGrid\Test\PhpUnit\TestData
  */
 final class TestPath
 {

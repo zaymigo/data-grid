@@ -4,12 +4,12 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Adapter\Exception;
+namespace Nnx\DataGrid\Adapter\Exception;
 
-use NNX\DataGrid\Exception\RuntimeException as CommonRuntimeException;
+use Nnx\DataGrid\Exception\RuntimeException as CommonRuntimeException;
 /**
- * Class RuntimeException 
- * @package NNX\DataGrid\Adapter\Exception
+ * Class RuntimeException
+ * @package Nnx\DataGrid\Adapter\Exception
  */
 class RuntimeException extends CommonRuntimeException
 {

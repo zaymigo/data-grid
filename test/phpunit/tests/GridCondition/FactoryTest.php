@@ -4,18 +4,19 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Test\PhpUnit\GridCondition;
-use NNX\DataGrid\Condition\ConditionInterface;
-use NNX\DataGrid\Condition\SimpleCondition;
-use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
+namespace Nnx\DataGrid\Test\PhpUnit\GridCondition;
+
+use Nnx\DataGrid\Condition\ConditionInterface;
+use Nnx\DataGrid\Condition\SimpleCondition;
+use Nnx\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
-use NNX\DataGrid\Condition\Factory;
-use NNX\DataGrid\Condition\DB;
-use NNX\DataGrid\Condition\Exception;
+use Nnx\DataGrid\Condition\Factory;
+use Nnx\DataGrid\Condition\DB;
+use Nnx\DataGrid\Condition\Exception;
 
 /**
- * Class FactoryTest 
- * @package NNX\DataGrid\Test\PhpUnit\GridCondition
+ * Class FactoryTest
+ * @package Nnx\DataGrid\Test\PhpUnit\GridCondition
  */
 class FactoryTest extends AbstractHttpControllerTestCase
 {
@@ -34,8 +35,8 @@ class FactoryTest extends AbstractHttpControllerTestCase
     }
 
     /**
-     * @throws \NNX\DataGrid\Condition\Exception\InvalidArgumentException
-     * @throws \NNX\DataGrid\Condition\Exception\RuntimeException
+     * @throws \Nnx\DataGrid\Condition\Exception\InvalidArgumentException
+     * @throws \Nnx\DataGrid\Condition\Exception\RuntimeException
      */
     public function testCreateCondition()
     {

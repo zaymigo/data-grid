@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Adapter\Exception;
+namespace Nnx\DataGrid\Adapter\Exception;
 
-use NNX\DataGrid\Exception\InvalidArgumentException as BaseInvalidArgumentException;
+use Nnx\DataGrid\Exception\InvalidArgumentException as BaseInvalidArgumentException;
 
 /**
- * Class InvalidArgumentException 
- * @package NNX\DataGrid\Adapter\Exception
+ * Class InvalidArgumentException
+ * @package Nnx\DataGrid\Adapter\Exception
  */
 class InvalidArgumentException extends BaseInvalidArgumentException
 {

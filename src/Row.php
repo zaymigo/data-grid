@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
 use ArrayAccess;
 
 /**
- * Class Row 
- * @package NNX\DataGrid
+ * Class Row
+ * @package Nnx\DataGrid
  */
 class Row implements ArrayAccess
 {

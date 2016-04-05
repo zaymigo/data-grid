@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Mutator\Exception;
+namespace Nnx\DataGrid\Mutator\Exception;
 
-use NNX\DataGrid\Exception\RuntimeException as BaseRuntimeException;
+use Nnx\DataGrid\Exception\RuntimeException as BaseRuntimeException;
 
 /**
  * Class RuntimeException
- * @package NNX\DataGrid\Mutator\Exception
+ * @package Nnx\DataGrid\Mutator\Exception
  */
 class RuntimeException extends BaseRuntimeException
 {

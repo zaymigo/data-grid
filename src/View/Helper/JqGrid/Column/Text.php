@@ -4,15 +4,15 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\View\Helper\JqGrid\Column;
+namespace Nnx\DataGrid\View\Helper\JqGrid\Column;
 
 use Zend\View\Helper\AbstractHelper;
-use NNX\DataGrid\Column\ColumnInterface;
+use Nnx\DataGrid\Column\ColumnInterface;
 use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Class Column
- * @package NNX\DataGrid\View\Helper
+ * @package Nnx\DataGrid\View\Helper
  */
 class Text extends AbstractHelper
 {

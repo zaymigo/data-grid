@@ -9,10 +9,10 @@
 
 Develop:
 
-[![Build Status](https://travis-ci.org/nnx-framework/data-grid.svg?branch=dev)](https://travis-ci.org/nnx-framework/data-grid)
-[![Coverage Status](https://coveralls.io/repos/github/nnx-framework/data-grid/badge.svg?branch=dev)](https://coveralls.io/github/nnx-framework/data-grid?branch=dev)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nnx-framework/data-grid/badges/quality-score.png?b=dev)](https://scrutinizer-ci.com/g/nnx-framework/data-grid/?branch=dev)
-[![Documentation Status](https://readthedocs.org/projects/data-grid/badge/?version=dev)](http://data-grid.readthedocs.org/ru/latest/?badge=dev)
+[![Build Status](https://travis-ci.org/nnx-framework/data-grid.svg?branch=develop)](https://travis-ci.org/nnx-framework/data-grid)
+[![Coverage Status](https://coveralls.io/repos/github/nnx-framework/data-grid/badge.svg?branch=develop)](https://coveralls.io/github/nnx-framework/data-grid?branch=develop)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nnx-framework/data-grid/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/nnx-framework/data-grid/?branch=develop)
+[![Documentation Status](https://readthedocs.org/projects/data-grid/badge/?version=develop)](http://data-grid.readthedocs.org/ru/latest/?badge=develop)
 
 
 Описание

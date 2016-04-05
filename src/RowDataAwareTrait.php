@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
 use ArrayAccess;
 
 /**
  * Trait RowDataAwareTrait
- * @package NNX\DataGrid
+ * @package Nnx\DataGrid
  */
 trait RowDataAwareTrait
 {
@@ -20,6 +20,7 @@ trait RowDataAwareTrait
     protected $rowData;
 
     /**
+     * Возвращает набор данных строки выбранной посредством adapter'a
      * @return array|ArrayAccess
      */
     public function getRowData()
@@ -28,6 +29,7 @@ trait RowDataAwareTrait
     }
 
     /**
+     * Устанавливает набор данных строки выбранных посредством adapter'a
      * @param array|ArrayAccess $rowData
      * @return $this
      */

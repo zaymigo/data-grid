@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
 use Zend\ServiceManager\AbstractPluginManager;
 
 /**
- * Class GridPluginManager 
- * @package NNX\DataGrid
+ * Class GridPluginManager
+ * @package Nnx\DataGrid
  */
 class GridPluginManager extends AbstractPluginManager
 {

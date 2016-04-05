@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Mutator;
+namespace Nnx\DataGrid\Mutator;
 
 use \ArrayAccess;
 
 /**
  * Interface MutatorInterface
- * @package NNX\DataGrid\Mutator
+ * @package Nnx\DataGrid\Mutator
  */
 interface MutatorInterface
 {

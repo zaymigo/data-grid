@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column\Action;
+namespace Nnx\DataGrid\Column\Action;
 
-use NNX\DataGrid\RowDataAwareInterface;
-use NNX\DataGrid\RowDataAwareTrait;
+use Nnx\DataGrid\RowDataAwareInterface;
+use Nnx\DataGrid\RowDataAwareTrait;
 
 /**
  * Class SimpleAction
- * @package NNX\DataGrid\Column\Action
+ * @package Nnx\DataGrid\Column\Action
  */
 class SimpleAction extends AbstractAction implements RowDataAwareInterface
 {

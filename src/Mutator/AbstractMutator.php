@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Mutator;
+namespace Nnx\DataGrid\Mutator;
 
 use ArrayAccess;
-use NNX\DataGrid\RowDataAwareInterface;
+use Nnx\DataGrid\RowDataAwareInterface;
 
 /**
  * Class AbstractMutator
- * @package NNX\DataGrid\Mutator
+ * @package Nnx\DataGrid\Mutator
  */
 abstract class AbstractMutator implements MutatorInterface, RowDataAwareInterface
 {
@@ -80,6 +80,7 @@ abstract class AbstractMutator implements MutatorInterface, RowDataAwareInterfac
     {
         $res = true;
         if ($this->getValidationFunction()) {
+
             $res = call_user_func($this->getValidationFunction(), $this->getRowData());
         }
         return $res;

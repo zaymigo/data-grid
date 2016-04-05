@@ -3,14 +3,14 @@
  * @company MTE Telecom, Ltd.
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
-use NNX\DataGrid\View\Helper\JqGrid\Column\Action;
-use NNX\DataGrid\View\Helper\JqGrid\Column\Hidden;
-use NNX\DataGrid\View\Helper\JqGrid\Column\Link;
-use NNX\DataGrid\View\Helper\JqGrid\Column\Money;
-use NNX\DataGrid\View\Helper\JqGrid\Column\Text;
-use NNX\DataGrid\View\Helper\JqGrid\Grid;
+use Nnx\DataGrid\View\Helper\JqGrid\Column\Action;
+use Nnx\DataGrid\View\Helper\JqGrid\Column\Hidden;
+use Nnx\DataGrid\View\Helper\JqGrid\Column\Link;
+use Nnx\DataGrid\View\Helper\JqGrid\Column\Money;
+use Nnx\DataGrid\View\Helper\JqGrid\Column\Text;
+use Nnx\DataGrid\View\Helper\JqGrid\Grid;
 
 
 return [

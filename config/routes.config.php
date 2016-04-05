@@ -11,7 +11,7 @@ return [
                 'options' => [
                     'route' => '/grid',
                     'defaults' => [
-                        'controller' => 'NNX\DataGrid\Controller\Data',
+                        'controller' => 'Nnx\DataGrid\Controller\Data',
                         'action' => 'get',
                     ],
                     'constraints' => [

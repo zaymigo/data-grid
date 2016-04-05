@@ -4,7 +4,7 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column;
+namespace Nnx\DataGrid\Column;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -13,19 +13,10 @@ use Zend\ServiceManager\MutableCreationOptionsTrait;
 
 /**
  * Class ActionFactory
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
-class ActionFactory implements FactoryInterface, MutableCreationOptionsInterface
+class ActionFactory extends Factory implements FactoryInterface
 {
-    use MutableCreationOptionsTrait;
-
-    /**
-     * @param array $options
-     */
-    public function __construct(array $options = [])
-    {
-        $this->setCreationOptions($options);
-    }
 
     /**
      * Create service
@@ -35,6 +26,7 @@ class ActionFactory implements FactoryInterface, MutableCreationOptionsInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        $this->setColumnPluginManager($serviceLocator);
         if ($serviceLocator instanceof GridColumnPluginManager) {
             $helper = $serviceLocator->getServiceLocator()->get('ViewHelperManager')->get('Url');
         } else {
@@ -42,6 +34,8 @@ class ActionFactory implements FactoryInterface, MutableCreationOptionsInterface
         }
         $options = $this->getCreationOptions();
         $options['urlHelper'] = $helper;
+        $header = $this->createHeader($this->getCreationOptions());
+        $options['header'] = $header;
         return new Action($options);
     }
 }

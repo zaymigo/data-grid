@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column;
+namespace Nnx\DataGrid\Column;
 
 /**
  * Class Money
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
 class Money extends AbstractColumn
 {

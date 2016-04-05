@@ -4,17 +4,18 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\View\Helper\JqGrid;
+namespace Nnx\DataGrid\View\Helper\JqGrid;
 
+use Nnx\DataGrid\Mutator\HighlightMutatorInterface;
 use Zend\View\Helper\AbstractHelper;
-use NNX\DataGrid\GridInterface;
+use Nnx\DataGrid\GridInterface;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Renderer\PhpRenderer;
-use NNX\DataGrid\View\Helper\Exception;
+use Nnx\DataGrid\View\Helper\Exception;
 
 /**
  * Class Grid
- * @package NNX\DataGrid\View\Helper
+ * @package Nnx\DataGrid\View\Helper
  */
 class Grid extends AbstractHelper
 {
@@ -45,8 +46,23 @@ class Grid extends AbstractHelper
             /** @var string $columnsJqOptions */
             $config['colModel'][] = $view->$helperName($column);
         }
+
+        $config['rowattr'] = '%rowAttrFunction%';
+        $rowattr = null;
+        if ($mutators = $grid->getMutators()) {
+            foreach ($mutators as $mutator) {
+                if ($mutator instanceof HighlightMutatorInterface) {
+                    $rowattr = 'function(rd) {console.log(rd);' .
+                        'if(rd.' . $mutator->getDataName() . ') {'
+                        . 'return {"class": "' . $mutator->getHighlightCssClass() . '"};'
+                        . '}'
+                        . '}';
+                }
+            }
+        }
         $view->headScript()->appendScript('$(function(){'
-            . 'var grid = $("#grid-' . $grid->getName() . '").jqGrid(' . json_encode((object)$config) . ');});');
+            . 'var grid = $("#grid-' . $grid->getName() . '").jqGrid('
+            . str_replace('"%rowAttrFunction%"', $rowattr, json_encode((object)$config)) . ');});');
         return $res;
     }
 

@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Condition;
+namespace Nnx\DataGrid\Condition;
 
 /**
- * Class DB 
- * @package NNX\DataGrid\Condition
+ * Class DB
+ * @package Nnx\DataGrid\Condition
  */
 class DB extends SimpleCondition
 {

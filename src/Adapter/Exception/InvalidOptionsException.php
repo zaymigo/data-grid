@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Adapter\Exception;
+namespace Nnx\DataGrid\Adapter\Exception;
 
 /**
- * Class InvalidOptionsException 
- * @package NNX\DataGrid\Adapter\Exception
+ * Class InvalidOptionsException
+ * @package Nnx\DataGrid\Adapter\Exception
  */
 class InvalidOptionsException extends RuntimeException
 {

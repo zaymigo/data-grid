@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
 use ArrayAccess;
 
 /**
  * Interface RowDataAwareInterface
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
 interface RowDataAwareInterface
 {

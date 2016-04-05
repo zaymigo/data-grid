@@ -4,24 +4,27 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
-use NNX\DataGrid\Adapter\AdapterInterface;
-use NNX\DataGrid\Column\GridColumnPluginManagerAwareInterface;
-use NNX\DataGrid\Options\ModuleOptions;
+use Nnx\DataGrid\Adapter\AdapterInterface;
+use Nnx\DataGrid\Mutator\MutatorInterface;
+use Nnx\DataGrid\Options\ModuleOptions;
 use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ArrayAccess;
 use Zend\Stdlib\InitializableInterface;
 
 /**
- * Class AbstractGridManager 
- * @package NNX\DataGrid
+ * Class AbstractGridManager
+ * @package Nnx\DataGrid
  */
 class AbstractGridManagerFactory implements AbstractFactoryInterface
 {
+    use ServiceLocatorAwareTrait;
 
     const CONFIG_KEY = 'grids';
+
     /**
      * Determine if we can create a service with name
      *
@@ -33,13 +36,14 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $res = false;
-        if (strpos($requestedName, 'grids.') === 0) {
+        if (strpos($requestedName, static::CONFIG_KEY . '.') === 0) {
             $res = true;
         }
         return $res;
     }
 
     /**
+     * Создает экземпляр класса adapter'a и настраивает его.
      * @param array | ArrayAccess | AdapterInterface $adapterOptions
      * @param ServiceLocatorInterface $serviceManager
      * @return AdapterInterface|null
@@ -74,6 +78,28 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
     }
 
     /**
+     * Возвращщает набор мутаторов
+     * @param array $spec
+     * @return array
+     */
+    protected function getMutators($spec)
+    {
+        $mutators = [];
+        if (array_key_exists('mutators', $spec) && $spec['mutators']) {
+            /** @var Mutator\Factory $mutatorFactory */
+            $mutatorFactory = $this->getServiceLocator()->get(Mutator\Factory::class);
+            $mutatorFactory->setServiceLocator($this->getServiceLocator());
+            foreach ($spec['mutators'] as $mutator) {
+                if (!$mutator instanceof MutatorInterface) {
+                    $mutator = $mutatorFactory->create($mutator);
+                }
+                $mutators[] = $mutator;
+            }
+        }
+        return $mutators;
+    }
+
+    /**
      * Create service with name
      *
      * @param GridPluginManager | ServiceLocatorInterface $serviceLocator
@@ -84,6 +110,7 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
+        $this->setServiceLocator($serviceLocator);
         /** @var ServiceLocatorInterface $serviceManager */
         $serviceManager = $serviceLocator->getServiceLocator();
         /** @var ModuleOptions $moduleOptions */
@@ -94,19 +121,16 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
             throw new Exception\RuntimeException('В конфигурационном файле нет секции grids');
         }
         $gridName = substr($requestedName, strlen(self::CONFIG_KEY . '.'));
-
         if (!array_key_exists($gridName, $gridsConfig) || !$gridsConfig[$gridName]) {
             throw new Exception\RuntimeException(
                 sprintf('Таблица с именем %s не найдена в конфиге гридов.', $gridName)
             );
         }
         $gridConfig =& $gridsConfig[$gridName];
-
         if (!array_key_exists('class', $gridConfig) || !$gridConfig['class']) {
             throw new Exception\RuntimeException('Необходимо задать класс таблицы в конфиге.');
         }
         $gridClass =& $gridConfig['class'];
-
         $options = [];
         if (array_key_exists('options', $gridConfig) && $gridConfig['options']) {
             if (!is_array($gridConfig['options']) && !$gridConfig['options'] instanceof ArrayAccess) {
@@ -118,11 +142,10 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
             $adapter = $this->createAdapter($options['adapter'], $serviceManager);
             $options['adapter'] = $adapter;
         }
-        /** @var GridInterface | AbstractGrid $grid */
+        $options['columnPluginManager'] = $serviceManager->get('GridColumnManager');
+        $options['mutatorPluginManager'] = $serviceManager->get('GridMutatorManager');
+        /** @var GridInterface|AbstractGrid $grid */
         $grid = $serviceLocator->get($gridClass, $options);
-        if ($grid instanceof GridColumnPluginManagerAwareInterface) {
-            $grid->setColumnPluginManager($serviceManager->get('GridColumnManager'));
-        }
         if ($grid instanceof InitializableInterface) {
             $grid->init();
         }

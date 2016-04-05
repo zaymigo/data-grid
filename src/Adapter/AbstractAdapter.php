@@ -4,16 +4,16 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Adapter;
+namespace Nnx\DataGrid\Adapter;
 
-use NNX\DataGrid\Condition\Conditions;
+use Nnx\DataGrid\Condition\Conditions;
 use Doctrine\Common\Collections\ArrayCollection;
 use ArrayAccess;
 use Traversable;
 
 /**
- * Class AbstractAdapter 
- * @package NNX\DataGrid\Adapter
+ * Class AbstractAdapter
+ * @package Nnx\DataGrid\Adapter
  */
 class AbstractAdapter implements AdapterInterface
 {

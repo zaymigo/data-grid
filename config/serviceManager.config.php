@@ -3,13 +3,13 @@
  * @company MTE Telecom, Ltd.
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
-use NNX\DataGrid\Column\GridColumnPluginManager;
-use NNX\DataGrid\Column\GridColumnPluginManagerFactory;
-use NNX\DataGrid\Mutator\GridMutatorPluginManagerFactory;
-use NNX\DataGrid\Mutator\GridMutatorPluginManager;
-use NNX\DataGrid\Options\ModuleOptions;
+use Nnx\DataGrid\Column\GridColumnPluginManager;
+use Nnx\DataGrid\Column\GridColumnPluginManagerFactory;
+use Nnx\DataGrid\Mutator\GridMutatorPluginManagerFactory;
+use Nnx\DataGrid\Mutator\GridMutatorPluginManager;
+use Nnx\DataGrid\Options\ModuleOptions;
 
 return [
     'service_manager' => [
@@ -23,7 +23,8 @@ return [
             ModuleOptions::class => Options\Factory::class
         ],
         'invokables' => [
-            Adapter\Factory::class => Adapter\Factory::class
+            Adapter\Factory::class => Adapter\Factory::class,
+            Column\Header\Factory::class => Column\Header\Factory::class
         ],
         'aliases' => [
             'GridMutatorManager' => GridMutatorPluginManager::class,

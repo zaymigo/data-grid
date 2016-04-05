@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
-use NNX\DataGrid\Column\GridColumnProviderInterface;
-use NNX\DataGrid\Mutator\GridMutatorProviderInterface;
-use NNX\DataGrid\Options\ModuleOptions;
+use Nnx\DataGrid\Column\GridColumnProviderInterface;
+use Nnx\DataGrid\Mutator\GridMutatorProviderInterface;
+use Nnx\DataGrid\Options\ModuleOptions;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
@@ -25,7 +25,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class Module
- * @package NNX\DataGrid
+ * @package Nnx\DataGrid
  */
 class Module
     implements ServiceLocatorAwareInterface,

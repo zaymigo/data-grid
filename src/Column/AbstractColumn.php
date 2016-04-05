@@ -4,10 +4,10 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column;
+namespace Nnx\DataGrid\Column;
 
-use NNX\DataGrid\Column\Header\HeaderInterface;
-use NNX\DataGrid\Mutator\MutatorInterface;
+use Nnx\DataGrid\Column\Header\HeaderInterface;
+use Nnx\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 
 abstract class AbstractColumn implements ColumnInterface
@@ -58,7 +58,7 @@ abstract class AbstractColumn implements ColumnInterface
      * Массив мутаторов данных для данной колонки
      * @var array|Traversable
      */
-    protected $mutators;
+    protected $mutators = [];
 
     /**
      * Предустановленные для данной колонки мутаторы

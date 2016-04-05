@@ -4,16 +4,16 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
-use NNX\DataGrid\Column\ColumnInterface;
-use NNX\DataGrid\Mutator\MutatorInterface;
+use Nnx\DataGrid\Column\ColumnInterface;
+use Nnx\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 use ArrayAccess;
 
 /**
- * Class SimpleGrid 
- * @package NNX\DataGrid
+ * Class SimpleGrid
+ * @package Nnx\DataGrid
  */
 class SimpleGrid extends AbstractGrid
 {
@@ -51,26 +51,46 @@ class SimpleGrid extends AbstractGrid
             );
         }
         $columns = $this->getColumns();
+
         foreach ($data as $item) {
+            $mutators = $this->getMutators();
+            $item = $this->mutate($mutators, $item);
             /** @var ColumnInterface $column */
             foreach ($columns as $column) {
                 $columnName = $column->getName();
                 $mutators = $column->getMutators();
                 if (array_key_exists($columnName, $item)) {
-                    /** @var MutatorInterface $mutator */
-                    foreach ($mutators as $mutator) {
-                        if ($mutator instanceof MutatorInterface) {
-                            $mutator->setRowData($item);
-                            if ($mutator->validate()) {
-                                $item[$columnName] = $mutator->change($item[$columnName]);
-                            }
-                        }
-                    }
+                    $item = $this->mutate($mutators, $item, $columnName);
                 }
             }
             $this->rowSet[] = new Row($item);
         }
         return $this;
+    }
+
+    /**
+     * Метод непосредственно осуществляет мутацию данных
+     * @param array $mutators
+     * @param array | Row $row
+     * @param string $name
+     * @return mixed
+     */
+    protected function mutate(array $mutators, $row, $name = null)
+    {
+        /** @var MutatorInterface $mutator */
+        foreach ($mutators as $mutator) {
+            if ($mutator instanceof MutatorInterface) {
+                $mutator->setRowData($row);
+                if ($mutator->validate()) {
+                    if ($name) {
+                        $row[$name] = $mutator->change($row[$name]);
+                    } else {
+                        $row = $mutator->change($row);
+                    }
+                }
+            }
+        }
+        return $row;
     }
 
     /**

@@ -4,24 +4,24 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Test\PhpUnit;
+namespace Nnx\DataGrid\Test\PhpUnit;
 
-use NNX\DataGrid\Adapter\AdapterInterface;
-use NNX\DataGrid\GridInterface;
-use NNX\DataGrid\GridPluginManager;
-use NNX\DataGrid\Options\ModuleOptions;
-use NNX\DataGrid\Row;
-use NNX\DataGrid\SimpleGrid;
-use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
+use Nnx\DataGrid\Adapter\AdapterInterface;
+use Nnx\DataGrid\GridInterface;
+use Nnx\DataGrid\GridPluginManager;
+use Nnx\DataGrid\Options\ModuleOptions;
+use Nnx\DataGrid\Row;
+use Nnx\DataGrid\SimpleGrid;
+use Nnx\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 use Exception;
-use NNX\DataGrid\Exception\RuntimeException;
+use Nnx\DataGrid\Exception\RuntimeException;
 
 
 /**
- * Class GridManagerFactoryTest 
- * @package NNX\DataGrid\Test\PhpUnit
+ * Class GridManagerFactoryTest
+ * @package Nnx\DataGrid\Test\PhpUnit
  */
 class GridManagerFactoryTest extends AbstractControllerTestCase
 {

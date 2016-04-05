@@ -3,14 +3,14 @@
  * @author Deller myogogo@gmail.com
  */
 
-namespace NNX\DataGrid\Column;
+namespace Nnx\DataGrid\Column;
 
-use NNX\DataGrid\Column\Action\ActionInterface;
+use Nnx\DataGrid\Column\Action\ActionInterface;
 use Zend\View\Helper\Url;
 
 /**
  * Class Action
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
 class Action extends AbstractColumn implements ActionAwareInterface
 {

@@ -4,23 +4,23 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Test\PhpUnit\GridColumn;
+namespace Nnx\DataGrid\Test\PhpUnit\GridColumn;
 
 
-use NNX\DataGrid\Column\ColumnInterface;
-use NNX\DataGrid\Column\Exception\InvalidColumnException;
-use NNX\DataGrid\Column\Exception\InvalidNameException;
-use NNX\DataGrid\Column\Exception\InvalidSpecificationException;
-use NNX\DataGrid\Column\Factory;
-use NNX\DataGrid\Column\GridColumnPluginManager;
-use NNX\DataGrid\Column\Header\HeaderInterface;
-use NNX\DataGrid\Test\PhpUnit\TestData\TestPath;
+use Nnx\DataGrid\Column\ColumnInterface;
+use Nnx\DataGrid\Column\Exception\InvalidColumnException;
+use Nnx\DataGrid\Column\Exception\InvalidNameException;
+use Nnx\DataGrid\Column\Exception\InvalidSpecificationException;
+use Nnx\DataGrid\Column\Factory;
+use Nnx\DataGrid\Column\GridColumnPluginManager;
+use Nnx\DataGrid\Column\Header\HeaderInterface;
+use Nnx\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 use Exception;
 
 /**
  * Class GridColumnFactoryTest
- * @package NNX\DataGrid\Test\PhpUnit\GridColumn
+ * @package Nnx\DataGrid\Test\PhpUnit\GridColumn
  */
 class GridColumnFactoryTest extends AbstractControllerTestCase
 {

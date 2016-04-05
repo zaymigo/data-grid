@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
 /**
  * Interface AjaxProviderInterface
- * @package NNX\DataGrid
+ * @package Nnx\DataGrid
  */
 interface AjaxProviderInterface
 {

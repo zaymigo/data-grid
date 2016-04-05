@@ -3,7 +3,7 @@
  * @company MTE Telecom, Ltd.
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
-namespace NNX\DataGrid\Test\PhpUnit;
+namespace Nnx\DataGrid\Test\PhpUnit;
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\Loader\StandardAutoloader;
@@ -67,9 +67,9 @@ class Bootstrap
                 StandardAutoloader::class => [
                     'autoregister_zf' => true,
                     'namespaces' => [
-                        'NNX\\DataGrid' => __DIR__ . '/../../src/',
+                        'Nnx\\DataGrid' => __DIR__ . '/../../src/',
                         __NAMESPACE__ => __DIR__ . '/tests/',
-                        'NNX\\DataGrid\\Test\\PhpUnit\\TestData' => __DIR__ . '/data',
+                        'Nnx\\DataGrid\\Test\\PhpUnit\\TestData' => __DIR__ . '/data',
                     ]
                 ]
             ]);

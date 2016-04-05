@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column;
+namespace Nnx\DataGrid\Column;
 
-use NNX\DataGrid\Column\Action\ActionInterface;
+use Nnx\DataGrid\Column\Action\ActionInterface;
 
 /**
  * Interface ActionAwareInterface
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
 interface ActionAwareInterface
 {
