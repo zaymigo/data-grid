@@ -52,7 +52,7 @@ class Grid extends AbstractHelper
         if ($mutators = $grid->getMutators()) {
             foreach ($mutators as $mutator) {
                 if ($mutator instanceof HighlightMutatorInterface) {
-                    $rowattr = 'function(rd) {console.log(rd);' .
+                    $rowattr = 'function(rd) {' .
                         'if(rd.' . $mutator->getDataName() . ') {'
                         . 'return {"class": "' . $mutator->getHighlightCssClass() . '"};'
                         . '}'
