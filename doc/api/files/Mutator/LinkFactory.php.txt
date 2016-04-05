@@ -4,7 +4,7 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Mutator;
+namespace Nnx\DataGrid\Mutator;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -14,7 +14,7 @@ use Zend\ServiceManager\MutableCreationOptionsInterface;
 
 /**
  * Class LinkFactory
- * @package NNX\DataGrid\Mutator
+ * @package Nnx\DataGrid\Mutator
  */
 class LinkFactory implements FactoryInterface, MutableCreationOptionsInterface
 {

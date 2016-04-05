@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\View\Helper\Exception;
+namespace Nnx\DataGrid\View\Helper\Exception;
 
-use NNX\DataGrid\Exception\RuntimeException as CommonRuntimeException;
+use Nnx\DataGrid\Exception\RuntimeException as CommonRuntimeException;
 
 /**
  * Class RuntimeException
- * @package NNX\DataGrid\View\Helper\Exception
+ * @package Nnx\DataGrid\View\Helper\Exception
  */
 class RuntimeException extends CommonRuntimeException
 {

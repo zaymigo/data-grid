@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Condition;
+namespace Nnx\DataGrid\Condition;
 
 /**
  * Interface ConditionInterface
- * @package NNX\DataGrid
+ * @package Nnx\DataGrid
  */
 interface ConditionInterface
 {

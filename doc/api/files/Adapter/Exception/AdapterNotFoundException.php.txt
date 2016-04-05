@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Adapter\Exception;
+namespace Nnx\DataGrid\Adapter\Exception;
 
 /**
- * Class AdapterNotFound 
- * @package NNX\DataGrid\Exception
+ * Class AdapterNotFound
+ * @package Nnx\DataGrid\Exception
  */
 class AdapterNotFoundException extends RuntimeException
 {

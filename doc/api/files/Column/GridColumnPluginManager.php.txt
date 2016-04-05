@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column;
+namespace Nnx\DataGrid\Column;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 
 /**
  * Class ColumnPluginManager
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
 class GridColumnPluginManager extends AbstractPluginManager
 {
@@ -36,14 +36,15 @@ class GridColumnPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = [
-        Text::class => Text::class,
-        Hidden::class => Hidden::class,
-        Link::class => Link::class,
-        Money::class => Money::class
+
     ];
 
     protected $factories = [
-        Action::class => ActionFactory::class
+        Action::class => ActionFactory::class,
+        Text::class => Factory::class,
+        Hidden::class => Factory::class,
+        Link::class => Factory::class,
+        Money::class => Factory::class
     ];
 
     /**
@@ -62,7 +63,7 @@ class GridColumnPluginManager extends AbstractPluginManager
             return;
         }
 
-        throw new Exception\RuntimeException('Column должен реализовывать %s', ColumnInterface::class);
+        throw new Exception\RuntimeException(sprintf('Column должен реализовывать %s', ColumnInterface::class));
     }
 }
 

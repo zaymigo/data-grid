@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\View\Helper\JqGrid\Column;
+namespace Nnx\DataGrid\View\Helper\JqGrid\Column;
 
 /**
  * Class Money
- * @package NNX\DataGrid\View\Helper\JqGrid\Column
+ * @package Nnx\DataGrid\View\Helper\JqGrid\Column
  */
 class Money extends Text
 {

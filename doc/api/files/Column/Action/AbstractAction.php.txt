@@ -4,12 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column\Action;
+namespace Nnx\DataGrid\Column\Action;
+
 use Zend\View\Helper\Url;
 
 /**
  * Class AbstractAction
- * @package NNX\DataGrid\Column\Action
+ * @package Nnx\DataGrid\Column\Action
  */
 abstract class AbstractAction implements ActionInterface
 {

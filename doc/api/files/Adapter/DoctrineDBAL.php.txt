@@ -4,7 +4,7 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Adapter;
+namespace Nnx\DataGrid\Adapter;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -12,8 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Traversable;
 
 /**
- * Class DoctrineDBAL 
- * @package NNX\DataGrid\Adapter
+ * Class DoctrineDBAL
+ * @package Nnx\DataGrid\Adapter
  */
 class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterface
 {

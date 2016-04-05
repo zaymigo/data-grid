@@ -4,16 +4,16 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Condition;
+namespace Nnx\DataGrid\Condition;
 
-use NNX\DataGrid\FactoryInterface;
+use Nnx\DataGrid\FactoryInterface;
 use Traversable;
 use ArrayAccess;
 use ReflectionClass;
 
 /**
  * Class ConditionFactory
- * @package NNX\DataGrid\Condition
+ * @package Nnx\DataGrid\Condition
  */
 class Factory implements FactoryInterface
 {

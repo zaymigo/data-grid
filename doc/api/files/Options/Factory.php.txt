@@ -4,16 +4,16 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Options;
+namespace Nnx\DataGrid\Options;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use NNX\DataGrid\Module;
+use Nnx\DataGrid\Module;
 use ArrayAccess;
 
 /**
- * Class Factory 
- * @package NNX\DataGrid\Options
+ * Class Factory
+ * @package Nnx\DataGrid\Options
  */
 class Factory implements FactoryInterface
 {

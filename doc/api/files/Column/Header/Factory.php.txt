@@ -4,17 +4,17 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column\Header;
+namespace Nnx\DataGrid\Column\Header;
 
-use NNX\DataGrid\FactoryInterface;
-use NNX\DataGrid\Column\Header\Exception\NoValidSpecificationException;
-use NNX\DataGrid\Column\Header\Exception\NoValidTemplateException;
+use Nnx\DataGrid\FactoryInterface;
+use Nnx\DataGrid\Column\Header\Exception\NoValidSpecificationException;
+use Nnx\DataGrid\Column\Header\Exception\NoValidTemplateException;
 use Traversable;
 
 /**
  * Фабрика заголовков для колонок таблицы
  * Class Factory
- * @package NNX\DataGrid\Column\Header
+ * @package Nnx\DataGrid\Column\Header
  *
  */
 class Factory implements FactoryInterface

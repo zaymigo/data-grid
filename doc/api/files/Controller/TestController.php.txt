@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Controller;
+namespace Nnx\DataGrid\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Class TestController
- * @package NNX\DataGrid\Controller
+ * @package Nnx\DataGrid\Controller
  */
 class TestController extends AbstractActionController
 {

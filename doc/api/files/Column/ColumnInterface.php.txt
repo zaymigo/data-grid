@@ -4,15 +4,15 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column;
+namespace Nnx\DataGrid\Column;
 
-use NNX\DataGrid\Column\Header\HeaderInterface;
-use NNX\DataGrid\Mutator\MutatorInterface;
+use Nnx\DataGrid\Column\Header\HeaderInterface;
+use Nnx\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 
 /**
  * Interface ColumnInterface
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
 interface ColumnInterface
 {

@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Mutator\Exception;
+namespace Nnx\DataGrid\Mutator\Exception;
 
-use NNX\DataGrid\Exception\InvalidArgumentException as BaseInvalidArgumentException;
+use Nnx\DataGrid\Exception\InvalidArgumentException as BaseInvalidArgumentException;
 
 /**
  * Class InvalidArgumentException
- * @package NNX\DataGrid\Mutator\Exception
+ * @package Nnx\DataGrid\Mutator\Exception
  */
 class InvalidArgumentException extends BaseInvalidArgumentException
 {

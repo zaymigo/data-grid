@@ -80,7 +80,6 @@ abstract class AbstractMutator implements MutatorInterface, RowDataAwareInterfac
     {
         $res = true;
         if ($this->getValidationFunction()) {
-
             $res = call_user_func($this->getValidationFunction(), $this->getRowData());
         }
         return $res;

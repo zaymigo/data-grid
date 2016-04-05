@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column\Action\Exception;
+namespace Nnx\DataGrid\Column\Action\Exception;
 
 /**
  * Class NameNotDefinedException
- * @package NNX\DataGrid\Column\Action\Exception
+ * @package Nnx\DataGrid\Column\Action\Exception
  */
 class NameNotDefinedException extends RuntimeException
 {

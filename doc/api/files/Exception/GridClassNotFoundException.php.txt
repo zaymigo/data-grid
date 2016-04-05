@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Exception;
+namespace Nnx\DataGrid\Exception;
 
 /**
- * Class GridClassNotFoundException 
- * @package NNX\DataGrid\Exception
+ * Class GridClassNotFoundException
+ * @package Nnx\DataGrid\Exception
  */
 class GridClassNotFoundException extends RuntimeException
 {

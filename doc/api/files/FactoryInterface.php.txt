@@ -4,13 +4,13 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
 use Traversable;
 
 /**
  * Interface FactoryInterface
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
 interface FactoryInterface
 {

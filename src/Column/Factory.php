@@ -131,7 +131,6 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
             } else {
                 $header = $spec['header'];
             }
-
         }
         return $header;
     }

@@ -6,7 +6,6 @@
 
 namespace Nnx\DataGrid\Mutator;
 
-
 use ReflectionClass;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\MutableCreationOptionsInterface;
@@ -69,6 +68,4 @@ class Factory implements FactoryInterface, MutableCreationOptionsInterface
         $mutator = $reflectionClass->newInstance($options);
         return $mutator;
     }
-
-
 }

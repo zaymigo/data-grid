@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Mutator;
+namespace Nnx\DataGrid\Mutator;
 
 use Zend\View\Helper\Url;
 
 
 /**
  * Class Link
- * @package NNX\DataGrid\Mutator
+ * @package Nnx\DataGrid\Mutator
  */
 class Link extends AbstractMutator
 {

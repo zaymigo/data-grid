@@ -4,15 +4,15 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Column\Action;
+namespace Nnx\DataGrid\Column\Action;
 
-use NNX\DataGrid\FactoryInterface;
+use Nnx\DataGrid\FactoryInterface;
 use Traversable;
 
 
 /**
  * Class Factory
- * @package NNX\DataGrid\Column\Action
+ * @package Nnx\DataGrid\Column\Action
  */
 class Factory implements FactoryInterface
 {

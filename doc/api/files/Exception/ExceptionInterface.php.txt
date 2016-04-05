@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Exception;
+namespace Nnx\DataGrid\Exception;
 
 /**
  * Interface ExceptionInterface
- * @package NNX\DataGrid\Exception
+ * @package Nnx\DataGrid\Exception
  */
 interface ExceptionInterface
 {

@@ -4,14 +4,14 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Mutator;
+namespace Nnx\DataGrid\Mutator;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 
 /**
  * Class GridMutatorPluginManager
- * @package NNX\DataGrid\Column
+ * @package Nnx\DataGrid\Column
  */
 class GridMutatorPluginManager extends AbstractPluginManager
 {
@@ -22,20 +22,28 @@ class GridMutatorPluginManager extends AbstractPluginManager
     protected $shareByDefault = false;
 
     /**
+     * Алиасы для вызова мутаторов
      * @var array
      */
     protected $aliases = [
         'link' => Link::class,
-        'money' => Money::class
+        'money' => Money::class,
+        'highlight' => Highlight::class
     ];
 
+    /**
+     * Классы мутаторов, которые может вызывать
+     * данный мэнеджер
+     * @var array
+     */
     protected $invokableClasses = [
-        Money::class => Money::class
+        Money::class => Money::class,
+
     ];
 
     protected $factories = [
         Link::class => LinkFactory::class,
-
+        Highlight::class => Factory::class
     ];
 
     /**

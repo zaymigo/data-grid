@@ -4,11 +4,11 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid\Adapter;
+namespace Nnx\DataGrid\Adapter;
 
 use ArrayAccess;
-use NNX\DataGrid\Adapter\Exception\InvalidOptionsException;
-use NNX\DataGrid\FactoryInterface;
+use Nnx\DataGrid\Adapter\Exception\InvalidOptionsException;
+use Nnx\DataGrid\FactoryInterface;
 use ReflectionClass;
 use Traversable;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -16,8 +16,8 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\Stdlib\InitializableInterface;
 
 /**
- * Class Factory 
- * @package NNX\DataGrid\Adapter
+ * Class Factory
+ * @package Nnx\DataGrid\Adapter
  */
 class Factory implements FactoryInterface, ServiceLocatorAwareInterface
 {

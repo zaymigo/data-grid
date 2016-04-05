@@ -8,8 +8,6 @@ namespace Nnx\DataGrid\Column;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\MutableCreationOptionsInterface;
-use Zend\ServiceManager\MutableCreationOptionsTrait;
 
 /**
  * Class ActionFactory

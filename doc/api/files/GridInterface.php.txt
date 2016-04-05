@@ -4,17 +4,18 @@
  * @author Roman Malashin <malashinr@mte-telecom.ru>
  */
 
-namespace NNX\DataGrid;
+namespace Nnx\DataGrid;
 
-use NNX\DataGrid\Adapter\AdapterInterface;
-use NNX\DataGrid\Column\ColumnInterface;
+use Nnx\DataGrid\Adapter\AdapterInterface;
+use Nnx\DataGrid\Column\ColumnInterface;
+use Nnx\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 use ArrayAccess;
 use Zend\Stdlib\InitializableInterface;
 
 /**
  * Interface GridInterface
- * @package NNX\DataGrid
+ * @package Nnx\DataGrid
  */
 interface GridInterface extends InitializableInterface
 {
@@ -63,6 +64,13 @@ interface GridInterface extends InitializableInterface
      * @return $this
      */
     public function add($column);
+
+    /**
+     * Удаляет колонку с именем $name из таблицы
+     * @param string $name
+     * @return $this
+     */
+    public function remove($name);
 
     /**
      * Возвращает колонку грида
@@ -117,6 +125,26 @@ interface GridInterface extends InitializableInterface
      * @return mixed
      */
     public function addAttribute($key, $value);
+
+    /**
+     * Возвращает набор мутаторов для строк таблицы
+     * @return array|ArrayAccess
+     */
+    public function getMutators();
+
+    /**
+     * Устанавливает набор мутаторов для строк таблицы
+     * @param array|ArrayAccess $mutators
+     * @return $this
+     */
+    public function setMutators(array $mutators);
+
+    /**
+     * Добавляет мутатор для строк таблицы
+     * @param MutatorInterface|array|ArrayAccess $mutator
+     * @return $this
+     */
+    public function addMutator($mutator);
 
     /**
      * Возвращает массив строк
