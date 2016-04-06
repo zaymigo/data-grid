@@ -22,7 +22,6 @@ class Text extends AbstractHelper
      */
     public function __invoke(ColumnInterface $column)
     {
-        /** @var  $escaper */
         $config = $this->getColumnConfig($column);
         $config = array_merge($config, $column->getAttributes());
         return (object)$config;

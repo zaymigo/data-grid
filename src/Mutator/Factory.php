@@ -46,14 +46,13 @@ class Factory implements FactoryInterface, MutableCreationOptionsInterface
      *
      * @param ServiceLocatorInterface|GridMutatorPluginManager $serviceLocator
      * @return mixed
+     * @throws Exception\RuntimeException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $spec = $this->getCreationOptions();
         $this->validate($spec);
 
-        /** @var GridMutatorPluginManager $mutatorManager */
-        $mutatorManager = $serviceLocator->getServiceLocator()->get('GridMutatorManager');
         $options = [];
         if (array_key_exists('options', $spec) && $spec['options']) {
             $options = $spec['options'];

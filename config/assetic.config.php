@@ -21,11 +21,24 @@ return [
                             'move_raw' => true,
                         )
                     ),
+                    'head_jquery_multiselect_css' => [
+                        'assets' => [
+                            'css/multiselect/common.css',
+                            'css/multiselect/ui.multiselect.css',
+                        ]
+                    ],
                     'head_jqgrid_css' => [
                         'assets' => [
                             'css/jqgrid/jquery-ui.min.css',
                             'css/jqgrid/ui.jqgrid.css',
                             'css/jqgrid/wordwrap.css'
+                        ]
+                    ],
+                    'head_jquery_multiselect_js' => [
+                        'assets' => [
+                            'js/multiselect/plugins/localisation/jquery.localisation-min.js',
+                            'js/multiselect/plugins/scrollTo/jquery.scrollTo-min.js',
+                            'js/multiselect/ui.multiselect.js',
                         ]
                     ],
                     'head_jqgrid_js' => [

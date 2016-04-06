@@ -88,7 +88,6 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         if (array_key_exists('mutators', $spec) && $spec['mutators']) {
             /** @var Mutator\Factory $mutatorFactory */
             $mutatorFactory = $this->getServiceLocator()->get(Mutator\Factory::class);
-            $mutatorFactory->setServiceLocator($this->getServiceLocator());
             foreach ($spec['mutators'] as $mutator) {
                 if (!$mutator instanceof MutatorInterface) {
                     $mutator = $mutatorFactory->create($mutator);

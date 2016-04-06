@@ -47,12 +47,12 @@ class Grid extends AbstractHelper
             $config['colModel'][] = $view->$helperName($column);
         }
 
-        $config['rowattr'] = '%rowAttrFunction%';
-        $rowattr = null;
+        $rowAttr = null;
         if ($mutators = $grid->getMutators()) {
             foreach ($mutators as $mutator) {
                 if ($mutator instanceof HighlightMutatorInterface) {
-                    $rowattr = 'function(rd) {' .
+                    $config['rowattr'] = '%rowAttrFunction%';
+                    $rowAttr = 'function(rd) {' .
                         'if(rd.' . $mutator->getDataName() . ') {'
                         . 'return {"class": "' . $mutator->getHighlightCssClass() . '"};'
                         . '}'
@@ -62,7 +62,7 @@ class Grid extends AbstractHelper
         }
         $view->headScript()->appendScript('$(function(){'
             . 'var grid = $("#grid-' . $grid->getName() . '").jqGrid('
-            . str_replace('"%rowAttrFunction%"', $rowattr, json_encode((object)$config)) . ');});');
+            . str_replace('"%rowAttrFunction%"', $rowAttr, json_encode((object)$config)) . ');});');
         return $res;
     }
 

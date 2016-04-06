@@ -6,14 +6,13 @@
 
 namespace Nnx\DataGrid\Column;
 
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class ActionFactory
  * @package Nnx\DataGrid\Column
  */
-class ActionFactory extends Factory implements FactoryInterface
+class ActionFactory extends Factory
 {
 
     /**

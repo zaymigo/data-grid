@@ -7,7 +7,7 @@
 namespace Nnx\DataGrid\Controller\Exception;
 
 /**
- * Class InvalidCopnditionName
+ * Class InvalidConditionName
  * @package Nnx\DataGrid\Controller\Exception
  */
 class InvalidConditionNameException extends RuntimeException

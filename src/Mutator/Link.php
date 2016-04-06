@@ -91,7 +91,7 @@ class Link extends AbstractMutator
         $varName = $matches[1];
         $value = '';
 
-        if (isset($row[$varName])) {
+        if (array_key_exists($varName, $row)) {
             if ($varName !== 'backurl') {
                 $value = urlencode($row[$varName]);
             } else {

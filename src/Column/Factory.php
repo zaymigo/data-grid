@@ -67,6 +67,7 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
      * Возвращщает набор мутаторов
      * @param array $spec
      * @return array
+     * @throws RuntimeException
      */
     protected function getMutators($spec)
     {
@@ -140,6 +141,11 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
      *
      * @param ServiceLocatorInterface $serviceLocator
      * @return mixed
+     * @throws Exception\RuntimeException
+     * @throws InvalidColumnException
+     * @throws InvalidNameException
+     * @throws InvalidSpecificationException
+     * @throws RuntimeException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

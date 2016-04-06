@@ -108,8 +108,10 @@ abstract class AbstractGrid implements GridInterface
 
     /**
      * Конфигурируем адаптер грида
+     * @param GridMutatorPluginManager $mutatorPluginManager
      * @param AdapterInterface $adapter
-     * @param array $options
+     * @param GridColumnPluginManager $columnPluginManager
+     * @internal param array $options
      */
     protected function configure(
         GridMutatorPluginManager $mutatorPluginManager,
@@ -187,7 +189,9 @@ abstract class AbstractGrid implements GridInterface
      * Добавление колонки в таблицу
      * @param ColumnInterface|array|ArrayAccess $column
      * @return $this
+     * @throws Column\Exception\InvalidColumnException
      * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     public function add($column)
     {
@@ -339,6 +343,7 @@ abstract class AbstractGrid implements GridInterface
      * Добавляет мутатор для строк таблицы
      * @param MutatorInterface|array|ArrayAccess $mutator
      * @return $this
+     * @throws Mutator\Exception\RuntimeException
      */
     public function addMutator($mutator)
     {

@@ -103,7 +103,7 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
 
     /**
      * @param QueryBuilder $query
-     * @return mixed
+     * @return QueryBuilder
      */
     protected function prepareConditions($query)
     {
