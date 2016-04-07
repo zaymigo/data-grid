@@ -54,7 +54,7 @@ class Grid extends AbstractHelper
                     $config['rowattr'] = '%rowAttrFunction%';
                     $rowAttr = 'function(rd) {' .
                         'if(rd.' . $mutator->getDataName() . ') {'
-                        . 'return {"class": "' . $mutator->getHighlightCssClass() . '"};'
+                        . 'return {"class": rd.' . $mutator->getDataName() . '};'
                         . '}'
                         . '}';
                 }
