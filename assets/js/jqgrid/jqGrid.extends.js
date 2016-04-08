@@ -4,8 +4,14 @@
 var NNX = NNX || {};
 NNX.jqGrid = NNX.jqGrid || {};
 
-NNX.jqGrid.expandCollapseAll = function (grid) {
-    $("#" + grid.attr('id') + " .treeclick").each(function () {
+NNX.jqGrid.expandAll = function (grid) {
+    $("#" + grid.attr('id') + " .tree-plus").each(function () {
+        $(this).trigger('click');
+    });
+};
+
+NNX.jqGrid.collapseAll = function (grid) {
+    $("#" + grid.attr('id') + " .tree-minus").each(function () {
         $(this).trigger('click');
     });
 };
