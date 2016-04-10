@@ -29,7 +29,8 @@ class GridMutatorPluginManager extends AbstractPluginManager
         'link' => Link::class,
         'money' => Money::class,
         'highlight' => Highlight::class,
-        'datetime' => DateTime::class
+        'datetime' => DateTime::class,
+        'concat' => Concat::class
     ];
 
     /**
@@ -39,7 +40,7 @@ class GridMutatorPluginManager extends AbstractPluginManager
      */
     protected $invokableClasses = [
         Money::class => Money::class,
-
+        Concat::class => Concat::class
     ];
 
     protected $factories = [
