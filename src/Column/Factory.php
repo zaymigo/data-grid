@@ -76,7 +76,7 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
             $mutatorPluginManager = $this->getColumnPluginManager()->getServiceLocator()->get('GridMutatorManager');
             foreach ($spec['mutators'] as $mutator) {
                 if (!$mutator instanceof MutatorInterface) {
-                    if (!array_key_exists('type', $mutator) || !$mutator['type']) {
+                    if (is_array($mutator) && (!array_key_exists('type', $mutator) || !$mutator['type'])) {
                         throw new RuntimeException('Для создания экземпляра мутатора должен быть передан его type');
                     }
                     $mutator['options'] = array_key_exists('options', $mutator) ? $mutator['options'] : [];

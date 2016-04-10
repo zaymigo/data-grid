@@ -86,11 +86,20 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
     {
         $mutators = [];
         if (array_key_exists('mutators', $spec) && $spec['mutators']) {
-            /** @var Mutator\Factory $mutatorFactory */
-            $mutatorFactory = $this->getServiceLocator()->get(Mutator\Factory::class);
+            /** @var Mutator\GridMutatorPluginManager $mutatorFactory */
+            $mutatorManager = $this->getServiceLocator()->get('GridMutatorManager');
+
             foreach ($spec['mutators'] as $mutator) {
                 if (!$mutator instanceof MutatorInterface) {
-                    $mutator = $mutatorFactory->create($mutator);
+                    if (!array_key_exists('type', $mutator) || !$mutator['type']) {
+                        throw new Mutator\Exception\RuntimeException('Не передан type для создания мутатора.');
+                    }
+                    if ($mutatorManager->has($mutator['type'])) {
+                        throw new Mutator\Exception\RuntimeException(
+                            sprintf('Mutator %s не зарегистрирован в MutatorManager')
+                        );
+                    }
+                    $mutator = $mutatorManager->get($mutator['type'], $mutator['options']);
                 }
                 $mutators[] = $mutator;
             }

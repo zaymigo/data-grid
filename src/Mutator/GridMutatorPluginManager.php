@@ -28,7 +28,8 @@ class GridMutatorPluginManager extends AbstractPluginManager
     protected $aliases = [
         'link' => Link::class,
         'money' => Money::class,
-        'highlight' => Highlight::class
+        'highlight' => Highlight::class,
+        'datetime' => DateTime::class
     ];
 
     /**
@@ -43,7 +44,8 @@ class GridMutatorPluginManager extends AbstractPluginManager
 
     protected $factories = [
         Link::class => LinkFactory::class,
-        Highlight::class => Factory::class
+        Highlight::class => Factory::class,
+        DateTime::class => DateTimeFactory::class
     ];
 
     /**
