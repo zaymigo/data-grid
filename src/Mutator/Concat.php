@@ -33,13 +33,9 @@ class Concat extends AbstractMutator
     {
         parent::__construct($options);
 
-        if (!array_key_exists('concatenateFields', $options) || !$options['concatenateFields']) {
-            throw new Exception\RuntimeException(
-                'Не заданы поля для конкатенации. Необходимо указать массив concatenateFields'
-            );
+        if (array_key_exists('concatenateFields', $options)) {
+            $this->setConcatenateFields($options['concatenateFields']);
         }
-
-        $this->setConcatenateFields($options['concatenateFields']);
 
         if (array_key_exists('separator', $options) && $options['separator']) {
             $this->setSeparator($options['separator']);
@@ -79,7 +75,7 @@ class Concat extends AbstractMutator
      * @param array $concatenateFields
      * @return $this
      */
-    public function setConcatenateFields($concatenateFields)
+    public function setConcatenateFields(array $concatenateFields)
     {
         $this->concatenateFields = $concatenateFields;
         return $this;

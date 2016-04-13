@@ -41,7 +41,6 @@ class DateTimeFactory implements FactoryInterface, MutableCreationOptionsInterfa
         }
         $dateTimeFormatter = $serviceLocator->get('FilterManager')->get('DateTimeFormatter');
         $options = $this->getCreationOptions();
-        $options['dateTimeFormatter'] = $dateTimeFormatter;
-        return new DateTime($options);
+        return new DateTime($dateTimeFormatter, $options);
     }
 }

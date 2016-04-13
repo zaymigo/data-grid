@@ -38,8 +38,7 @@ class LinkFactory implements FactoryInterface, MutableCreationOptionsInterface
         }
         $helper = $serviceLocator->get('ViewHelperManager')->get('Url');
         $options = $this->getCreationOptions();
-        $options['urlHelper'] = $helper;
-        $linkMutator = new Link($options);
+        $linkMutator = new Link($helper, $options);
         return $linkMutator;
     }
 }

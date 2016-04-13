@@ -36,13 +36,9 @@ class Link extends AbstractMutator
     protected $routeOptions = [];
 
 
-    public function __construct(array $options = [])
+    public function __construct(Url $urlHelper, array $options = [])
     {
         parent::__construct($options);
-        $urlHelper = array_key_exists('urlHelper', $options) ? $options['urlHelper'] : null;
-        if (!$urlHelper || !$urlHelper instanceof Url) {
-            throw new Exception\InvalidArgumentException('Для корректной работы мутатора необходимо передавать helper url.');
-        }
         $this->setUrlHelper($urlHelper);
 
         if (array_key_exists('routeName', $options)) {

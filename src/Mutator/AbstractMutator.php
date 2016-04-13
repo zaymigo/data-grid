@@ -26,6 +26,9 @@ abstract class AbstractMutator implements MutatorInterface, RowDataAwareInterfac
      */
     protected $validationFunction;
 
+    /**
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         if (array_key_exists('rowData', $options) && $options['rowData']) {
