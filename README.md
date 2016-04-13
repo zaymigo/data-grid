@@ -28,5 +28,5 @@ composer require nnx/data-grid
 ```
 
 # Документация
-- [Online documentation](http://data-grids.readthedocs.org/ru/dev/)
+- [Online documentation](http://data-grid.readthedocs.org/ru/develop/)
 - [Documentation source files](doc/book/ru/)
