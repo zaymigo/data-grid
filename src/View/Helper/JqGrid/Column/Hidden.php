@@ -23,8 +23,10 @@ class Hidden extends AbstractHelper
         $view = $this->getView();
         /** @var \Zend\View\Helper\EscapeHtml $escape */
         $escape = $view->plugin('escapeHtml');
+        $attributes = $column->getAttributes();
         $config = [
             'hidden' => true,
+            'hidedlg' => empty($attributes['hidedlg']) ? false: (bool)$attributes['hidedlg'],
             'name' => $escape($column->getName())
         ];
         $config = array_merge($config, $column->getAttributes());
