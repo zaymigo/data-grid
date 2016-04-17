@@ -19,7 +19,14 @@ Develop:
 ------------
 Компонент создания и управления таблицами. Позволяет создавать модель таблицы с действиями над записями.
 
+Установка модуля
+-----------------
+Для установки через composer
+
+```json
+composer require nnx/data-grid
+```
 
 # Документация
-- [Online documentation](http://data-grids.readthedocs.org/ru/dev/)
+- [Online documentation](http://data-grid.readthedocs.org/ru/develop/)
 - [Documentation source files](doc/book/ru/)

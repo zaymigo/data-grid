@@ -30,17 +30,10 @@ class DateTime extends AbstractMutator
      * Конструктор класса
      * @param array $options
      */
-    public function __construct(array $options = [])
+    public function __construct(DateTimeFormatter $dateTimeFormatter, array $options = [])
     {
         parent::__construct($options);
-
-        if (array_key_exists('dateTimeFormatter', $options) && $options['dateTimeFormatter']) {
-            if (!$options['dateTimeFormatter'] instanceof DateTimeFormatter) {
-                throw new Exception\RuntimeException(sprintf(''));
-            }
-            $this->setDateTimeFormatter($options['dateTimeFormatter']);
-        }
-
+        $this->setDateTimeFormatter($dateTimeFormatter);
         if (array_key_exists('format', $options) && $options['format']) {
             $this->setFormat($options['format']);
         }

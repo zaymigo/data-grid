@@ -43,6 +43,9 @@ class GridMutatorPluginManager extends AbstractPluginManager
         Concat::class => Concat::class
     ];
 
+    /**
+     * @var array
+     */
     protected $factories = [
         Link::class => LinkFactory::class,
         Highlight::class => Factory::class,
