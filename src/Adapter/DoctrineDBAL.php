@@ -110,12 +110,9 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
         $i = 0;
         if (count($this->getConditions()) !== 0) {
             foreach ($this->getConditions() as $condition) {
-                if ($i === 0) {
-                    $query->where($condition->getKey() . ' ' . $condition->getCriteria() . ' ?');
-                } else {
-                    $query->andWhere($condition->getKey() . ' ' . $condition->getCriteria() . ' ?');
-                }
-                $query->setParameter($i, $condition->getValue());
+                $conditionKey = 'NNXGridCondition_'.$i;
+                $query->andWhere($condition->getKey() . ' ' . $condition->getCriteria() . ' :'.$conditionKey);
+                $query->setParameter($conditionKey, $condition->getValue());
                 $i++;
             }
         }
