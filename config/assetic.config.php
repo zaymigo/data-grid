@@ -39,6 +39,7 @@ return [
                             'js/multiselect/plugins/localisation/jquery.localisation-min.js',
                             'js/multiselect/plugins/scrollTo/jquery.scrollTo-min.js',
                             'js/multiselect/ui.multiselect.js',
+                            'js/multiselect/ui.multiselect.extended.js',
                         ]
                     ],
                     'head_jqgrid_js' => [
