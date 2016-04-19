@@ -15,8 +15,19 @@ use ArrayAccess;
  * Class SimpleGrid
  * @package Nnx\DataGrid
  */
-class SimpleGrid extends AbstractGrid
+class SimpleGrid extends AbstractGrid implements ColumHidebleProviderInterface
 {
+    /**
+     * Коллекция колонок таблицы скрытых/показаннах пользователем
+     * @var array | Traversable
+     */
+    protected $userHiddenColums;
+
+    /**
+     * Флаг указывающий на изменеи списка колонок используется для проверки необходимости переустановки скрытия колонок пользователем
+     * @var bool
+     */
+    protected $columsChanged = false;
     /**
      * Данные в гриде
      * @var array
@@ -36,6 +47,31 @@ class SimpleGrid extends AbstractGrid
 
         return $this->rowSet;
     }
+
+    /**
+     * Добавление колонок в таблицу
+     * @param array | Traversable $columns
+     * @return $this
+     */
+    public function setColumns($columns)
+    {
+        $this->setColumsChanged(true);
+        return parent::setColumns($columns);
+    }
+    /**
+     * Добавление колонки в таблицу
+     * @param ColumnInterface|array|ArrayAccess $column
+     * @return $this
+     * @throws Column\Exception\InvalidColumnException
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
+     */
+    public function add($column)
+    {
+        $this->setColumsChanged(true);
+        return parent::add($column);
+    }
+
 
     /**
      * Создает из данных адаптера rowSet
@@ -109,5 +145,78 @@ class SimpleGrid extends AbstractGrid
      */
     public function init()
     {
+    }
+    /**
+     * Возвращает коллекцию колонок
+     * @return array | Traversable
+     */
+    public function getColumns()
+    {
+        $colums = parent::getColumns();
+        if ($this->getUserHiddenColums() && $this->isColumsChanged()) {
+            $newColums = [];
+            $addedColums = [];
+            foreach ($this->getUserHiddenColums() as $i => $userColum) {
+                /** @var ColumnInterface $colum */
+                if (!empty($userColum['n']) && $colum = $this->get($userColum['n'])) {
+                    $addedColums[$userColum['n']] = true;
+                    $colum->setOrder($i);
+                    if (!empty($userColum['h'])) {
+                        $colum->setAttribute('hidden', (bool)$userColum['h']);
+                    }
+                    $newColums[] = $colum;
+                }
+            }
+            $i++;
+            /** @var ColumnInterface $colum */
+            foreach ($colums as $colum) {
+                if (empty($addedColums[$colum->getName()])) {
+                    $colum->setOrder($i);
+                    $newColums[] = $colum;
+                }
+            }
+            return $newColums;
+        }
+        return $colums;
+    }
+
+
+    /**
+     * получить коллекцию колонок таблицы скрытых/показаннах пользователем
+     * @return array|Traversable
+     */
+    public function getUserHiddenColums()
+    {
+        return $this->userHiddenColums;
+    }
+
+    /**
+     * установить коллекцию колонок таблицы скрытых/показаннах пользователем
+     * @param array|Traversable $userHiddenColums
+     * @return $this
+     */
+    public function setUserHiddenColums($userHiddenColums)
+    {
+        $this->setColumsChanged(true);
+        $this->userHiddenColums = $userHiddenColums;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isColumsChanged()
+    {
+        return $this->columsChanged;
+    }
+
+    /**
+     * @param boolean $columsChanged
+     * @return $this
+     */
+    public function setColumsChanged($columsChanged)
+    {
+        $this->columsChanged = $columsChanged;
+        return $this;
     }
 }

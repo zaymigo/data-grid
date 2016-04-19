@@ -26,3 +26,19 @@ NNX.jqGrid.indent = function (grid) {
         }
     }
 };
+NNX.jqGrid.saveColums = function (grid, perm) {
+    grid.remapColumns(perm,true,false);
+    var colums = grid.jqGrid('getGridParam','colModel');
+    var gridName = $(grid).attr('id').substr(5);
+    var settings = [];
+    var h;
+    for (var i = 0; i < colums.length; i++) {
+        if (colums[i]['hidden']) {
+            h = 1;
+        } else {
+            h = 0;
+        }
+        settings[i] = {'n':colums[i]['name'], 'h':h};
+    }
+    $.cookie('nnx[grid][' + gridName + ']', JSON.stringify(settings), {expires: 1, path: '/'});
+};

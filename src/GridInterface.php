@@ -9,6 +9,7 @@ namespace Nnx\DataGrid;
 use Nnx\DataGrid\Adapter\AdapterInterface;
 use Nnx\DataGrid\Column\ColumnInterface;
 use Nnx\DataGrid\Mutator\MutatorInterface;
+use Nnx\DataGrid\NavigationBar\NavigationBarInterface;
 use Traversable;
 use ArrayAccess;
 use Zend\Stdlib\InitializableInterface;
@@ -151,4 +152,30 @@ interface GridInterface extends InitializableInterface
      * @return array
      */
     public function getRowSet();
+
+    /**
+     * Возвращвет верхнюю навигационную панель
+     * @return NavigationBarInterface
+     */
+    public function getTopNavigationBar();
+
+    /**
+     * Устанавливает верхнюю навигационную панель
+     * @param NavigationBarInterface $topNavigationBar
+     * @return $this
+     */
+    public function setTopNavigationBar($topNavigationBar);
+
+    /**
+     * Возвращвет верхнюю навигационную панель
+     * @return NavigationBarInterface
+     */
+    public function getBottomNavigationBar();
+
+    /**
+     * Устанавливает верхнюю навигационную панель
+     * @param NavigationBarInterface $bottomNavigationBar
+     * @return $this
+     */
+    public function setBottomNavigationBar($bottomNavigationBar);
 }

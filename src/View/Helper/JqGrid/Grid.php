@@ -12,6 +12,8 @@ use Nnx\DataGrid\GridInterface;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Renderer\PhpRenderer;
 use Nnx\DataGrid\View\Helper\Exception;
+use Nnx\DataGrid\NavigationBar\NavigationBarInterface;
+use Nnx\DataGrid\Button\ButtonInterface;
 
 /**
  * Class Grid
@@ -34,7 +36,10 @@ class Grid extends AbstractHelper
         $view = $this->getView();
         /** @var EscapeHtml $escape */
         $escape = $view->plugin('escapeHtml');
-        $res = '<table id="grid-' . $escape($grid->getName()) . '"></table>';
+        $bottomNavigationBar = $this->renderNavigationBar($grid->getBottomNavigationBar());
+        $topNavigationBar = $this->renderNavigationBar($grid->getTopNavigationBar());
+        $res = $topNavigationBar['html'] . '<table id="grid-' . $escape($grid->getName()) . '"></table>' . $bottomNavigationBar['html'];
+        $buttonsJs = $topNavigationBar['js'] . $bottomNavigationBar['js'];
         /** @var PhpRenderer $view */
         $view = $this->getView();
         $config = $this->getGridConfig($grid);
@@ -42,7 +47,7 @@ class Grid extends AbstractHelper
             $columnClass = get_class($column);
             $columnPath = explode('\\', $columnClass);
             $colName = array_pop($columnPath);
-            $helperName = 'mteGridJqGrid' . $colName;
+            $helperName = 'nnxGridJqGrid' . $colName;
             /** @var string $columnsJqOptions */
             $config['colModel'][] = $view->$helperName($column);
         }
@@ -62,8 +67,31 @@ class Grid extends AbstractHelper
         }
         $view->headScript()->appendScript('$(function(){'
             . 'var grid = $("#grid-' . $grid->getName() . '").jqGrid('
-            . str_replace('"%rowAttrFunction%"', $rowAttr, json_encode((object)$config)) . ');});');
+            . str_replace('"%rowAttrFunction%"', $rowAttr, json_encode((object)$config)) . ');'
+            . str_replace('%gridName%', $grid->getName(), $buttonsJs) .'});');
         return $res;
+    }
+
+    /**
+     * @param NavigationBarInterface $navigationBar
+     * @return array
+     */
+    protected function renderNavigationBar(NavigationBarInterface $navigationBar = null)
+    {
+        $html = '';
+        $js = '';
+        if ($navigationBar) {
+            /** @var PhpRenderer $view */
+            $view = $this->getView();
+            /** @var ButtonInterface $button */
+            foreach ($navigationBar->getButtons() as $button) {
+                $buttonResult = $view->nnxGridJqGridButton($button);
+                $html .=  $buttonResult['html'];
+                $js .=  $buttonResult['js'];
+            }
+            $html = "<div class='buttons-panel'>$html</div><br>";
+        }
+        return ['html' => $html,'js' => $js];
     }
 
     /**

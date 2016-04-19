@@ -46,5 +46,4 @@ class NestedSet
         $this->id = $id;
         return $this;
     }
-
 }

@@ -8,6 +8,7 @@ namespace Nnx\DataGrid;
 
 use Nnx\DataGrid\Column\ColumnInterface;
 use Nnx\DataGrid\Adapter\AdapterInterface;
+use Nnx\DataGrid\NavigationBar\NavigationBarInterface;
 use Nnx\DataGrid\Column\GridColumnPluginManager;
 use Nnx\DataGrid\Column\GridColumnPluginManagerAwareTrait;
 use Nnx\DataGrid\Mutator\GridMutatorPluginManager;
@@ -67,6 +68,16 @@ abstract class AbstractGrid implements GridInterface
      */
     protected $mutators = [];
 
+    /**
+     * @var NavigationBarInterface
+     */
+    protected $topNavigationBar;
+
+    /**
+     * @var NavigationBarInterface
+     */
+    protected $bottomNavigationBar;
+
 
     /**
      * Конструкто класса
@@ -102,7 +113,12 @@ abstract class AbstractGrid implements GridInterface
         }
         $mutatorPluginManager = $options['mutatorPluginManager'];
         unset($options['mutatorPluginManager']);
-        $this->configure($mutatorPluginManager, $adapter, $columnPluginManager);
+
+        $topNavigationBar = !empty($options['topNavigationBar']) ? $options['topNavigationBar'] : null;
+        $bottomNavigationBar = !empty($options['bottomNavigationBar']) ? $options['bottomNavigationBar'] : null;
+        unset($options['topNavigationBar'], $options['bottomNavigationBar']);
+
+        $this->configure($mutatorPluginManager, $adapter, $columnPluginManager, $topNavigationBar, $bottomNavigationBar);
         $this->setOptions($options);
     }
 
@@ -111,16 +127,22 @@ abstract class AbstractGrid implements GridInterface
      * @param GridMutatorPluginManager $mutatorPluginManager
      * @param AdapterInterface $adapter
      * @param GridColumnPluginManager $columnPluginManager
+     * @param NavigationBarInterface $topNavigationBar
+     * @param NavigationBarInterface $bottomNavigationBar
      * @internal param array $options
      */
     protected function configure(
         GridMutatorPluginManager $mutatorPluginManager,
         AdapterInterface $adapter,
-        GridColumnPluginManager $columnPluginManager)
+        GridColumnPluginManager $columnPluginManager,
+        NavigationBarInterface $topNavigationBar = null,
+        NavigationBarInterface $bottomNavigationBar = null)
     {
         $this->setMutatorPluginManager($mutatorPluginManager);
         $this->setAdapter($adapter);
         $this->setColumnPluginManager($columnPluginManager);
+        $this->setTopNavigationBar($topNavigationBar);
+        $this->setBottomNavigationBar($bottomNavigationBar);
     }
 
 
@@ -223,6 +245,7 @@ abstract class AbstractGrid implements GridInterface
      */
     public function remove($name)
     {
+        $name = strtolower($name);
         if (array_key_exists($name, $this->columns)) {
             unset($this->columns[$name]);
         }
@@ -240,6 +263,7 @@ abstract class AbstractGrid implements GridInterface
         if (!is_string($name)) {
             throw new Exception\InvalidArgumentException('Имя получаемой колонки должно быть строкой.');
         }
+        $name = strtolower($name);
         $column = null;
         if (array_key_exists($name, $this->columns)) {
             $column = $this->columns[$name];
@@ -354,6 +378,46 @@ abstract class AbstractGrid implements GridInterface
             $mutator = $this->getMutatorPluginManager()->get($mutator['type'], $mutator);
         }
         $this->mutators[] = $mutator;
+        return $this;
+    }
+
+    /**
+     * Возвращвет верхнюю навигационную панель
+     * @return NavigationBarInterface
+     */
+    public function getTopNavigationBar()
+    {
+        return $this->topNavigationBar;
+    }
+
+    /**
+     * Устанавливает верхнюю навигационную панель
+     * @param NavigationBarInterface $topNavigationBar
+     * @return $this
+     */
+    public function setTopNavigationBar($topNavigationBar)
+    {
+        $this->topNavigationBar = $topNavigationBar;
+        return $this;
+    }
+
+    /**
+     * Возвращвет верхнюю навигационную панель
+     * @return NavigationBarInterface
+     */
+    public function getBottomNavigationBar()
+    {
+        return $this->bottomNavigationBar;
+    }
+
+    /**
+     * Устанавливает верхнюю навигационную панель
+     * @param NavigationBarInterface $bottomNavigationBar
+     * @return $this
+     */
+    public function setBottomNavigationBar($bottomNavigationBar)
+    {
+        $this->bottomNavigationBar = $bottomNavigationBar;
         return $this;
     }
     /**

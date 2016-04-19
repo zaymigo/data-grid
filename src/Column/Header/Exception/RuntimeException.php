@@ -6,8 +6,8 @@
 
 namespace Nnx\DataGrid\Column\Header\Exception;
 
-use Nnx\DataGrid\Exception\RuntimeException as MteGridRuntimeException;
+use Nnx\DataGrid\Exception\RuntimeException as NnxGridRuntimeException;
 
-class RuntimeException extends MteGridRuntimeException
+class RuntimeException extends NnxGridRuntimeException
 {
 }

@@ -100,5 +100,4 @@ class Concat extends AbstractMutator
         $this->separator = $separator;
         return $this;
     }
-
 }

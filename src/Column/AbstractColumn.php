@@ -140,7 +140,7 @@ abstract class AbstractColumn implements ColumnInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = strtolower($name);
         return $this;
     }
 
@@ -174,6 +174,18 @@ abstract class AbstractColumn implements ColumnInterface
     }
 
     /**
+     * Аттрибут колонки
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+        return $this;
+    }
+
+    /**
      * Аттрибуты колонки
      * @param array $attributes
      * @return $this
@@ -183,6 +195,20 @@ abstract class AbstractColumn implements ColumnInterface
         $this->attributes = $attributes;
         return $this;
     }
+
+    /**
+     * Возвращает атрибут колонки
+     * @param $name
+     * @return mixed|null
+     */
+    public function getAttribute($name)
+    {
+        if (isset($this->attributes[$name])) {
+            return $this->attributes[$name];
+        }
+        return null;
+    }
+
 
     /**
      * Возвращает атрибуты колонки

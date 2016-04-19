@@ -69,11 +69,26 @@ interface ColumnInterface
     public function getOptions();
 
     /**
+     * Аттрибут колонки
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setAttribute($name, $value);
+
+    /**
      * Аттрибуты колонки
      * @param array $attributes
      * @return $this
      */
     public function setAttributes(array $attributes = []);
+
+    /**
+     * Возвращает атрибут колонки
+     * @param $name
+     * @return mixed|null
+     */
+    public function getAttribute($name);
 
     /**
      * Возвращает атрибуты колонки

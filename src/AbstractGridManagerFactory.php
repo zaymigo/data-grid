@@ -7,6 +7,7 @@
 namespace Nnx\DataGrid;
 
 use Nnx\DataGrid\Adapter\AdapterInterface;
+use Nnx\DataGrid\NavigationBar\NavigationBarInterface;
 use Nnx\DataGrid\Mutator\MutatorInterface;
 use Nnx\DataGrid\Options\ModuleOptions;
 use Zend\ServiceManager\AbstractFactoryInterface;
@@ -148,6 +149,12 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
             }
             $options = $gridConfig['options'];
             $adapter = $this->createAdapter($options['adapter'], $serviceManager);
+            if (!empty($options['topNavigationBar'])) {
+                $options['topNavigationBar'] = $this->createNavigationBar($options['topNavigationBar'], $serviceManager);
+            }
+            if (!empty($options['bottomNavigationBar'])) {
+                $options['bottomNavigationBar'] = $this->createNavigationBar($options['bottomNavigationBar'], $serviceManager);
+            }
             $options['adapter'] = $adapter;
         }
         $options['columnPluginManager'] = $serviceManager->get('GridColumnManager');
@@ -157,6 +164,33 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         if ($grid instanceof InitializableInterface) {
             $grid->init();
         }
+        if ($grid instanceof ColumHidebleProviderInterface) {
+            /** @var \ZF\ContentNegotiation\Request $request */
+            $request = $serviceManager->get('request');
+            $cookie = $request->getCookie();
+            $name = !empty($gridConfig['options']['name'])? $gridConfig['options']['name'] : $gridName;
+            if (!empty($cookie['nnx']['grid'][$name])
+                && is_string($cookie['nnx']['grid'][$name])
+                && $userHideColums = json_decode($cookie['nnx']['grid'][$name], true)) {
+                $grid->setUserHiddenColums($userHideColums);
+            }
+        }
         return $grid;
+    }
+
+    /**
+     * @param $navigationBarOptions
+     * @param ServiceLocatorInterface $serviceManager
+     * @return NavigationBarInterface|null
+     * @throws NavigationBar\Exception\InvalidArgumentException
+     * @throws NavigationBar\Exception\NavigationBarNotFoundException
+     * @throws NavigationBar\Exception\RuntimeException
+     */
+    protected function createNavigationBar($navigationBarOptions, ServiceLocatorInterface $serviceManager)
+    {
+        /** @var NavigationBar\Factory $navigationBarFactory */
+        $navigationBarFactory = $serviceManager->get(NavigationBar\Factory::class);
+        $navigationBar = $navigationBarFactory->create($navigationBarOptions);
+        return $navigationBar;
     }
 }
