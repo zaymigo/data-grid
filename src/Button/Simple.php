@@ -14,4 +14,7 @@ namespace Nnx\DataGrid\Button;
  */
 class Simple extends AbstractButton
 {
+    protected $attributes = [
+        'class' => 'btn btn-default',
+    ];
 }

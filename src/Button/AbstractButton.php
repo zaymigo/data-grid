@@ -78,6 +78,10 @@ abstract class AbstractButton implements ButtonInterface
     public function __construct($options)
     {
         unset($options['type']);
+        if (!empty($options['attributes']) && $this->getAttributes()) {
+            $this->setAttributes(array_merge($this->getAttributes(), $options['attributes']));
+            unset($options['attributes']);
+        }
         foreach ($options as $key => $option) {
             $this->setProperty($key, $options);
         }
