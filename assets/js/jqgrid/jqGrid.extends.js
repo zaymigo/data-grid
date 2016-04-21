@@ -3,6 +3,9 @@
  */
 var NNX = NNX || {};
 NNX.jqGrid = NNX.jqGrid || {};
+NNX.jqGrid.oddRow = function(){
+    $("tr.jqgrow:odd").addClass('odd-row');
+};
 
 NNX.jqGrid.expandAll = function (grid) {
     $("#" + grid.attr('id') + " .tree-plus").each(function () {
