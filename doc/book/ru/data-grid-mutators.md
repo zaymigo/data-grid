@@ -48,51 +48,52 @@ protected $thousandSeparator = ' ';
 
 Теперь разберемся как можно написать собственный мутатор, зарегистрировать его в системе и использовать.
 Для этого создадим свой класс мутатор.
-
-    class CustomMutator extends AbstractMutator 
+```php
+class CustomMutator extends AbstractMutator 
+{
+    /**
+     * @var string
+    **/
+    protected $customOption;
+    
+    public function __construct(array $options = [])
     {
-        /**
-         * @var string
-        **/
-        protected $customOption;
-        
-        public function __construct(array $options = [])
-        {
-            parent::__construct($options);
-            if(array_key_exists('customOption', $options)) {
-                $this->setCustomOption($options['customOption']);
-            }
-        }
-        /**
-         * Изменяет данные
-         * @param mixed $value
-         * @return mixed
-         */
-        public function change($value)
-        {
-            if($this->getCustomOption() === 'test' && $value) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
-        /**
-         * @return string
-         */
-        public function getCustomOption()
-        {
-            return $this->customOption;
-        }
-        /**
-         * @param string $customOption
-         * @return $this
-         */
-        public function setCustomOption($customOption)
-        {
-            $this->customOption = $customOption;
-            return $this;
+        parent::__construct($options);
+        if(array_key_exists('customOption', $options)) {
+            $this->setCustomOption($options['customOption']);
         }
     }
+    /**
+     * Изменяет данные
+     * @param mixed $value
+     * @return mixed
+     */
+    public function change($value)
+    {
+        if($this->getCustomOption() === 'test' && $value) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    /**
+     * @return string
+     */
+    public function getCustomOption()
+    {
+        return $this->customOption;
+    }
+    /**
+     * @param string $customOption
+     * @return $this
+     */
+    public function setCustomOption($customOption)
+    {
+        $this->customOption = $customOption;
+        return $this;
+    }
+}
+```
 В методе change должна быть некая бизнес логика по преобразованию данных для данного мутатора.
 Теперь регистрируем в конфигурационном файле модуля данный мутатор:
 ```php
@@ -104,21 +105,21 @@ protected $thousandSeparator = ' ';
 ```
 Теперь мы можем вызывать мутатор с именем CustomMutator. Давайте попробуем сделать это.
 ```php
-        $this->add([
-            'type' => 'text',
-            'name' => 'field',
-            'header' => [
-                'title' => 'Колонка проверки мутатора'
-            ],
-            'mutators' => [
-                [
-                    'type' => 'CustomMutator',
-                    'options' => [
-                        'customOption' => 'test'
-                    ]
-                ]
+$this->add([
+    'type' => 'text',
+    'name' => 'field',
+    'header' => [
+        'title' => 'Колонка проверки мутатора'
+    ],
+    'mutators' => [
+        [
+            'type' => 'CustomMutator',
+            'options' => [
+                'customOption' => 'test'
             ]
-        ]);
+        ]
+    ]
+]);
 ```
 Т.о. для колонки с именем field  будет применяться мутатор CustomMutator. В зависимости от значения и параметра customOption 
 будет выводиться 0 или 1. 
