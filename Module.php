@@ -148,12 +148,13 @@ class Module
 
     /**
      * Возвращает объект с настройками модуля
+     *
      * @return ModuleOptions
+     * @throws \Zend\ServiceManager\Exception\ServiceNotFoundException
      */
     public function getModuleOptions()
     {
         /** @var ModuleOptions $moduleOptions */
-        $moduleOptions = $this->getServiceLocator()->get('GridModuleOptions');
-        return $moduleOptions;
+        return $this->getServiceLocator()->get('GridModuleOptions');
     }
 }

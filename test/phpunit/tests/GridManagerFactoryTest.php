@@ -13,7 +13,6 @@ use Nnx\DataGrid\Options\ModuleOptions;
 use Nnx\DataGrid\Row;
 use Nnx\DataGrid\SimpleGrid;
 use Nnx\DataGrid\Test\PhpUnit\TestData\TestPath;
-use Zend\ModuleManager\ModuleEvent;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 use Exception;
 use Nnx\DataGrid\Exception\RuntimeException;
