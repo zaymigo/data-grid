@@ -38,8 +38,19 @@ class Module
 
     use ServiceLocatorAwareTrait;
 
+    /**
+     * Имя секции в конфигах приложения, содержащей настройки модуля
+     *
+     * @var string
+     */
     const CONFIG_KEY = 'mteGrid';
 
+    /**
+     * Имя модуля
+     *
+     * @var string
+     */
+    const MODULE_NAME = __NAMESPACE__;
 
     /**
      * Получаем конфигурацию модуля

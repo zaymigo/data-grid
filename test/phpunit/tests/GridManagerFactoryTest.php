@@ -25,26 +25,22 @@ use Nnx\DataGrid\Exception\RuntimeException;
  */
 class GridManagerFactoryTest extends AbstractControllerTestCase
 {
+    /**
+     *
+     * @throws \Zend\Stdlib\Exception\LogicException
+     */
     public function setUp()
     {
-        $config = require TestPath::getApplicationConfigPath();
+        /** @noinspection PhpIncludeInspection */
+        $config = require TestPath::getPathToGridAppConfig();
         $this->setApplicationConfig($config);
-        $this->getApplication()->getEventManager()->attach(ModuleEvent::EVENT_MERGE_CONFIG, function(ModuleEvent $e) {
-            $configListener = $e->getConfigListener();
-            $config         = $configListener->getMergedConfig(false);
 
-            // Modify the configuration; here, we'll remove a specific key:
-            if (isset($config['grids']['SimpleGrid']['options'])) {
-                unset($config['grids']['SimpleGrid']['options']);
-            }
-
-            // Pass the changed configuration back to the listener:
-            $configListener->setMergedConfig($config);
-        });
     }
 
     /**
      * Проверяет создается корректно ли создается GridManager
+     *
+     * @throws \Zend\ServiceManager\Exception\ServiceNotFoundException
      */
     public function testCreateGridManager()
     {
@@ -55,6 +51,8 @@ class GridManagerFactoryTest extends AbstractControllerTestCase
 
     /**
      * Проверяет создание грида
+     *
+     * @throws \Zend\ServiceManager\Exception\ServiceNotFoundException
      */
     public function testCreateGrid()
     {
@@ -65,6 +63,7 @@ class GridManagerFactoryTest extends AbstractControllerTestCase
         self::assertInstanceOf(SimpleGrid::class, $grid);
         self::assertInstanceOf(AdapterInterface::class, $grid->getAdapter());
     }
+
 
     public function testCreateGridInvalidConfig()
     {
