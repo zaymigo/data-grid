@@ -8,6 +8,7 @@ namespace Nnx\DataGrid;
 
 use Nnx\DataGrid\Column\GridColumnProviderInterface;
 use Nnx\DataGrid\Mutator\GridMutatorProviderInterface;
+use \Nnx\DataGrid\Button\GridButtonProviderInterface;
 use Nnx\DataGrid\Options\ModuleOptions;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -143,6 +144,12 @@ class Module
             'grid_mutators',
             GridMutatorProviderInterface::class,
             'getGridMutatorConfig'
+        );
+        $serviceListener->addServiceManager(
+            'GridButtonManager',
+            'grid_buttons',
+            GridButtonProviderInterface::class,
+            'getGridButtonConfig'
         );
     }
 
