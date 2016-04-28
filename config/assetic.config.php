@@ -23,7 +23,7 @@ return [
                     ),
                     'head_jquery_multiselect_css' => [
                         'assets' => [
-                            'css/multiselect/common.css',
+//                            'css/multiselect/common.css',
                             'css/multiselect/ui.multiselect.css',
                         ]
                     ],
