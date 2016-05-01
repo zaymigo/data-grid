@@ -39,6 +39,12 @@ abstract class AbstractButton implements ButtonInterface
     protected $js;
 
     /**
+     * JS библиотеки кнопки
+     * @var array
+     */
+    protected $libJs = [];
+
+    /**
      * Опции кнопки
      * @var array | \Traversable
      */
@@ -167,6 +173,28 @@ abstract class AbstractButton implements ButtonInterface
         $this->js = $js;
         return $this;
     }
+
+    /**
+     * Получить JS библитеки кнопки
+     * @return array
+     */
+    public function getLibJs()
+    {
+        return $this->libJs;
+    }
+
+    /**
+     * Установить JS библитеки кнопки
+     * @param array $libJs
+     * @return $this
+     */
+    public function setLibJs($libJs)
+    {
+        $this->libJs = $libJs;
+        return $this;
+    }
+
+
 
     /**
      * Получить Опции кнопки

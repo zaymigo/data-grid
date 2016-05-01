@@ -25,4 +25,8 @@ class DB extends SimpleCondition
     const CRITERIA_TYPE_LESS_EQUAL = '<=';
 
     const CRITERIA_TYPE_GREATER_EQUAL = '>=';
+
+    const CRITERIA_TYPE_IN = 'in';
+
+    const CRITERIA_TYPE_NOT_IN = 'not in';
 }

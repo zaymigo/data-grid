@@ -49,6 +49,11 @@ class GridButton extends AbstractHelper
             }
             $url = $view->url($routeName, $routeParams, $routeOptions);
         }
+        if ($button->getLibJs()) {
+            $view->mteAsseticAppend([
+                'headScript' => $button->getLibJs()
+            ]);
+        }
         $url = $this->getUrl($url);
         $title = $escape($button->getTitle());
         $html = "<a href='$url' $attributeString>$title</a> ";
