@@ -43,7 +43,7 @@ class ShowHideColumns extends Simple
     public function __construct($options)
     {
         parent::__construct($options);
-        $this->js = preg_replace('/%msSearchable%/', (int)$this->msSearchable , $this->js);
+        $this->setJs(preg_replace('/%msSearchable%/', (int)$this->msSearchable , $this->js));
     }
 
     public function setMsSearchable($msSearchable)
