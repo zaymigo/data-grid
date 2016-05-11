@@ -83,9 +83,14 @@ class Grid extends AbstractHelper
         if ($navigationBar) {
             /** @var PhpRenderer $view */
             $view = $this->getView();
+            $navigationBarOptions = $navigationBar->getOptions();
+            $urlVariables = [];
+            if (isset($navigationBarOptions['urlVariables'])) {
+                $urlVariables = $navigationBarOptions['urlVariables'];
+            }
             /** @var ButtonInterface $button */
             foreach ($navigationBar->getButtons() as $button) {
-                $buttonResult = $view->nnxGridJqGridButton($button);
+                $buttonResult = $view->nnxGridJqGridButton($button, $urlVariables);
                 $html .=  $buttonResult['html'];
                 $js .=  $buttonResult['js'];
             }

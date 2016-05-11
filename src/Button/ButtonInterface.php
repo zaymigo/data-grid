@@ -67,6 +67,19 @@ interface ButtonInterface
     public function setJs($js);
 
     /**
+     * Получить JS библитеки кнопки
+     * @return array
+     */
+    public function getLibJs();
+
+    /**
+     * Установить JS библитеки кнопки
+     * @param array $libJs
+     * @return $this
+     */
+    public function setLibJs($libJs);
+
+    /**
      * Получить Опции кнопки
      * @return array|\Traversable
      */

@@ -164,9 +164,9 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         if ($grid instanceof InitializableInterface) {
             $grid->init();
         }
-        if ($grid instanceof ColumHidebleProviderInterface) {
-            /** @var \ZF\ContentNegotiation\Request $request */
-            $request = $serviceManager->get('request');
+        /** @var \ZF\ContentNegotiation\Request $request */
+        $request = $serviceManager->get('request');
+        if ($grid instanceof ColumHidebleProviderInterface && $request instanceof \ZF\ContentNegotiation\Request) {
             $cookie = $request->getCookie();
             $name = !empty($gridConfig['options']['name'])? $gridConfig['options']['name'] : $gridName;
             if (!empty($cookie['nnx']['grid'][$name])
