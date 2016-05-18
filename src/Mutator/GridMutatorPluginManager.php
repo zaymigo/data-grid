@@ -31,8 +31,7 @@ class GridMutatorPluginManager extends AbstractPluginManager
         'highlight' => Highlight::class,
         'datetime' => DateTime::class,
         'concat' => Concat::class,
-        'stringformat' => StringFormat::class,
-        'percent' => Percent::class
+        'stringformat' => StringFormat::class
     ];
 
     /**
@@ -43,8 +42,7 @@ class GridMutatorPluginManager extends AbstractPluginManager
     protected $invokableClasses = [
         Money::class => Money::class,
         Concat::class => Concat::class,
-        StringFormat::class => StringFormat::class,
-        Percent::class => Percent::class
+        StringFormat::class => StringFormat::class
 
     ];
 
