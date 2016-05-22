@@ -119,3 +119,17 @@ NNX.jqGrid.stretchable.init = function (grid, params, minGridWidth, minColumWidt
     return stretch;
 
 };
+
+NNX.jqGrid.getCollapsedRows = function(grid) {
+    var collapsed = [];
+    $(grid).find('tr[role=row] > td[role=gridcell] > div.tree-wrap > div.tree-plus.treeclick').each(function() {
+        collapsed.push($(this).parents('tr[role=row]').attr('id'));
+    });
+    return collapsed;
+};
+
+NNX.jqGrid.reloadWithSaveCollapsedRows = function(grid) {
+    $(grid).jqGrid('setGridParam', { postData: { collapsedRows: NNX.jqGrid.getCollapsedRows(grid)} });
+    $(grid).trigger('reloadGrid');
+    $(grid).jqGrid('setGridParam', { postData: {collapsedRows:null} });
+};
