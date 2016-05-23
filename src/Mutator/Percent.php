@@ -75,15 +75,19 @@ class Percent extends AbstractMutator
         if (!array_key_exists($this->getDenominator(), $this->getRowData())) {
             throw new Exception\RuntimeException('Знаменатель отсутствует в наборе данных');
         }
-        $denominator = $this->getRowData()[$this->getDenominator()];
+        $denominator = $this->parseNumber($this->getRowData()[$this->getDenominator()]);
         if (!array_key_exists($this->getNumerator(), $this->getRowData())) {
             throw new Exception\RuntimeException('Числитель отсутствует в наборе данных');
         }
-        $numerator = $this->getRowData()[$this->getNumerator()];
+        $numerator = $this->parseNumber($this->getRowData()[$this->getNumerator()]);
         if ($denominator == 0) {
             return 0;
         }
-        return (float)$numerator / (float)$denominator * 100;
+        return $numerator / $denominator * 100;
+    }
+
+    protected function parseNumber($number) {
+        return (float)filter_var($number, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }
 
     /**
