@@ -44,6 +44,80 @@ NNX.jqGrid.saveColums = function (grid, perm) {
         settings[i] = {'n':colums[i]['name'], 'h':h};
     }
     $.cookie('nnx[grid][' + gridName + ']', JSON.stringify(settings), {expires: 1, path: '/'});
+    if( NNX.jqGrid.stretchable.created[$(grid).attr('id')] ) {
+        NNX.jqGrid.stretchable.created[$(grid).attr('id')].resize();
+    }
+};
+
+NNX.jqGrid.stretchable = {};
+NNX.jqGrid.stretchable.created = {};
+NNX.jqGrid.stretchable.init = function (grid, params, minGridWidth, minColumWidth) {
+    var stretch = {
+        grid:grid,
+        params:params,
+        minGridWidth:minGridWidth,
+        minColumWidth:minColumWidth,
+        resize: function() {
+            var avalibleWhidth = $(this.grid).parents('.ui-jqgrid').parent().innerWidth();
+            var windowSize = null;
+            if (this.minGridWidth && avalibleWhidth < this.minGridWidth) {
+                windowSize = avalibleWhidth;
+                avalibleWhidth = this.minGridWidth
+            }
+
+            var colums = $(this.grid).jqGrid('getGridParam','colModel');
+            var unresizeColumsWidth = 0;
+            var resizeColumsWidth = 0;
+            var resizeColums = {};
+            for (var i = 0; i < colums.length;i++) {
+                var col = colums[i];
+                if (col.hidden) {
+                    continue;
+                }
+                if ($.inArray(col.index,this.params) == -1) {
+                    unresizeColumsWidth += col.width;
+                } else {
+                    resizeColumsWidth += col.width;
+                    resizeColums[col.index] = col.width;
+                }
+            }
+            if (avalibleWhidth < unresizeColumsWidth) {
+                avalibleWhidth = unresizeColumsWidth + resizeColumsWidth;
+            }
+            var resizeK = (avalibleWhidth - unresizeColumsWidth)/resizeColumsWidth;
+
+            var newWidth = unresizeColumsWidth;
+            for (var i in resizeColums) {
+                resizeColums[i] = Math.round(resizeColums[i] * resizeK);
+                if (this.minColumWidth && resizeColums[i] < this.minColumWidth) {
+                    resizeColums[i] = this.minColumWidth
+                }
+                newWidth += resizeColums[i];
+            }
+            for (var i in resizeColums) {
+                if (newWidth != avalibleWhidth) {
+                    resizeColums[i] += avalibleWhidth - newWidth;
+                    if (this.minColumWidth && resizeColums[i] < this.minColumWidth) {
+                        resizeColums[i] = this.minColumWidth
+                    }
+                    avalibleWhidth = newWidth;
+                }
+                $(this.grid).jqGrid('setColProp',i,{widthOrg:resizeColums[i]});
+            }
+            $(this.grid).jqGrid('setGridWidth', avalibleWhidth, true);
+            if (windowSize) {
+                $(this.grid).jqGrid('setGridWidth', windowSize, false);
+            }
+
+        }
+    };
+    $(window).resize(function() {
+        stretch.resize();
+    });
+    stretch.resize();
+    NNX.jqGrid.stretchable.created[$(grid).attr('id')] = stretch;
+    return stretch;
+
 };
 
 NNX.jqGrid.getCollapsedRows = function(grid) {
