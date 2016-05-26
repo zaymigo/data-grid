@@ -125,6 +125,9 @@ NNX.jqGrid.getCollapsedRows = function(grid) {
     $(grid).find('tr[role=row] > td[role=gridcell] > div.tree-wrap > div.tree-plus.treeclick').each(function() {
         collapsed.push($(this).parents('tr[role=row]').attr('id'));
     });
+    if (collapsed.length == 0) {
+        collapsed = ['_none'];
+    }
     return collapsed;
 };
 
