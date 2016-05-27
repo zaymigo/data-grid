@@ -14,6 +14,11 @@ if (count($data) !== 0) {
     foreach ($data as $item) {
         /** @var \NNX\DataGrid\Row $item */
         $item = $item->getData();
+        if (count($this->collapsedRows) && isset($item['is_leaf']) && isset($item['id']) && !$item['is_leaf']) {
+            if (!in_array($item['id'],$this->collapsedRows)) {
+                $item['expanded'] = true;
+            }
+        }
         /**
          * @var string $name
          * @var \NNX\DataGrid\Column\ColumnInterface $column

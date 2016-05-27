@@ -35,6 +35,7 @@ class DataController extends AbstractActionController
         $offset = (int)$request->getQuery('offset', 0);
         $orderField = $request->getQuery('sidx', 'id');
         $orderType = $request->getQuery('sorder', 'asc');
+        $collapsedRows = is_array($request->getPost('collapsedRows')) ? $request->getPost('collapsedRows') : [];
         /**
          * $conditions => [
          *      [
@@ -70,7 +71,7 @@ class DataController extends AbstractActionController
             }
         }
         $grid->setConditions($conditionsObj);
-        $result = new ViewModel(['grid' => $grid]);
+        $result = new ViewModel(['grid' => $grid, 'collapsedRows' => $collapsedRows]);
         $result->setTerminal(true);
         return $result;
     }
