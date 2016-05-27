@@ -24,7 +24,7 @@ class Highlight extends AbstractMutator implements HighlightMutatorInterface
      * Ключ который добавляется в данные для подсветки
      * @var string
      */
-    protected $dataName = 'highlightCssClass';
+    protected $dataName = 'highlightcssclass';
 
     /**
      * Конструктор класса
