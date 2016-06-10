@@ -66,20 +66,19 @@ class Percent extends AbstractMutator
     }
 
     /**
-     * Возвращает проценты
+     * Возвращает проценты. Если знаменатель равен 0 или в наборе данных отсутствует одно из значений, возвращает 0.
      * @return float
      * @throws Exception\RuntimeException
      */
     public function getPercent()
     {
-        if (!array_key_exists($this->getDenominator(), $this->getRowData())) {
-            throw new Exception\RuntimeException('Знаменатель отсутствует в наборе данных');
+        if (array_key_exists($this->getDenominator(), $this->getRowData())
+            && array_key_exists($this->getNumerator(), $this->getRowData())) {
+            $denominator = $this->parseNumber($this->getRowData()[$this->getDenominator()]);
+            $numerator = $this->parseNumber($this->getRowData()[$this->getNumerator()]);
+        } else {
+            return 0;
         }
-        $denominator = $this->parseNumber($this->getRowData()[$this->getDenominator()]);
-        if (!array_key_exists($this->getNumerator(), $this->getRowData())) {
-            throw new Exception\RuntimeException('Числитель отсутствует в наборе данных');
-        }
-        $numerator = $this->parseNumber($this->getRowData()[$this->getNumerator()]);
         if ($denominator == 0) {
             return 0;
         }
