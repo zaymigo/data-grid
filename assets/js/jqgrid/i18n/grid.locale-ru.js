@@ -115,7 +115,7 @@ $.jgrid.regional["ru"] = {
 		selectcaption : "Действия..."
 	},
 	col : {
-		caption: "Показать/скрыть столбцы",
+		caption: "Скрыть/показать столбцы",
 		bSubmit: "Сохранить",
 		bCancel: "Отмена"	
 	},
