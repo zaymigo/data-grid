@@ -10,6 +10,7 @@ use Nnx\DataGrid\View\Helper\JqGrid\Column\Hidden;
 use Nnx\DataGrid\View\Helper\JqGrid\Column\Link;
 use Nnx\DataGrid\View\Helper\JqGrid\Column\Money;
 use Nnx\DataGrid\View\Helper\JqGrid\Column\Text;
+use Nnx\DataGrid\View\Helper\JqGrid;
 use Nnx\DataGrid\View\Helper\JqGrid\Grid;
 use Nnx\DataGrid\View\Helper\JqGrid\GridButton;
 
@@ -23,6 +24,8 @@ return [
             'nnxGridJqGridLink' => Link::class,
             'nnxGridJqGridAction' => Action::class,
             'nnxGridJqGridMoney' => Money::class,
+            'nnxGridJqGridRadio' => JqGrid\Column\Radio::class,
+            'nnxGridJqGridCheckbox' => JqGrid\Column\Checkbox::class,
             'nnxGridJqGridButton' => GridButton::class
         ],
     ]

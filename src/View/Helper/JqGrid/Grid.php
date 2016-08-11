@@ -65,10 +65,17 @@ class Grid extends AbstractHelper
                 }
             }
         }
+
+        $options = \Zend\Json\Json::encode(
+            $config,
+            false,
+            ['enableJsonExprFinder' => true]
+        );
+
         $view->headScript()->appendScript('$(function(){'
             . 'var grid = $("#grid-' . $grid->getName() . '").jqGrid('
-            . str_replace('"%rowAttrFunction%"', $rowAttr, json_encode((object)$config)) . ');'
-            . str_replace('%gridName%', $grid->getName(), $buttonsJs) .'});');
+            . str_replace('"%rowAttrFunction%"', $rowAttr, $options) . ');'
+            . str_replace('%gridName%', $grid->getName(), $buttonsJs) . '});');
         return $res;
     }
 
