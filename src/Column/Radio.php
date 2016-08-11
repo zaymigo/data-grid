@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package Nnx\DataGrid
+ * @author Lobanov Aleksandr
+ */
 
 namespace Nnx\DataGrid\Column;
 

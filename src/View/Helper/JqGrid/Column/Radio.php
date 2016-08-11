@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package Nnx\DataGrid
+ * @author Lobanov Aleksandr
+ */
 
 namespace Nnx\DataGrid\View\Helper\JqGrid\Column;
 
@@ -21,21 +24,7 @@ class Radio extends Text
     protected function getColumnConfig(ColumnInterface $column)
     {
         $config = parent::getColumnConfig($column);
-        $config['formatter'] = new Json\Expr(<<<JS
-
-    function radio(value, options, rowObject){
-
-        var result = '<input type="radio" name="radio-{$column->getName()}"';
-        if(value) {
-            result += 'value=' + value;
-        }
-        result += ' />';
-
-        return result;
-    }
-
-JS
-        );
+        $config['formatter'] = 'radio';
         return $config;
     }
 

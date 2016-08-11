@@ -7,6 +7,22 @@ NNX.jqGrid.oddRow = function(){
     $("tr.jqgrow:odd").addClass('odd-row');
 };
 
+jQuery.extend($.fn.fmatter, {
+    radio: function (cellvalue, options, rowdata) {
+        var result = '<input type="radio" name="radio-' + options.colModel.name + '"';
+        if (cellvalue) {
+            result += 'value=' + cellvalue;
+        }
+        result += ' />';
+        return result;
+    }
+});
+jQuery.extend($.fn.fmatter.radio, {
+    unformat: function (cellvalue, options) {
+        return $(cellvalue).val();
+    }
+});
+
 NNX.jqGrid.expandAll = function (grid) {
     $("#" + grid.attr('id') + " .tree-plus").each(function () {
         $(this).trigger('click');
