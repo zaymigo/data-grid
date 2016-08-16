@@ -10,13 +10,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Traversable;
-use Zend\Paginator\Adapter\AdapterInterface;
 
 /**
  * Class DoctrineDBAL
  * @package Nnx\DataGrid\Adapter
  */
-class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterface, AdapterInterface
+class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterface, PaginatorAdapterInterface
 {
     use PaginatorAdapterTrait;
 

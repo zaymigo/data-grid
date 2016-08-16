@@ -29,12 +29,13 @@ trait PaginatorGridTrait
 
     /**
      * @return Paginator\PaginatorInterface
+     * @throws Exception\InvalidArgumentException
      */
     public function getPaginator()
     {
         if ($this->paginator === null) {
             $adapter = $this->getAdapter();
-            if ($adapter instanceof \Zend\Paginator\Adapter\AdapterInterface) {
+            if ($adapter instanceof Adapter\PaginatorAdapterInterface) {
                 $this->paginator = new Paginator\Paginator($adapter);
             } else {
                 throw new Exception\InvalidArgumentException('Адаптер должен реализовывать \Zend\Paginator\Adapter\AdapterInterface');
