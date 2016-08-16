@@ -6,13 +6,13 @@
 
 namespace Nnx\DataGrid\Adapter;
 
-use Zend\Paginator\Adapter\AdapterInterface;
+use Zend\Paginator\Adapter\AdapterInterface as ZendAdapterInterface;
 
 /**
  * Interface PaginatorAdapterInterface
  * @package Nnx\DataGrid\Adapter
  */
-interface PaginatorAdapterInterface extends AdapterInterface
+interface PaginatorAdapterInterface extends ZendAdapterInterface
 {
     /**
      * @param int $offset
