@@ -12,5 +12,4 @@ namespace Nnx\DataGrid\Column;
  */
 class Checkbox extends AbstractColumn
 {
-
 }

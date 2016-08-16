@@ -6,9 +6,7 @@
 
 namespace Nnx\DataGrid\View\Helper\JqGrid\Column;
 
-
 use Nnx\DataGrid\Column\ColumnInterface;
-use Zend\Json;
 
 /**
  * Class Radio
@@ -27,5 +25,4 @@ class Radio extends Text
         $config['formatter'] = 'radio';
         return $config;
     }
-
 }

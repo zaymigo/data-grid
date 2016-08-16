@@ -6,7 +6,6 @@
 
 namespace Nnx\DataGrid\View\Helper\JqGrid\Column;
 
-
 use Nnx\DataGrid\Column\ColumnInterface;
 
 /**
@@ -32,5 +31,4 @@ class Checkbox extends Text
 
         return $config;
     }
-
 }
