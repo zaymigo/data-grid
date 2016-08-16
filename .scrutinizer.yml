@@ -7,3 +7,6 @@ build:
         before:
             - sudo service start mysql || true
             - mysql -e "CREATE DATABASE test_database_name"
+    tests:
+        before:
+            command: 'phpunit  --configuration `pwd`/phpunit.xml'
