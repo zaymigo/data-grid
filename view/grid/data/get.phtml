@@ -15,7 +15,7 @@ if (count($data) !== 0) {
         /** @var \NNX\DataGrid\Row $item */
         $item = $item->getData();
         if (count($this->collapsedRows) && isset($item['is_leaf']) && isset($item['id']) && !$item['is_leaf']) {
-            if (!in_array($item['id'],$this->collapsedRows)) {
+            if (!in_array($item['id'], $this->collapsedRows)) {
                 $item['expanded'] = true;
             }
         }
@@ -51,9 +51,19 @@ if (count($data) !== 0) {
         $rows[] = $item;
     }
 }
+$total = 0;
+$page = 1;
+
+if ($grid instanceof \Nnx\DataGrid\PaginatorGridInterface) {
+    /** @var \Nnx\DataGrid\PaginatorGridInterface $grid */
+    $paginator = $grid->getPaginator();
+    $total = $paginator->count();
+    $page = $paginator->getCurrentPageNumber();
+}
+
 
 echo json_encode((object)[
     'rows' => $rows,
-    'total' => 0,
-    'page' => 1
+    'total' => $total,
+    'page' => $page
 ]);
