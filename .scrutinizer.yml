@@ -9,4 +9,4 @@ build:
             - mysql -e "CREATE DATABASE test_database_name"
     tests:
         before:
-            command: 'phpunit  --configuration `pwd`/phpunit.xml'
+            command: 'phpunit  --configuration `pwd`/.scrutinizer.phpunit.xml.dist'

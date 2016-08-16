@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<phpunit
+        bootstrap="./test/phpunit/Bootstrap.php"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        verbose="true"
+        stopOnFailure="false"
+        processIsolation="false"
+        backupGlobals="false"
+        syntaxCheck="true"
+        >
+    <testsuites>
+        <testsuite name="NNX Data Grid">
+            <directory>./test/phpunit/tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <blacklist>
+            <directory>./vendor</directory>
+            <directory>./test</directory>
+        </blacklist>
+    </filter>
+    <logging>
+        <log type="coverage-php" target="./build/logs/coverage/coverage-phpunit.cov"/>
+    </logging>
+
+    <listeners>
+        <listener class="\Nnx\ZF2TestToolkit\Listener\InitTestAppListener">
+            <arguments>
+                <!-- Имя соеденения - которое можно получить через сервис doctrine.connection.ИМЯ_СОЕДЕНЕНИЯ -->
+                <string>test</string>
+                <!-- Используемый драйвер -->
+                <string>\Doctrine\DBAL\Driver\PDOPgSql\Driver</string>
+                <array>
+                    <element key="host">
+                        <string>localhost</string>
+                    </element>
+                    <element key="port">
+                        <string>5432</string>
+                    </element>
+                    <element key="user">
+                        <string>root</string>
+                    </element>
+                    <element key="password">
+                        <string></string>
+                    </element>
+                    <element key="dbname">
+                        <string>test_database_name</string>
+                    </element>
+                </array>
+
+            </arguments>
+        </listener>
+        <listener class="\Nnx\ZF2TestToolkit\Listener\InitTestAppListener">
+            <arguments>
+                <!-- Имя соеденения - которое можно получить через сервис doctrine.connection.ИМЯ_СОЕДЕНЕНИЯ -->
+                <string>orm_default</string>
+                <!-- Используемый драйвер -->
+                <string>\Doctrine\DBAL\Driver\PDOPgSql\Driver</string>
+                <array>
+                    <element key="host">
+                        <string>localhost</string>
+                    </element>
+                    <element key="port">
+                        <string>5432</string>
+                    </element>
+                    <element key="user">
+                        <string>root</string>
+                    </element>
+                    <element key="password">
+                        <string></string>
+                    </element>
+                    <element key="dbname">
+                        <string>test_database_name</string>
+                    </element>
+                </array>
+
+            </arguments>
+        </listener>
+    </listeners>
+
+</phpunit>
