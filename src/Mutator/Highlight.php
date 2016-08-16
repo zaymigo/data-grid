@@ -43,7 +43,7 @@ class Highlight extends AbstractMutator implements HighlightMutatorInterface
 
     /**
      * Изменяет данные
-     * @param Row $value
+     * @param Row|array $value
      * @return mixed
      */
     public function change($value)

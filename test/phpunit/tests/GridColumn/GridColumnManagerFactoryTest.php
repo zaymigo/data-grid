@@ -33,7 +33,10 @@ class GridColumnManagerFactoryTest extends AbstractControllerTestCase
             $gridColumnManager = $this->getApplicationServiceLocator()->get('GridColumnManager');
             self::assertInstanceOf(GridColumnPluginManager::class, $gridColumnManager);
 
-            $textColumn = $gridColumnManager->get('text');
+            $textColumn = $gridColumnManager->get('text', [
+                'type' => 'text',
+                'name' => 'test'
+            ]);
             self::assertInstanceOf(ColumnInterface::class, $textColumn);
         }
     }

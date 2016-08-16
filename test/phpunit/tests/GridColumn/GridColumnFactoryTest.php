@@ -54,7 +54,7 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
     protected function getFactory()
     {
         if(!$this->factory) {
-            $factory = new Factory();
+            $factory = new Factory([]);
             $factory->setColumnPluginManager($this->gridColumnManager);
             $this->factory = $factory;
         }
@@ -76,8 +76,9 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
             'attributes' => [],
             'template' => ''
         ];
+        $factory->setCreationOptions($columnSpec);
         /** @var ColumnInterface $column */
-        $column = $factory->create($columnSpec);
+        $column = $factory->createService($this->gridColumnManager);
 
         self::assertEquals($columnSpec['name'],$column->getName());
         self::assertEquals($columnSpec['options'], $column->getOptions());
@@ -99,7 +100,8 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
             'template' => ''
         ];
         try {
-            $factory->create($columnSpec);
+            $factory->setCreationOptions($columnSpec);
+            $factory->createService($this->gridColumnManager);
         } catch (Exception $e) {
             self::assertInstanceOf(InvalidColumnException::class, $e);
         }
@@ -113,9 +115,9 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
     {
         $factory = $this->getFactory();
         try {
-            $factory->create('');
+            $factory->createService($this->gridColumnManager);
         } catch(Exception $e) {
-            self::assertInstanceOf(InvalidSpecificationException::class, $e);
+            self::assertInstanceOf(InvalidColumnException::class, $e);
         }
     }
 
@@ -134,7 +136,8 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
             'template' => ''
         ];
         try {
-            $factory->create($columnSpec);
+            $factory->setCreationOptions($columnSpec);
+            $factory->createService($this->gridColumnManager);
         } catch(Exception $e) {
             self::assertInstanceOf(InvalidNameException::class, $e);
         }
@@ -154,7 +157,8 @@ class GridColumnFactoryTest extends AbstractControllerTestCase
                 'data' => ['key' => 'val']
             ]
         ];
-        $column = $factory->create($columnSpec);
+        $factory->setCreationOptions($columnSpec);
+        $column = $factory->createService($this->gridColumnManager);
 
         self::assertInstanceOf(HeaderInterface::class,$column->getHeader());
         self::assertEquals($columnSpec['header']['data'], $column->getHeader()->getData());

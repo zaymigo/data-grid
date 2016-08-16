@@ -15,6 +15,7 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ArrayAccess;
 use Zend\Stdlib\InitializableInterface;
+use ZF\ContentNegotiation\Request;
 
 /**
  * Class AbstractGridManager
@@ -159,20 +160,23 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         }
         $options['columnPluginManager'] = $serviceManager->get('GridColumnManager');
         $options['mutatorPluginManager'] = $serviceManager->get('GridMutatorManager');
-        /** @var GridInterface|AbstractGrid $grid */
+        /** @var GridInterface|AbstractGrid|SimpleGrid $grid */
         $grid = $serviceLocator->get($gridClass, $options);
         if ($grid instanceof InitializableInterface) {
             $grid->init();
         }
-        /** @var \ZF\ContentNegotiation\Request $request */
+        /** @var Request $request */
         $request = $serviceManager->get('request');
-        if ($grid instanceof ColumHidebleProviderInterface && $request instanceof \ZF\ContentNegotiation\Request) {
+        if ($grid instanceof ColumHidebleProviderInterface
+            && $request instanceof Request
+        ) {
             $cookie = $request->getCookie();
-            $name = !empty($gridConfig['options']['name'])? $gridConfig['options']['name'] : $gridName;
+            $name = !empty($gridConfig['options']['name']) ? $gridConfig['options']['name'] : $gridName;
             if (!empty($cookie['nnx']['grid'][$name])
                 && is_string($cookie['nnx']['grid'][$name])
-                && $userHideColums = json_decode($cookie['nnx']['grid'][$name], true)) {
-                $grid->setUserHiddenColums($userHideColums);
+                && $userHideColumns = json_decode($cookie['nnx']['grid'][$name], true)
+            ) {
+                $grid->setUserHiddenColums($userHideColumns);
             }
         }
         return $grid;
