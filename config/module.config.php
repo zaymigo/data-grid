@@ -6,7 +6,6 @@
 
 namespace Nnx\DataGrid;
 
-
 use Nnx\DataGrid\Adapter\DoctrineDBAL;
 use Nnx\DataGrid\Controller\DataController;
 
@@ -25,11 +24,11 @@ return array_merge(
                 ],
             ]
         ],
-        'controllers' => array(
-            'invokables' => array(
+        'controllers' => [
+            'invokables' => [
                 'Nnx\DataGrid\Controller\Data' => DataController::class,
-            ),
-        ),
+            ],
+        ],
         'view_manager' => [
             'template_map' => include __DIR__ . '/../template_map.php',
             'template_path_stack' => [

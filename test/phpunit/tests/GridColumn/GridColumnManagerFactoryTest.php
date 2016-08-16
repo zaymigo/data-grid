@@ -6,7 +6,6 @@
 
 namespace Nnx\DataGrid\Test\PhpUnit\GridColumn;
 
-
 use Nnx\DataGrid\Column\ColumnInterface;
 use Nnx\DataGrid\Column\GridColumnPluginManager;
 use Nnx\DataGrid\Test\PhpUnit\TestData\TestPath;
@@ -25,7 +24,7 @@ class GridColumnManagerFactoryTest extends AbstractControllerTestCase
     public function testCreateGridColumnPluginManager()
     {
         $configPath = TestPath::getApplicationConfigPath();
-        if(is_string($configPath) && file_exists($configPath)) {
+        if (is_string($configPath) && file_exists($configPath)) {
             $config = require $configPath;
             $this->setApplicationConfig($config);
 
