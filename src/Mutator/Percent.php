@@ -6,8 +6,6 @@
 
 namespace Nnx\DataGrid\Mutator;
 
-use Nnx\DataGrid\Mutator\Exception;
-
 /**
  * Class Percent
  * Осуществляет вывод процентов от переданных значений.
@@ -86,7 +84,8 @@ class Percent extends AbstractMutator
         return $numerator / $denominator * 100;
     }
 
-    protected function parseNumber($number) {
+    protected function parseNumber($number)
+    {
         return (float)filter_var($number, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }
 

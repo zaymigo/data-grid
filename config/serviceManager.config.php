@@ -7,7 +7,6 @@ namespace Nnx\DataGrid;
 
 use Nnx\DataGrid\Button\GridButtonPluginManager;
 use Nnx\DataGrid\Button\GridButtonPluginManagerFactory;
-use Nnx\DataGrid\NavigationBar;
 use Nnx\DataGrid\Column\GridColumnPluginManager;
 use Nnx\DataGrid\Column\GridColumnPluginManagerFactory;
 use Nnx\DataGrid\Mutator\GridMutatorPluginManagerFactory;

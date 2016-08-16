@@ -53,10 +53,9 @@ class HeaderFactoryTest extends AbstractControllerTestCase
     {
         $factory = new Factory();
         try {
-             $factory->create(null);
+            $factory->create(null);
         } catch (Exception $e) {
             self::assertInstanceOf(NoValidSpecificationException::class, $e);
         }
-
     }
 }

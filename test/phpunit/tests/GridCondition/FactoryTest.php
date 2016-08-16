@@ -62,7 +62,7 @@ class FactoryTest extends AbstractHttpControllerTestCase
         $conditionSpec = '';
         try {
             $this->factory->create($conditionSpec);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             self::assertInstanceOf(Exception\InvalidArgumentException::class, $e);
         }
     }
@@ -81,7 +81,7 @@ class FactoryTest extends AbstractHttpControllerTestCase
 
         try {
             $this->factory->create($conditionSpec);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             self::assertInstanceOf(Exception\RuntimeException::class, $e);
             self::assertEquals('Не задан ключ для Condition', $e->getMessage());
         }
@@ -98,7 +98,7 @@ class FactoryTest extends AbstractHttpControllerTestCase
 
         try {
             $this->factory->create($conditionSpec);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             self::assertInstanceOf(Exception\RuntimeException::class, $e);
             self::assertEquals('Не задан тип Condition', $e->getMessage());
         }
@@ -115,7 +115,7 @@ class FactoryTest extends AbstractHttpControllerTestCase
 
         try {
             $this->factory->create($conditionSpec);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             self::assertInstanceOf(Exception\RuntimeException::class, $e);
             self::assertEquals(sprintf('Класс condition\'a %s не найден', $conditionSpec['type']), $e->getMessage());
         }
@@ -140,7 +140,7 @@ class FactoryTest extends AbstractHttpControllerTestCase
         ];
         try {
             $this->factory->create($conditionSpec);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             self::assertInstanceOf(Exception\RuntimeException::class, $e);
             self::assertEquals('Не задано значение для Condition', $e->getMessage());
         }
@@ -155,7 +155,7 @@ class FactoryTest extends AbstractHttpControllerTestCase
         ];
         try {
             $this->factory->create($conditionSpec);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             self::assertInstanceOf(Exception\RuntimeException::class, $e);
             self::assertEquals(sprintf('Condition должен реализовывать %s', ConditionInterface::class), $e->getMessage());
         }

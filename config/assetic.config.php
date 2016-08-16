@@ -12,15 +12,15 @@ return [
             'Nnx\DataGrid' => [
                 'root_path' => __DIR__ . '/../assets',
                 'collections' => [
-                    'mtegrid_grid_images' => array(
-                        'assets' => array(
+                    'mtegrid_grid_images' => [
+                        'assets' => [
                             'images/grid/*.png',
                             'images/grid/*.gif',
-                        ),
-                        'options' => array(
+                        ],
+                        'options' => [
                             'move_raw' => true,
-                        )
-                    ),
+                        ]
+                    ],
                     'head_jquery_multiselect_css' => [
                         'assets' => [
 //                            'css/multiselect/common.css',
