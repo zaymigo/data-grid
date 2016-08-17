@@ -35,7 +35,7 @@ class Paginator extends BasePaginator implements PaginatorInterface
      * @param array $possibleItemCountPerPage
      * @return $this
      */
-    public function setPossibleItemCountPerPage($possibleItemCountPerPage)
+    public function setPossibleItemCountPerPage(array $possibleItemCountPerPage)
     {
         $this->possibleItemCountPerPage = $possibleItemCountPerPage;
         return $this;
