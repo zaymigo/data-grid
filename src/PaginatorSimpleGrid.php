@@ -6,7 +6,6 @@
 
 namespace Nnx\DataGrid;
 
-
 /**
  * Class PaginatorSimpleGrid
  * @package Nnx\DataGrid

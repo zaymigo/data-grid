@@ -6,7 +6,6 @@
 
 namespace Nnx\DataGrid;
 
-
 use Nnx\DataGrid\Adapter\AdapterInterface;
 
 /**
@@ -40,7 +39,6 @@ trait PaginatorGridTrait
             } else {
                 throw new Exception\InvalidArgumentException('Адаптер должен реализовывать \Zend\Paginator\Adapter\AdapterInterface');
             }
-
         }
         return $this->paginator;
     }
@@ -54,6 +52,4 @@ trait PaginatorGridTrait
         $this->paginator = $paginator;
         return $this;
     }
-
-
 }

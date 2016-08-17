@@ -6,7 +6,6 @@
 
 namespace Nnx\DataGrid;
 
-
 /**
  * Interface PaginatorGridInterface
  * @package Nnx\DataGrid
@@ -17,5 +16,4 @@ interface PaginatorGridInterface
      * @return Paginator\PaginatorInterface
      */
     public function getPaginator();
-
 }

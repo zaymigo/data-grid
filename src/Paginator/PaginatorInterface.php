@@ -51,5 +51,4 @@ interface PaginatorInterface extends Countable
      * @return int
      */
     public function getCurrentPageNumber();
-
 }

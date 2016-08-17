@@ -6,7 +6,6 @@
 
 namespace Nnx\DataGrid\Adapter;
 
-
 /**
  * Class PaginatorAdapterTrait
  * @package Nnx\DataGrid\Adapter

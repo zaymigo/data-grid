@@ -73,6 +73,4 @@ class Paginator extends BasePaginator implements PaginatorInterface
         }
         return parent::setItemCountPerPage($itemCountPerPage);
     }
-
-
 }
