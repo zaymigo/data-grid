@@ -15,8 +15,10 @@ use Traversable;
  * Class DoctrineDBAL
  * @package Nnx\DataGrid\Adapter
  */
-class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterface
+class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterface, PaginatorAdapterInterface
 {
+    use PaginatorAdapterTrait;
+
     /**
      * Запрос данных
      * @var QueryBuilder
@@ -110,8 +112,8 @@ class DoctrineDBAL extends AbstractAdapter implements EntityManagerAwareInterfac
         $i = 0;
         if (count($this->getConditions()) !== 0) {
             foreach ($this->getConditions() as $condition) {
-                $conditionKey = 'NNXGridCondition_'.$i;
-                $query->andWhere($condition->getKey() . ' ' . $condition->getCriteria() . ' :'.$conditionKey);
+                $conditionKey = 'NNXGridCondition_' . $i;
+                $query->andWhere($condition->getKey() . ' ' . $condition->getCriteria() . ' :' . $conditionKey);
                 $query->setParameter($conditionKey, $condition->getValue());
                 $i++;
             }
