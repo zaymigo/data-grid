@@ -6,8 +6,6 @@
 
 namespace Nnx\DataGrid\Mutator;
 
-use Nnx\DataGrid\Mutator\Exception;
-
 /**
  * Class StringFormat
  * Осуществляет форматированный вывод переданных значений.

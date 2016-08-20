@@ -16,7 +16,7 @@ final class TestPath
     /**
      * @return string
      */
-    static public function getApplicationConfigPath()
+    public static function getApplicationConfigPath()
     {
         return __DIR__ . '/application.config.php';
     }
@@ -46,7 +46,7 @@ final class TestPath
      *
      * @return string
      */
-    static public function getPathToGridAppConfig()
+    public static function getPathToGridAppConfig()
     {
         return __DIR__ . '/GridApp/config/application.config.php';
     }

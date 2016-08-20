@@ -14,7 +14,6 @@ use Nnx\DataGrid\Row;
 use Nnx\DataGrid\SimpleGrid;
 use Nnx\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
-use Exception;
 use Nnx\DataGrid\Exception\RuntimeException;
 
 
@@ -33,7 +32,6 @@ class GridManagerFactoryTest extends AbstractControllerTestCase
         /** @noinspection PhpIncludeInspection */
         $config = require TestPath::getPathToGridAppConfig();
         $this->setApplicationConfig($config);
-
     }
 
     /**
@@ -79,7 +77,6 @@ class GridManagerFactoryTest extends AbstractControllerTestCase
             self::assertInstanceOf(\Zend\ServiceManager\Exception\ServiceNotCreatedException::class, $e);
         }
         $options->setGrids($gridsConfig);
-
     }
 
     public function testExceptionNotFoundGrid()
@@ -105,6 +102,4 @@ class GridManagerFactoryTest extends AbstractControllerTestCase
             self::assertInstanceOf(RuntimeException::class, $e);
         }
     }
-
-
 }

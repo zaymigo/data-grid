@@ -1,7 +1,6 @@
 <?php
 namespace Nnx\DataGrid\Test\PhpUnit\TestData\GridApp;
 
-
 use Nnx\DataGrid\Test\PhpUnit\TestData\TestPath;
 use Nnx\DataGrid\Test\PhpUnit\TestData\GridApp;
 

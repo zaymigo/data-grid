@@ -5,8 +5,6 @@
  */
 namespace Nnx\DataGrid;
 
-
-
 return [
     'grid_manager' => [
         'abstract_factories' => [
