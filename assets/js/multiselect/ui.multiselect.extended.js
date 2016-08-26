@@ -1,6 +1,7 @@
 $(function ($) {
     $.widget('ui.multiselect', $.ui.multiselect, {
         _create: function () {
+            this.locale = 'ru';
             this.element.hide();
             this.id = this.element.attr("id");
             this.container = $('<div class="ui-multiselect ui-helper-clearfix ui-widget"></div>').insertAfter(this.element);
