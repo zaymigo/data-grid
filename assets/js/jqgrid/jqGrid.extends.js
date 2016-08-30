@@ -136,3 +136,142 @@ NNX.jqGrid.reloadWithSaveCollapsedRows = function(grid) {
     $(grid).trigger('reloadGrid');
     $(grid).jqGrid('setGridParam', { postData: {collapsedRows:null} });
 };
+
+
+NNX.jqGrid.initFilterForm = function (grid, params)
+{
+    params = params || {};
+
+    var searchForm = params.searchForm ? $(params.searchForm) : $('form[id^="search"]');
+    var searchButton = params.searchButton ? $(params.searchButton) : $('button[id$="-submit"]');
+    var resetButton = params.searchResetButton ? $(params.searchResetButton) : $('button[id$="-reset"]');
+
+    if (searchButton) {
+        searchButton.unbind('click').click(function () {
+            var vals = {};
+            $(searchForm).find('input').each(function (i, elem) {
+                if ($(elem).prop('type') == 'text') {
+                    vals[$(elem).prop('name')] = $(elem).val();
+                }
+            });
+            NNX.jqGrid.filterInputEx(grid, vals);
+            NNX.jqGrid.sortTree(grid);
+        });
+    }
+    if (resetButton) {
+        resetButton.click(function () {
+            NNX.jqGrid.filterInputEx(grid, {});
+            NNX.jqGrid.sortTree(grid);
+        });
+    }
+};
+
+NNX.jqGrid.filterInputEx = function (grid, values)
+{
+    function createField(name, op, data) {
+        return '{\"field\":\"' + name + '\",\"op\":\"' + op + '\",\"data\":\"' + data + '\"}';
+    }
+
+    var fields = '', val;
+    var colums = $(grid).jqGrid('getGridParam','colModel');
+    colums.each(function(column) {
+        val = values[column.name];
+        if (!val) {
+            return;
+        }
+        fields += (fields.length == 0 ? "" : ",") + createField(column.name, 'cn', val);
+    });
+    var filters = '{\"groupOp\":\"AND\",\"rules\":[' + fields + ']}';
+
+    if (fields.length == 0) {
+        $(grid).jqGrid('setGridParam', { search: false, postData: { "filters": ""} }).trigger("reloadGrid");
+    } else {
+        $(grid).jqGrid('setGridParam', { search: true, postData: { "filters": filters} }).trigger("reloadGrid");
+    }
+};
+
+NNX.jqGrid.sortTree = function (grid, params)
+{
+    params = params || {};
+    var sortField = params.sortField  || $(grid).jqGrid('getGridParam', 'sortname');
+    var sortOrder =  params.sortOrder || $(grid).jqGrid('getGridParam', 'sortorder') || 'asc';
+    var sortType  =  params.sortType  || 'text';
+    if (! params.sortField ) {
+        var colums = $(grid).jqGrid('getGridParam','colModel');
+        colums.each(function (column) {
+            if (column.name == sortField && column.sorttype) {
+                sortType = column.sorttype;
+            }
+        });
+    }
+    $(grid).jqGrid("SortTree", sortField, sortOrder, sortType);
+};
+
+NNX.jqGrid.initFilterForm = function (grid, params)
+{
+    params = params || {};
+
+    var searchForm = params.searchForm ? $(params.searchForm) : $('form[id^="search"]');
+    var searchButton = params.searchButton ? $(params.searchButton) : $('button[id$="-submit"]');
+    var resetButton = params.searchResetButton ? $(params.searchResetButton) : $('button[id$="-reset"]');
+
+    if (searchButton) {
+        searchButton.unbind('click').click(function () {
+            var vals = {};
+            $(searchForm).find('input').each(function (i, elem) {
+                if ($(elem).prop('type') == 'text') {
+                    vals[$(elem).prop('name')] = $(elem).val();
+                }
+            });
+            NNX.jqGrid.filterInputEx(grid, vals);
+            NNX.jqGrid.sortTree(grid);
+        });
+    }
+    if (resetButton) {
+        resetButton.click(function () {
+            NNX.jqGrid.filterInputEx(grid, {});
+            NNX.jqGrid.sortTree(grid);
+        });
+    }
+};
+
+NNX.jqGrid.filterInputEx = function (grid, values)
+{
+    function createField(name, op, data) {
+        return '{\"field\":\"' + name + '\",\"op\":\"' + op + '\",\"data\":\"' + data + '\"}';
+    }
+
+    var fields = '', val;
+    var colums = $(grid).jqGrid('getGridParam','colModel');
+    colums.each(function(column) {
+        val = values[column.name];
+        if (!val) {
+            return;
+        }
+        fields += (fields.length == 0 ? "" : ",") + createField(column.name, 'cn', val);
+    });
+    var filters = '{\"groupOp\":\"AND\",\"rules\":[' + fields + ']}';
+
+    if (fields.length == 0) {
+        $(grid).jqGrid('setGridParam', { search: false, postData: { "filters": ""} }).trigger("reloadGrid");
+    } else {
+        $(grid).jqGrid('setGridParam', { search: true, postData: { "filters": filters} }).trigger("reloadGrid");
+    }
+};
+
+NNX.jqGrid.sortTree = function (grid, params)
+{
+    params = params || {};
+    var sortField = params.sortField  || $(grid).jqGrid('getGridParam', 'sortname');
+    var sortOrder =  params.sortOrder || $(grid).jqGrid('getGridParam', 'sortorder') || 'asc';
+    var sortType  =  params.sortType  || 'text';
+    if (! params.sortField ) {
+        var colums = $(grid).jqGrid('getGridParam','colModel');
+        colums.each(function (column) {
+            if (column.name == sortField && column.sorttype) {
+                sortType = column.sorttype;
+            }
+        });
+    }
+    $(grid).jqGrid("SortTree", sortField, sortOrder, sortType);
+};
