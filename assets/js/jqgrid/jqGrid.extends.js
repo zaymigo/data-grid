@@ -141,9 +141,11 @@ NNX.jqGrid.reloadWithSaveCollapsedRows = function(grid) {
  * result = {
  *      elementName1: [value],
  *      elementName2: [value1, value2]      // checkbox or multiple-select
+ *      elementName3: [],
  * }
  */
-NNX.jqGrid.getFormValues = function (form, params) {
+NNX.jqGrid.getFormValues = function (form, params)
+{
     var result = {};
     params = params || {};
 
@@ -156,9 +158,6 @@ NNX.jqGrid.getFormValues = function (form, params) {
         }
 
         var values = result[elementName] || [];
-        if (!$(elem).val()) {
-
-        }
         values.push($(elem).val());
         result[elementName] = values;
     });
@@ -213,18 +212,23 @@ NNX.jqGrid.initFilterForm = function (grid, params)
  * @param data (если массив, то будет группа правил объедененных ИЛИ)
  * @returns {string}
  */
-NNX.jqGrid.createFilterRule = function (name, op, data) {
+NNX.jqGrid.createFilterRule = function (name, op, data)
+{
     var result = '';
     var dataType = $.type(data);
     if ($.isArray(data) && data.length == 1 || $.inArray(dataType, ['string', 'number'])) {
         if ($.isArray(data)) {
             data = data.shift();
         }
-        if (!data) { return; }
+        if (!data) {
+            return;
+        }
         result = '{\"field\":\"' + name + '\",\"op\":\"' + op + '\",\"data\":\"' + data + '\"}';
     } else if ($.isArray(data)) {
         data.each(function(val) {
-            if (!val) { return; }
+            if (!val) {
+                return;
+            }
             var groupRules = NNX.jqGrid.createFilterRule(name, op, val);
             if (groupRules) {
                 result += (result.length == 0 ? "" : ",") + groupRules;
@@ -245,7 +249,9 @@ NNX.jqGrid.filterInputEx = function (grid, values)
     var colums = $(grid).jqGrid('getGridParam','colModel');
     colums.each(function(column) {
         val = values[column.name];
-        if (!val) { return; }
+        if (!val) {
+            return;
+        }
         field = NNX.jqGrid.createFilterRule(column.name, 'cn', val);
         if (field) {
             fields += (fields.length == 0 ? "" : ",") + field;
@@ -253,7 +259,6 @@ NNX.jqGrid.filterInputEx = function (grid, values)
 
     });
     var filters = '{\"groupOp\":\"AND\",\"rules\":[' + fields + ']}';
-    console.log(filters);
     if (fields.length == 0) {
         $(grid).jqGrid('setGridParam', { search: false, postData: { "filters": ""} }).trigger("reloadGrid");
     } else {
