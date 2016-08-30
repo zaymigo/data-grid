@@ -55,7 +55,7 @@ class DataController extends AbstractActionController
         if ($adapter instanceof DoctrineDBAL) {
             $adapter->setLimit($limit);
             $adapter->setOffset($offset);
-            if($orderField && $orderType) {
+            if ($orderField && $orderType) {
                 $adapter->setOrder([
                     [
                         'field' => $orderField,
