@@ -45,7 +45,7 @@ class Action extends AbstractColumn implements ActionAwareInterface
 
     /**
      * Возвращает набор действий в колонке
-     * @return array
+     * @return array|ActionInterface[]
      */
     public function getActions()
     {

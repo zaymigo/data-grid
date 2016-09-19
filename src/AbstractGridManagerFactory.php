@@ -62,7 +62,7 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
             /** @var Adapter\Factory $adapterFactory */
             $adapterFactory = $serviceManager->get(Adapter\Factory::class);
             if (!array_key_exists('doctrine_entity_manager', $adapterOptions)
-                || $adapterOptions['doctrine_entity_manager']
+                || !$adapterOptions['doctrine_entity_manager']
             ) {
                 $adapterOptions['doctrine_entity_manager'] = $moduleOptions->getDoctrineEntityManager();
             }

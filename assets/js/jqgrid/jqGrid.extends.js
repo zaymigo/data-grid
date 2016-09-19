@@ -152,3 +152,150 @@ NNX.jqGrid.reloadWithSaveCollapsedRows = function(grid) {
     $(grid).trigger('reloadGrid');
     $(grid).jqGrid('setGridParam', { postData: {collapsedRows:null} });
 };
+
+/**
+ * result = {
+ *      elementName1: [value],
+ *      elementName2: [value1, value2]      // checkbox or multiple-select
+ *      elementName3: [],
+ * }
+ */
+NNX.jqGrid.getFormValues = function (form, params)
+{
+    var result = {};
+    params = params || {};
+
+    var excludeElements = params.exludeElements || [];
+
+    $(form).find('input[type="text"], input:checked[type="radio"], input:checked[type="checkbox"]').each(function (i, elem) {
+        var elementName = $(elem).prop('name');
+        if (!elementName || $.inArray(elementName, excludeElements) !== -1) {
+            return;
+        }
+
+        var values = result[elementName] || [];
+        values.push($(elem).val());
+        result[elementName] = values;
+    });
+
+    $(form).find('select').each(function (i, elem) {
+        var elementName = $(elem).prop('name');
+        if (!elementName || $.inArray(elementName, excludeElements) !== -1) {
+            return;
+        }
+        var values = [];
+        $(elem).find('option:selected').each(function (i, option) {
+            values.push( $(option).val())
+        });
+        result[elementName] = values;
+    });
+
+    return result;
+};
+
+/**
+ * Привязываем фильтрацию к форме поиска.
+ * @param grid
+ * @param params
+ */
+NNX.jqGrid.initFilterForm = function (grid, params)
+{
+    params = params || {};
+
+    var searchForm = params.searchForm ? $(params.searchForm) : $('form[id^="search"]');
+    var searchButton = params.searchButton ? $(params.searchButton) : $('button[id$="-submit"]');
+    var resetButton = params.searchResetButton ? $(params.searchResetButton) : $('button[id$="-reset"]');
+
+    if (searchButton) {
+        searchButton.unbind('click').click(function () {
+            var values = NNX.jqGrid.getFormValues(searchForm);
+            NNX.jqGrid.filterInputEx(grid, values);
+            NNX.jqGrid.sortTree(grid);
+        });
+    }
+    if (resetButton) {
+        resetButton.click(function () {
+            NNX.jqGrid.filterInputEx(grid, {});
+            NNX.jqGrid.sortTree(grid);
+        });
+    }
+};
+
+/**
+ * Создать правило для фильтра (не принимает пустые значения)
+ * @param name
+ * @param op
+ * @param data (если массив, то будет группа правил объедененных ИЛИ)
+ * @returns {string}
+ */
+NNX.jqGrid.createFilterRule = function (name, op, data)
+{
+    var result = '';
+    var dataType = $.type(data);
+    if ($.isArray(data) && data.length == 1 || $.inArray(dataType, ['string', 'number'])) {
+        if ($.isArray(data)) {
+            data = data.shift();
+        }
+        if (!data) {
+            return;
+        }
+        result = '{\"field\":\"' + name + '\",\"op\":\"' + op + '\",\"data\":\"' + data + '\"}';
+    } else if ($.isArray(data)) {
+        data.each(function(val) {
+            if (!val) {
+                return;
+            }
+            var groupRules = NNX.jqGrid.createFilterRule(name, op, val);
+            if (groupRules) {
+                result += (result.length == 0 ? "" : ",") + groupRules;
+            }
+        });
+        result = '{\"groupOp\":\"OR\",\"rules\":[' + result + ']}';
+    }
+    return result;
+};
+
+/**
+ * @param grid
+ * @param values (ex: {element1: value, element2: [value2, value3]})
+ */
+NNX.jqGrid.filterInputEx = function (grid, values)
+{
+    var field, fields = '', val;
+    var colums = $(grid).jqGrid('getGridParam','colModel');
+    colums.each(function(column) {
+        val = values[column.name];
+        if (!val) {
+            return;
+        }
+        field = NNX.jqGrid.createFilterRule(column.name, 'cn', val);
+        if (field) {
+            fields += (fields.length == 0 ? "" : ",") + field;
+        }
+
+    });
+    var filters = '{\"groupOp\":\"AND\",\"rules\":[' + fields + ']}';
+    if (fields.length == 0) {
+        $(grid).jqGrid('setGridParam', { search: false, postData: { "filters": ""} }).trigger("reloadGrid");
+    } else {
+        $(grid).jqGrid('setGridParam', { search: true, postData: { "filters": filters} }).trigger("reloadGrid");
+    }
+};
+
+// Функция сортировки реестра может некоректно отрабатывать при multisort=false
+NNX.jqGrid.sortTree = function (grid, params)
+{
+    params = params || {};
+    var sortField = params.sortField  || $(grid).jqGrid('getGridParam', 'sortname');
+    var sortOrder =  params.sortOrder || $(grid).jqGrid('getGridParam', 'sortorder') || 'asc';
+    var sortType  =  params.sortType  || 'text';
+    if (! params.sortType ) {
+        var colums = $(grid).jqGrid('getGridParam','colModel');
+        colums.each(function (column) {
+            if (column.name == sortField && column.sorttype) {
+                sortType = column.sorttype;
+            }
+        });
+    }
+    $(grid).jqGrid("SortTree", sortField, sortOrder, sortType);
+};

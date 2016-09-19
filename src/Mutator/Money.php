@@ -57,7 +57,10 @@ class Money extends AbstractMutator
      */
     public function change($value)
     {
-        return number_format($value, $this->getDecimals(), $this->getDecPoint(), $this->getThousandSeparator());
+        if (is_numeric($value)) {
+            $value = number_format($value, $this->getDecimals(), $this->getDecPoint(), $this->getThousandSeparator());
+        }
+        return $value;
     }
 
     /**

@@ -40,6 +40,7 @@ return [
                             'js/multiselect/plugins/scrollTo/jquery.scrollTo-min.js',
                             'js/multiselect/ui.multiselect.js',
                             'js/multiselect/ui.multiselect.extended.js',
+                            'js/multiselect/locale/ui-multiselect-*.js',
                         ]
                     ],
                     'head_jqgrid_js' => [

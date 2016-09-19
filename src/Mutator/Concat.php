@@ -24,6 +24,8 @@ class Concat extends AbstractMutator
      */
     protected $separator = ' ';
 
+    protected $onlyNotEmptyFields = false;
+
     /**
      * Конструктор класса
      * @param array $options
@@ -40,6 +42,10 @@ class Concat extends AbstractMutator
         if (array_key_exists('separator', $options) && $options['separator']) {
             $this->setSeparator($options['separator']);
         }
+
+        if (array_key_exists('onlyNotEmptyFields', $options)) {
+            $this->setOnlyNotEmptyFields((bool)$options['onlyNotEmptyFields']);
+        }
     }
 
 
@@ -54,7 +60,7 @@ class Concat extends AbstractMutator
         $row = $this->getRowData();
         $res = [];
         foreach ($concatenateFields as $field) {
-            if (array_key_exists($field, $row)) {
+            if (array_key_exists($field, $row) && (!$this->isOnlyNotEmptyFields() || $row[$field])) {
                 $res[] = $row[$field];
             }
         }
@@ -98,6 +104,24 @@ class Concat extends AbstractMutator
     public function setSeparator($separator)
     {
         $this->separator = $separator;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOnlyNotEmptyFields()
+    {
+        return $this->onlyNotEmptyFields;
+    }
+
+    /**
+     * @param boolean $onlyNotEmptyFields
+     * @return $this
+     */
+    public function setOnlyNotEmptyFields($onlyNotEmptyFields)
+    {
+        $this->onlyNotEmptyFields = $onlyNotEmptyFields;
         return $this;
     }
 }

@@ -33,8 +33,8 @@ class DataController extends AbstractActionController
         $gridName = $request->getQuery('grid');
         $limit = (int)$request->getQuery('limit', 25);
         $offset = (int)$request->getQuery('offset', 0);
-        $orderField = $request->getQuery('sidx', 'id');
-        $orderType = $request->getQuery('sorder', 'asc');
+        $orderField = $request->getQuery('sidx', null);
+        $orderType = $request->getQuery('sorder', null);
         $collapsedRows = is_array($request->getPost('collapsedRows')) ? $request->getPost('collapsedRows') : [];
         /**
          * $conditions => [
@@ -55,12 +55,14 @@ class DataController extends AbstractActionController
         if ($adapter instanceof DoctrineDBAL) {
             $adapter->setLimit($limit);
             $adapter->setOffset($offset);
-            $adapter->setOrder([
-                [
-                    'field' => $orderField,
-                    'order' => $orderType
-                ]
-            ]);
+            if ($orderField && $orderType) {
+                $adapter->setOrder([
+                    [
+                        'field' => $orderField,
+                        'order' => $orderType
+                    ]
+                ]);
+            }
         }
 
         $conditionsObj = new Conditions();

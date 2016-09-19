@@ -66,7 +66,7 @@ $.jgrid.regional["de"] = {
 		caption: "Suche...",
 		Find: "Suchen",
 		Reset: "Zurücksetzen",
-		odata: [{ oper:'eq', text:"gleich"},{ oper:'ne', text:"ungleich"},{ oper:'lt', text:"kleiner"},{ oper:'le', text:"kleiner gleich"},{ oper:'gt', text:"größer"},{ oper:'ge', text:"größer gleich"},{ oper:'bw', text:"beginnt mit"},{ oper:'bn', text:"beginnt nicht mit"},{ oper:'in', text:"ist in"},{ oper:'ni', text:"ist nicht in"},{ oper:'ew', text:"endet mit"},{ oper:'en', text:"endet nicht mit"},{ oper:'cn', text:"enthält"},{ oper:'nc', text:"enthält nicht"}, { oper:'nu', text:"ist Null" }, { oper:'nn', text:"ist nicht Null" }],
+		odata: [{ oper:'eq', text:"gleich"},{ oper:'ne', text:"ungleich"},{ oper:'lt', text:"kleiner"},{ oper:'le', text:"kleiner gleich"},{ oper:'gt', text:"größer"},{ oper:'ge', text:"größer gleich"},{ oper:'bw', text:"beginnt mit"},{ oper:'bn', text:"beginnt nicht mit"},{ oper:'in', text:"ist in"},{ oper:'ni', text:"ist nicht in"},{ oper:'ew', text:"endet mit"},{ oper:'en', text:"endet nicht mit"},{ oper:'cn', text:"enthält"},{ oper:'nc', text:"enthält nicht"}, { oper:'nu', text:"ist Null" }, { oper:'nn', text:"ist nicht Null" }, {oper:'bt', text:'zwischen'}],
 		groupOps: [{ op: "AND", text: "alle" },{ op: "OR", text: "mindestens eine" }],
 		operandTitle : "Click to select search operation.",
 		resetTitle : "Reset Search Value"
@@ -210,6 +210,18 @@ $.jgrid.regional["de"] = {
 		target: '',
 		checkbox : {disabled:true},
 		idName : 'id'
+	},
+	colmenu : {
+		sortasc : "Aufsteigend sortieren",
+		sortdesc : "Absteigend sortieren",
+		columns : "Spalte",
+		filter : "Filter",
+		grouping : "Gruppiere nach",
+		ungrouping : "Gruppierung aufheben",
+		searchTitle : "Erhalten Sie Artikel mit Wert:",
+		freeze : "Einfrieren",
+		unfreeze : "Freigeben",
+		reorder : "Bewegen neu anordnen"
 	}
 };
 }));

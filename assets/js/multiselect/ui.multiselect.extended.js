@@ -1,6 +1,7 @@
 $(function ($) {
     $.widget('ui.multiselect', $.ui.multiselect, {
         _create: function () {
+            this.locale = 'ru';
             this.element.hide();
             this.id = this.element.attr("id");
             this.container = $('<div class="ui-multiselect ui-helper-clearfix ui-widget"></div>').insertAfter(this.element);
@@ -48,7 +49,7 @@ $(function ($) {
                         });
                     },
                     receive: function (event, ui) {
-                        ui.item.data('optionLink').attr('selected', true);
+                        ui.item.data('optionLink').prop('selected', true);
                         // increment count
                         that.count += 1;
                         that._updateCount();
@@ -94,6 +95,74 @@ $(function ($) {
                 that._populateLists(that.element.find('option'));
                 return false;
             });
+        },
+        _setSelected: function (item, selected) {
+            item.data('optionLink').prop('selected', selected);
+
+            if (selected) {
+                var selectedItem = this._cloneWithData(item);
+                item[this.options.hide](this.options.animated, function () {
+                    $(this).remove();
+                });
+                selectedItem.appendTo(this.selectedList).hide()[this.options.show](this.options.animated);
+
+                this._applyItemState(selectedItem, true);
+                return selectedItem;
+            } else {
+
+                // look for successor based on initial option index
+                var items = this.availableList.find('li'), comparator = this.options.nodeComparator;
+                var succ = null, i = item.data('idx'), direction = comparator(item, $(items[i]));
+
+                // TODO: test needed for dynamic list populating
+                if (direction) {
+                    while (i >= 0 && i < items.length) {
+                        direction > 0 ? i++ : i--;
+                        if (direction != comparator(item, $(items[i]))) {
+                            // going up, go back one item down, otherwise leave as is
+                            succ = items[direction > 0 ? i : i + 1];
+                            break;
+                        }
+                    }
+                } else {
+                    succ = items[i];
+                }
+
+                var availableItem = this._cloneWithData(item);
+                succ ? availableItem.insertBefore($(succ)) : availableItem.appendTo(this.availableList);
+                item[this.options.hide](this.options.animated, function () {
+                    $(this).remove();
+                });
+                availableItem.hide()[this.options.show](this.options.animated);
+
+                this._applyItemState(availableItem, false);
+                return availableItem;
+            }
+        },
+        _applyItemState: function (item, selected) {
+            if (selected) {
+                item.removeClass('ui-draggable');
+                if (this.options.sortable)
+                    item.children('span').addClass('ui-icon-arrowthick-2-n-s').removeClass('ui-helper-hidden').addClass('ui-icon');
+                else
+                    item.children('span').removeClass('ui-icon-arrowthick-2-n-s').addClass('ui-helper-hidden').removeClass('ui-icon');
+                item.find('a.action span').addClass('ui-icon-minus').removeClass('ui-icon-plus');
+                this._registerRemoveEvents(item.find('a.action'));
+
+            } else {
+                item.children('span').removeClass('ui-icon-arrowthick-2-n-s').addClass('ui-helper-hidden').removeClass('ui-icon');
+                item.find('a.action span').addClass('ui-icon-plus').removeClass('ui-icon-minus');
+                this._registerAddEvents(item.find('a.action'));
+            }
+
+            this._registerDoubleClickEvents(item);
+            this._registerHoverEvents(item);
         }
+    });
+
+    $.extend($.ui.multiselect.locale, {
+        addAll: 'Добавить все',
+        removeAll: 'Удалить все',
+        itemsCount: 'элементов выбрано'
     });
 });
