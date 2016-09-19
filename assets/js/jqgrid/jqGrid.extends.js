@@ -299,3 +299,22 @@ NNX.jqGrid.sortTree = function (grid, params)
     }
     $(grid).jqGrid("SortTree", sortField, sortOrder, sortType);
 };
+
+// Сообщение пустого реестра
+NNX.jqGrid.initEmptyMessage = function (grid, params)
+{
+    params = params || {};
+    params.message = params.message || $(grid).getGridParam('emptyrecords') || 'Данных не найдено...';
+    params.template = params.template || '<div id="noResultsDiv" style="display: none; padding: 10px; text-align: center;" class=""><span class="notice"><label>' + params.message + '</label></span></div>';
+
+    var div = $(params.template);
+    div.insertAfter($(grid).parent());
+
+    $(grid).bind('jqGridLoadComplete', function (event, data) {
+        if ($(grid).getGridParam('reccount') === 0) {
+            $(div).show();
+        } else {
+            $(div).hide();
+        }
+    });
+};
