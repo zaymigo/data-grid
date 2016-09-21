@@ -248,7 +248,7 @@ NNX.jqGrid.filterInputEx = function (grid, values)
     var field, fields = '', val;
     var colums = $(grid).jqGrid('getGridParam','colModel');
     colums.each(function(column) {
-        val = values[column.name];
+        val = values[column.name] || values[column.name + '[]'];
         if (!val) {
             return;
         }
