@@ -29,6 +29,8 @@ class GridColumnPluginManager extends AbstractPluginManager
         'hidden' => Hidden::class,
         'link' => Link::class,
         'money' => Money::class,
+        'radio' => Radio::class,
+        'checkbox' => Checkbox::class,
         'action' => Action::class
     ];
 
@@ -44,6 +46,8 @@ class GridColumnPluginManager extends AbstractPluginManager
         Text::class => Factory::class,
         Hidden::class => Factory::class,
         Link::class => Factory::class,
+        Radio::class => Factory::class,
+        Checkbox::class => Factory::class,
         Money::class => Factory::class
     ];
 

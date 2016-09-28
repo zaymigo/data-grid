@@ -7,6 +7,7 @@
 namespace Nnx\DataGrid\View\Helper\JqGrid;
 
 use Nnx\DataGrid\Mutator\HighlightMutatorInterface;
+use Nnx\DataGrid\PaginatorGridInterface;
 use Zend\View\Helper\AbstractHelper;
 use Nnx\DataGrid\GridInterface;
 use Zend\View\Helper\EscapeHtml;
@@ -65,10 +66,25 @@ class Grid extends AbstractHelper
                 }
             }
         }
+
+        $gridName = $grid->getName();
+        if ($grid instanceof PaginatorGridInterface) {
+            $config['rowNum'] = $grid->getPaginator()->getItemCountPerPage();
+            $config['rowList'] = $grid->getPaginator()->getPossibleItemCountPerPage();
+            $config['pager'] = 'pager-grid-' . $gridName;
+            $res .= "<div id='pager-grid-{$gridName}'>";
+        }
+
+        $options = \Zend\Json\Json::encode(
+            $config,
+            false,
+            ['enableJsonExprFinder' => true]
+        );
+
         $view->headScript()->appendScript('$(function(){'
             . 'var grid = $("#grid-' . $grid->getName() . '").jqGrid('
-            . str_replace('"%rowAttrFunction%"', $rowAttr, json_encode((object)$config)) . ');'
-            . str_replace('%gridName%', $grid->getName(), $buttonsJs) .'});');
+            . str_replace('"%rowAttrFunction%"', $rowAttr, $options) . ');'
+            . str_replace('%gridName%', $grid->getName(), $buttonsJs) . '});');
         return $res;
     }
 
@@ -91,12 +107,12 @@ class Grid extends AbstractHelper
             /** @var ButtonInterface $button */
             foreach ($navigationBar->getButtons() as $button) {
                 $buttonResult = $view->nnxGridJqGridButton($button, $urlVariables);
-                $html .=  $buttonResult['html'];
-                $js .=  $buttonResult['js'];
+                $html .= $buttonResult['html'];
+                $js .= $buttonResult['js'];
             }
             $html = "<div class='buttons-panel'>$html</div><br>";
         }
-        return ['html' => $html,'js' => $js];
+        return ['html' => $html, 'js' => $js];
     }
 
     /**
