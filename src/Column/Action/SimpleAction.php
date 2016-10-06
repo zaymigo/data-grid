@@ -27,7 +27,7 @@ class SimpleAction extends AbstractAction implements RowDataAwareInterface
         $route = $this->getRoute();
         $routeName = array_key_exists('routeName', $route) ? $route['routeName'] : null;
         $routeParams = array_key_exists('routeParams', $route) ? $route['routeParams'] : null;
-        $routeOptions = array_key_exists('routeOptions', $route) ? $route['options'] : [];
+        $routeOptions = array_key_exists('routeOptions', $route) ? $route['routeOptions'] : [];
         $options = array_merge($routeOptions, $this->getRowData());
         $url = preg_replace_callback('/:([a-zA-Z_]+)/',
             [$this, 'replaceCallback'],
