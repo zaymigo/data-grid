@@ -16,19 +16,19 @@ use Nnx\DataGrid\Row;
 class AddClassToCell extends AbstractMutator
 {
     const ROW_KEY = 'additionalClass';
-    
+
     /**
      * Имя ячейки строки в который добавляется класс
      * @var array
      */
     protected $cellName;
-    
+
     /**
      * Класс добавляемый для ячейки строки
      * @var array
      */
     protected $className;
-    
+
     /**
      * AddClassToCell constructor.
      * @param array $options
@@ -38,7 +38,7 @@ class AddClassToCell extends AbstractMutator
         parent::__construct($options);
         $this->setOptions($options);
     }
-    
+
     /**
      * @param array $options
      */
@@ -51,14 +51,14 @@ class AddClassToCell extends AbstractMutator
             $this->setClassName($options['class']);
         }
     }
-    
+
     /**
      * @param mixed $row
      * @return array|mixed|Row
      */
     public function change($row)
     {
-        if (is_array($row) || $row instanceof Row ) {
+        if (is_array($row) || $row instanceof Row) {
             foreach ($this->getCellName() as $cell) {
                 $cellClass = isset($row[self::ROW_KEY][$cell]) ? $row[self::ROW_KEY][$cell] : [];
                 $cellClass = array_merge($cellClass, $this->getClassName());
@@ -67,7 +67,7 @@ class AddClassToCell extends AbstractMutator
         }
         return $row;
     }
-    
+
     /**
      * @return array
      */
@@ -75,7 +75,7 @@ class AddClassToCell extends AbstractMutator
     {
         return $this->cellName;
     }
-    
+
     /**
      * @param string|array $cellName
      */
@@ -86,7 +86,7 @@ class AddClassToCell extends AbstractMutator
         }
         $this->cellName = $cellName;
     }
-    
+
     /**
      * @return array
      */
@@ -94,7 +94,7 @@ class AddClassToCell extends AbstractMutator
     {
         return $this->className;
     }
-    
+
     /**
      * @param string|array $class
      */
