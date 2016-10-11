@@ -318,3 +318,24 @@ NNX.jqGrid.initEmptyMessage = function (grid, params)
         }
     });
 };
+
+// Инициализирует мутатор AddClassToCell для грида
+// todo: inject to jqGrid
+NNX.jqGrid.initAddClassMutator = function (grid, data)
+{
+    var rows = data.rows || {};
+    var gridName = $(grid).attr('id');
+    $.each(rows, function(i,row) {
+        var rowId = row.id;
+        if (!rowId) {
+            return null;
+        }
+        var additionalClass = row.additionalClass || {};
+        $.each(additionalClass, function (columnName, classes) {
+            var cell = $('#' + rowId).find('td[aria-describedby="' + gridName+'_'+columnName +'"]');
+            $(classes).each(function (i, addClass) {
+                $(cell).addClass(addClass);
+            });
+        });
+    });
+};
