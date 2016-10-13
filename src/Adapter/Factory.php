@@ -73,7 +73,7 @@ class Factory implements FactoryInterface, ServiceLocatorAwareInterface
 
         $adapter = $this->createAdapter($adapterClass, $spec);
         if (array_key_exists('options', $spec) && $spec['options']) {
-            $options =& $adapter['options'];
+            $options =& $spec['options'];
             if (!$options instanceof ArrayAccess && !is_array($options)) {
                 throw new InvalidOptionsException(
                     sprintf('Опции для адаптера должны быть массивом или реализовывать %s', ArrayAccess::class)
