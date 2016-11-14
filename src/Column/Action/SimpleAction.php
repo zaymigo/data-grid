@@ -57,11 +57,14 @@ class SimpleAction extends AbstractAction implements RowDataAwareInterface
         return $value;
     }
 
+    /**
+     * @return bool|mixed
+     */
     public function validate()
     {
         $res = true;
         if ($this->getValidationFunction()) {
-            $res = call_user_func($this->getValidationFunction(), $this->getRowData());
+            $res = call_user_func($this->getValidationFunction(), $this->getRowData(), $this);
         }
         return $res;
     }
