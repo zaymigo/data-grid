@@ -1,6 +1,6 @@
 {
-  "name": "nnx/data-grid",
-  "description": "NNX grid module",
+  "name": "zaymigo/data-grid",
+  "description": "Fork NNX grid module",
   "type": "library",
   "keywords": [
     "zf2"
@@ -8,17 +8,17 @@
   "authors": [
     {
       "name": "Roman Malashin",
-      "email": "malashinr@mte-telecom.ru"
+      "email": "r.malashin@zaymigo.com"
     }
   ],
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/nnx-company/grid.git"
+      "url": "https://github.com/zaymigo/data-grid"
     }
   ],
   "require": {
-    "php": ">=5.5",
+    "php": "^5.5 || ^7.0",
 
     "doctrine/common": "~2.5.0",
     "doctrine/dbal": "~2.5.0",
