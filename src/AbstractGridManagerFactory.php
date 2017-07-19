@@ -6,14 +6,20 @@
 
 namespace Nnx\DataGrid;
 
+
+use Interop\Container\Exception\ContainerException;
 use Nnx\DataGrid\Adapter\AdapterInterface;
 use Nnx\DataGrid\NavigationBar\NavigationBarInterface;
 use Nnx\DataGrid\Mutator\MutatorInterface;
 use Nnx\DataGrid\Options\ModuleOptions;
-use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Psr\Container\ContainerInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\AbstractFactoryInterface;
+use Zend\ServiceManager\Factory\InvokableFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ArrayAccess;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\InitializableInterface;
 use ZF\ContentNegotiation\Request;
 
@@ -23,19 +29,14 @@ use ZF\ContentNegotiation\Request;
  */
 class AbstractGridManagerFactory implements AbstractFactoryInterface
 {
-    use ServiceLocatorAwareTrait;
+    /**
+     * @var ContainerInterface
+     */
+    protected $serviceLocator;
 
     const CONFIG_KEY = 'grids';
 
-    /**
-     * Determine if we can create a service with name
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param $name
-     * @param $requestedName
-     * @return bool
-     */
-    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    public function canCreate(\Interop\Container\ContainerInterface $container, $requestedName)
     {
         $res = false;
         if (strpos($requestedName, static::CONFIG_KEY . '.') === 0) {
@@ -47,7 +48,7 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
     /**
      * Создает экземпляр класса adapter'a и настраивает его.
      * @param array | ArrayAccess | AdapterInterface $adapterOptions
-     * @param ServiceLocatorInterface $serviceManager
+     * @param ServiceLocatorInterface $container
      * @return AdapterInterface|null
      * @throws Adapter\Exception\AdapterNotFoundException
      * @throws Adapter\Exception\InvalidArgumentException
@@ -55,18 +56,18 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
      * @throws Adapter\Exception\RuntimeException
      * @throws Exception\RuntimeException
      */
-    protected function createAdapter($adapterOptions, ServiceLocatorInterface $serviceManager)
+    protected function createAdapter($adapterOptions, ServiceLocatorInterface $container)
     {
-        $moduleOptions = $serviceManager->get('GridModuleOptions');
+        $moduleOptions = $container->get('GridModuleOptions');
         if (is_array($adapterOptions) || $adapterOptions instanceof ArrayAccess) {
             /** @var Adapter\Factory $adapterFactory */
-            $adapterFactory = $serviceManager->get(Adapter\Factory::class);
+            $adapterFactory = $container->get(Adapter\Factory::class);
             if (!array_key_exists('doctrine_entity_manager', $adapterOptions)
                 || !$adapterOptions['doctrine_entity_manager']
             ) {
                 $adapterOptions['doctrine_entity_manager'] = $moduleOptions->getDoctrineEntityManager();
             }
-            $adapter = $adapterFactory->create($adapterOptions);
+            $adapter = $adapterFactory($container, '', $adapterOptions);
         } elseif (is_object($adapterOptions)) {
             /** @var Adapter\Factory $adapterFactory */
             $adapter = $adapterOptions;
@@ -110,19 +111,17 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
     }
 
     /**
-     * Create service with name
-     *
-     * @param GridPluginManager | ServiceLocatorInterface $serviceLocator
-     * @param $name
-     * @param $requestedName
-     * @return mixed
+     * @param \Interop\Container\ContainerInterface | ServiceManager $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return AbstractGrid|GridInterface|SimpleGrid
      * @throws Exception\RuntimeException
      */
-    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->setServiceLocator($serviceLocator);
+        $this->setServiceLocator($container);
         /** @var ServiceLocatorInterface $serviceManager */
-        $serviceManager = $serviceLocator->getServiceLocator();
+        $serviceManager = $container;
         /** @var ModuleOptions $moduleOptions */
         $moduleOptions = $serviceManager->get('GridModuleOptions');
         $gridsConfig = $moduleOptions->getGrids();
@@ -160,8 +159,14 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         }
         $options['columnPluginManager'] = $serviceManager->get('GridColumnManager');
         $options['mutatorPluginManager'] = $serviceManager->get('GridMutatorManager');
+        if (!$container->has($gridClass)) {
+            $container->setFactory($gridClass, InvokableFactory::class);
+        }
+        //TODO подумать насчет кэширования shared
         /** @var GridInterface|AbstractGrid|SimpleGrid $grid */
-        $grid = $serviceLocator->get($gridClass, $options);
+        $grid = $container->build($gridClass, $options);
+
+
         if ($grid instanceof InitializableInterface) {
             $grid->init();
         }
@@ -182,6 +187,10 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         return $grid;
     }
 
+
+
+
+
     /**
      * @param $navigationBarOptions
      * @param ServiceLocatorInterface $serviceManager
@@ -197,4 +206,26 @@ class AbstractGridManagerFactory implements AbstractFactoryInterface
         $navigationBar = $navigationBarFactory->create($navigationBarOptions);
         return $navigationBar;
     }
+
+    /**
+     * @return ContainerInterface
+     */
+    public function getServiceLocator(): ContainerInterface
+    {
+        return $this->serviceLocator;
+    }
+
+    /**
+     * @param ContainerInterface $serviceLocator
+     * @return $this
+     */
+    public function setServiceLocator(ContainerInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+
+
+
 }

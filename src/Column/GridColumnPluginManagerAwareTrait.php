@@ -6,6 +6,8 @@
 
 namespace Nnx\DataGrid\Column;
 
+use Psr\Container\ContainerInterface;
+
 /**
  * Class GridColumnPluginManagerAwareTrait
  * @package Nnx\DataGrid\Column
@@ -29,10 +31,10 @@ trait GridColumnPluginManagerAwareTrait
 
     /**
      * Устанавливает мэнджер колонок
-     * @param GridColumnPluginManager $columnPluginManager
+     * @param ContainerInterface | GridColumnPluginManager $columnPluginManager
      * @return $this
      */
-    public function setColumnPluginManager(GridColumnPluginManager $columnPluginManager)
+    public function setColumnPluginManager(ContainerInterface $columnPluginManager)
     {
         $this->columnPluginManager = $columnPluginManager;
         return $this;

@@ -8,6 +8,7 @@ namespace Nnx\DataGrid\Controller;
 
 use Nnx\DataGrid\Adapter\DoctrineDBAL;
 use Nnx\DataGrid\Condition\Conditions;
+use Nnx\DataGrid\GridPluginManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Nnx\DataGrid\GridInterface;
 use Nnx\DataGrid\Condition\SimpleCondition;
@@ -16,9 +17,20 @@ use Zend\View\Model\ViewModel;
 /**
  * Class DataController
  * @package Nnx\DataGrid\Controller
+ * @deprecated use Nnx\DataGrid\Middleware\DataMiddleware
  */
 class DataController extends AbstractActionController
 {
+    /**
+     * @var GridPluginManager
+     */
+    protected $gridManager;
+
+    public function __construct(GridPluginManager $gridManager)
+    {
+        $this->setGridManager($gridManager);
+    }
+
     /**
      * Возвращает данные для таблиц
      * @return ViewModel
@@ -49,7 +61,7 @@ class DataController extends AbstractActionController
             throw new Exception\InvalidGridNameException('Не задано имя таблицы для получения данных');
         }
         /** @var GridInterface $grid */
-        $grid = $this->getServiceLocator()->get('GridManager')->get('grids.' . $gridName);
+        $grid = $this->getGridManager()->get('grids.' . $gridName);
 
         $adapter = $grid->getAdapter();
         if ($adapter instanceof DoctrineDBAL) {
@@ -96,5 +108,23 @@ class DataController extends AbstractActionController
 
         $conditionType = SimpleCondition::CRITERIA_TYPE_EQUAL;
         return new SimpleCondition($conditionData['key'], $conditionType, $conditionData['value']);
+    }
+
+    /**
+     * @return GridPluginManager
+     */
+    public function getGridManager(): GridPluginManager
+    {
+        return $this->gridManager;
+    }
+
+    /**
+     * @param GridPluginManager $gridManager
+     * @return $this
+     */
+    public function setGridManager(GridPluginManager $gridManager)
+    {
+        $this->gridManager = $gridManager;
+        return $this;
     }
 }

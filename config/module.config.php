@@ -8,6 +8,8 @@ namespace Nnx\DataGrid;
 
 use Nnx\DataGrid\Adapter\DoctrineDBAL;
 use Nnx\DataGrid\Controller\DataController;
+use Nnx\DataGrid\Controller\DataControllerFactory;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 return array_merge(
     [
@@ -25,8 +27,11 @@ return array_merge(
             ]
         ],
         'controllers' => [
-            'invokables' => [
-                'Nnx\DataGrid\Controller\Data' => DataController::class,
+            'factories' => [
+                DataController::class => DataControllerFactory::class,
+            ],
+            'aliases' => [
+                'Nnx\DataGrid\Controller\Data' => DataController::class
             ],
         ],
         'view_manager' => [

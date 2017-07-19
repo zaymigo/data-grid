@@ -6,8 +6,10 @@
 
 namespace Nnx\DataGrid\Mutator;
 
+use Nnx\DataGrid\Mutator\Exception\RuntimeException;
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\Factory\InvokableFactory;
+
 
 /**
  * Class GridMutatorPluginManager
@@ -41,22 +43,15 @@ class GridMutatorPluginManager extends AbstractPluginManager
      * данный мэнеджер
      * @var array
      */
-    protected $invokableClasses = [
-        Money::class => Money::class,
-        Concat::class => Concat::class,
-        StringFormat::class => StringFormat::class,
-        Percent::class => Percent::class,
-        AddClassToCell::class => AddClassToCell::class,
-
-    ];
-
-    /**
-     * @var array
-     */
     protected $factories = [
         Link::class => LinkFactory::class,
         Highlight::class => Factory::class,
-        DateTime::class => DateTimeFactory::class
+        DateTime::class => DateTimeFactory::class,
+        Money::class => InvokableFactory::class,
+        Concat::class => InvokableFactory::class,
+        StringFormat::class => InvokableFactory::class,
+        Percent::class => InvokableFactory::class,
+        AddClassToCell::class => InvokableFactory::class,
     ];
 
     /**
@@ -67,14 +62,14 @@ class GridMutatorPluginManager extends AbstractPluginManager
      *
      * @param  mixed $plugin
      * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @throws RuntimeException if invalid
      */
-    public function validatePlugin($plugin)
+    public function validate($plugin)
     {
         if ($plugin instanceof MutatorInterface) {
             return;
         }
 
-        throw new Exception\RuntimeException('Mutator должен реализовывать %s', MutatorInterface::class);
+        throw new RuntimeException('Mutator должен реализовывать %s', MutatorInterface::class);
     }
 }

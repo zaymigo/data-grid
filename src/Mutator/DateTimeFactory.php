@@ -6,27 +6,20 @@
 
 namespace Nnx\DataGrid\Mutator;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\MutableCreationOptionsInterface;
-use Zend\ServiceManager\MutableCreationOptionsTrait;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Zend\Filter\FilterPluginManager;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class DateTimeFactory
  * @package Nnx\DataGrid\Mutator
  */
-class DateTimeFactory implements FactoryInterface, MutableCreationOptionsInterface
+class DateTimeFactory implements FactoryInterface
 {
-    use MutableCreationOptionsTrait;
-
-    /**
-     * Конструктор класса
-     * @param array $options
-     */
-    public function __construct(array $options = [])
-    {
-        $this->setCreationOptions($options);
-    }
 
     /**
      * Create service
@@ -36,11 +29,30 @@ class DateTimeFactory implements FactoryInterface, MutableCreationOptionsInterfa
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof GridMutatorPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
+
+    }
+
+    /**
+     * Create an object
+     *
+     * @param  ContainerInterface $container
+     * @param  string $requestedName
+     * @param  null|array $options
+     * @return object
+     * @throws ServiceNotFoundException if unable to resolve the service.
+     * @throws ServiceNotCreatedException if an exception is raised when
+     *     creating a service.
+     * @throws ContainerException if any other error occurs
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+//        if ($serviceLocator instanceof GridMutatorPluginManager) {
+//            $serviceLocator = $serviceLocator->getServiceLocator();
+//        }
+        $dateTimeFormatter = $container->get("FilterManager")->get('DateTimeFormatter');
+        if (!is_array($options)) {
+            $options = [];
         }
-        $dateTimeFormatter = $serviceLocator->get('FilterManager')->get('DateTimeFormatter');
-        $options = $this->getCreationOptions();
         return new DateTime($dateTimeFormatter, $options);
     }
 }

@@ -6,8 +6,9 @@
 
 namespace Nnx\DataGrid\Column\Action;
 
-use Nnx\DataGrid\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Traversable;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 
 /**
@@ -40,19 +41,19 @@ class Factory implements FactoryInterface
      * @param array | Traversable | string $spec
      * @return mixed
      */
-    public function create($spec)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /**
-         * @TODO fixme
-         */
-        $action = new SimpleAction($spec);
-        if (array_key_exists('attributes', $spec)) {
-            $action->setAttributes($spec['attributes']);
+        //TODO fixme
+        $action = new SimpleAction($options);
+        if (array_key_exists('attributes', $options)) {
+            $action->setAttributes($options['attributes']);
         }
 
-        if (array_key_exists('validate', $spec)) {
-            $action->setValidationFunction($spec['validate']);
+        if (array_key_exists('validate', $options)) {
+            $action->setValidationFunction($options['validate']);
         }
         return $action;
     }
+
+
 }

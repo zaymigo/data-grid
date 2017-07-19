@@ -6,29 +6,17 @@
 
 namespace Nnx\DataGrid\Mutator;
 
+use Interop\Container\ContainerInterface;
 use ReflectionClass;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\MutableCreationOptionsInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\MutableCreationOptionsTrait;
 
 /**
  * Class Factory
  * @package Nnx\DataGrid\Mutator
  */
-class Factory implements FactoryInterface, MutableCreationOptionsInterface
+class Factory implements FactoryInterface
 {
-    use MutableCreationOptionsTrait;
-
-    /**
-     * Конструктор класса
-     * @param array $options
-     */
-    public function __construct(array $options = [])
-    {
-        $this->setCreationOptions($options);
-    }
-
     /**
      * Валидирует пришедшие данные для создания мутатора
      * @param array $spec
@@ -48,23 +36,22 @@ class Factory implements FactoryInterface, MutableCreationOptionsInterface
      * @return mixed
      * @throws Exception\RuntimeException
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $spec = $this->getCreationOptions();
-        $this->validate($spec);
+        $this->validate($options);
 
-        $options = [];
-        if (array_key_exists('options', $spec) && $spec['options']) {
-            $options = $spec['options'];
+        $specOptions = [];
+        if (array_key_exists('options', $options) && $options['options']) {
+            $specOptions = $options['options'];
         }
-        $className = __NAMESPACE__ . '\\' . ucfirst($spec['type']);
+        $className = __NAMESPACE__ . '\\' . ucfirst($options['type']);
         $reflectionClass = new ReflectionClass($className);
         if (!$reflectionClass->isInstantiable()) {
             throw new Exception\RuntimeException(
                 sprintf('Невозможно создать экземпляр класса %s', $className)
             );
         }
-        $mutator = $reflectionClass->newInstance($options);
+        $mutator = $reflectionClass->newInstance($specOptions);
         return $mutator;
     }
 }

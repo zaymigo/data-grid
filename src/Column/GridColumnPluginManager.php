@@ -6,6 +6,7 @@
 
 namespace Nnx\DataGrid\Column;
 
+use Nnx\DataGrid\Column\Exception\RuntimeException;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 
@@ -59,14 +60,14 @@ class GridColumnPluginManager extends AbstractPluginManager
      *
      * @param  mixed $plugin
      * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @throws RuntimeException if invalid
      */
-    public function validatePlugin($plugin)
+    public function validate($plugin)
     {
         if ($plugin instanceof ColumnInterface) {
             return;
         }
 
-        throw new Exception\RuntimeException(sprintf('Column должен реализовывать %s', ColumnInterface::class));
+        throw new RuntimeException(sprintf('Column должен реализовывать %s', ColumnInterface::class));
     }
 }

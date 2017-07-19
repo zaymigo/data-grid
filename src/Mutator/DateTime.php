@@ -6,6 +6,7 @@
 
 namespace Nnx\DataGrid\Mutator;
 
+use function MongoDB\is_string_array;
 use Zend\Filter\DateTimeFormatter;
 
 /**
@@ -46,6 +47,9 @@ class DateTime extends AbstractMutator
      */
     public function change($value)
     {
+        if (is_string($value) && is_numeric($value)) {
+            $value = (int)$value;
+        }
         return $this->getDateTimeFormatter()->setFormat($this->getFormat())->filter($value);
     }
 

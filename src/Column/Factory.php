@@ -6,15 +6,17 @@
 
 namespace Nnx\DataGrid\Column;
 
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use Nnx\DataGrid\Column\Exception\InvalidColumnException;
 use Nnx\DataGrid\Column\Exception\InvalidNameException;
 use Nnx\DataGrid\Column\Exception\InvalidSpecificationException;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Nnx\DataGrid\Mutator\MutatorInterface;
 use Traversable;
 use Zend\Http\Header\HeaderInterface;
-use Zend\ServiceManager\MutableCreationOptionsInterface;
-use Zend\ServiceManager\MutableCreationOptionsTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ReflectionClass;
 use Nnx\DataGrid\Mutator\Exception\RuntimeException;
@@ -24,20 +26,9 @@ use Nnx\DataGrid\Mutator\Exception\RuntimeException;
  * Class Factory
  * @package Nnx\DataGrid\Column
  */
-class Factory implements MutableCreationOptionsInterface, FactoryInterface
+class Factory implements FactoryInterface
 {
     use GridColumnPluginManagerAwareTrait;
-    use MutableCreationOptionsTrait;
-
-
-    /**
-     * Конструктор класса
-     * @param array $options
-     */
-    public function __construct(array $options)
-    {
-        $this->setCreationOptions($options);
-    }
 
     /**
      * @param array | Traversable $spec
@@ -73,7 +64,7 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
     {
         $mutators = [];
         if (array_key_exists('mutators', $spec) && $spec['mutators']) {
-            $mutatorPluginManager = $this->getColumnPluginManager()->getServiceLocator()->get('GridMutatorManager');
+            $mutatorPluginManager = $this->getColumnPluginManager()->get('GridMutatorManager');
             foreach ($spec['mutators'] as $mutator) {
                 if (!$mutator instanceof MutatorInterface) {
                     if (is_array($mutator) && (!array_key_exists('type', $mutator) || !$mutator['type'])) {
@@ -107,6 +98,7 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
             ) {
                 $mutatorsOptions = $spec['options']['mutatorsOptions'];
             }
+
             foreach ($mutatorsNames as $k => $mutator) {
                 $spec['mutators'][] = [
                     'type' => $mutator,
@@ -119,7 +111,7 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
         return $spec;
     }
 
-    protected function createHeader($spec)
+    protected function createHeader($spec, ContainerInterface $container)
     {
         $header = null;
         if (array_key_exists('header', $spec)
@@ -127,8 +119,8 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
         ) {
             if (!$spec['header'] instanceof HeaderInterface) {
                 /** @var Header\Factory $headerFactory */
-                $headerFactory = $this->getColumnPluginManager()->getServiceLocator()->get(Header\Factory::class);
-                $header = $headerFactory->create($spec['header']);
+                $headerFactory = $this->getColumnPluginManager()->get(Header\Factory::class);
+                $header = $headerFactory($container, '', $spec['header']);
             } else {
                 $header = $spec['header'];
             }
@@ -147,22 +139,22 @@ class Factory implements MutableCreationOptionsInterface, FactoryInterface
      * @throws InvalidSpecificationException
      * @throws RuntimeException
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $spec = $this->getCreationOptions();
-        $this->setColumnPluginManager($serviceLocator);
-        $this->validate($spec);
-        $className = __NAMESPACE__ . '\\' . ucfirst($spec['type']);
+        $this->setColumnPluginManager($container);
+        $this->validate($options);
+        $className = __NAMESPACE__ . '\\' . ucfirst($options['type']);
         $reflectionColumn = new ReflectionClass($className);
         if (!$reflectionColumn->isInstantiable()) {
             throw new Exception\RuntimeException(sprintf('Класс %s не найден', $className));
         }
-        unset($spec['columnPluginManager']);
-        $column = $reflectionColumn->newInstance($spec);
-        $header = $this->createHeader($spec);
+        unset($options['columnPluginManager']);
+        /** @var ColumnInterface $column */
+        $column = $reflectionColumn->newInstance($options);
+        $header = $this->createHeader($options, $container);
         $column->setHeader($header);
-        $spec = $this->prepareMutatorsSpecification($column, $spec);
-        $column->setMutators($this->getMutators($spec));
+        $options = $this->prepareMutatorsSpecification($column, $options);
+        $column->setMutators($this->getMutators($options));
 
         return $column;
     }

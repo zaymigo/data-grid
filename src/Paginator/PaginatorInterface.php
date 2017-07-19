@@ -23,6 +23,13 @@ interface PaginatorInterface extends Countable
     public function getPossibleItemCountPerPage();
 
     /**
+     * Set the possible number of items per page.
+     * @param array $posItemsCountPerPage
+     * @return $this
+     */
+    public function setPossibleItemCountPerPage(array $posItemsCountPerPage);
+
+    /**
      * Sets the number of items per page.
      *
      * @param  int $itemCountPerPage

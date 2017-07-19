@@ -6,6 +6,7 @@
 
 namespace Nnx\DataGrid\Column;
 
+use Psr\Container\ContainerInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
@@ -34,5 +35,9 @@ class ActionFactory extends Factory
         $header = $this->createHeader($this->getCreationOptions());
         $options['header'] = $header;
         return new Action($options);
+    }
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) {
+
     }
 }

@@ -9,6 +9,8 @@ use Nnx\DataGrid\Button\GridButtonPluginManager;
 use Nnx\DataGrid\Button\GridButtonPluginManagerFactory;
 use Nnx\DataGrid\Column\GridColumnPluginManager;
 use Nnx\DataGrid\Column\GridColumnPluginManagerFactory;
+use Nnx\DataGrid\Middleware\DataMiddleware;
+use Nnx\DataGrid\Middleware\DataMiddlewareFactory;
 use Nnx\DataGrid\Mutator\GridMutatorPluginManagerFactory;
 use Nnx\DataGrid\Mutator\GridMutatorPluginManager;
 use Nnx\DataGrid\Options\ModuleOptions;
@@ -23,7 +25,9 @@ return [
             GridMutatorPluginManager::class => GridMutatorPluginManagerFactory::class,
             GridPluginManager::class => GridPluginManagerFactory::class,
             ModuleOptions::class => Options\Factory::class,
-            GridButtonPluginManager::class => GridButtonPluginManagerFactory::class
+            GridButtonPluginManager::class => GridButtonPluginManagerFactory::class,
+
+            DataMiddleware::class => DataMiddlewareFactory::class,
         ],
         'invokables' => [
             Adapter\Factory::class => Adapter\Factory::class,

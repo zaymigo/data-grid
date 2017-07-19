@@ -7,12 +7,13 @@
 namespace Nnx\DataGrid;
 
 use Traversable;
+use Zend\ServiceManager\Factory\FactoryInterface as ServiceManagerFactoryInterface;
 
 /**
  * Interface FactoryInterface
  * @package Nnx\DataGrid\Column
  */
-interface FactoryInterface
+interface FactoryInterface extends ServiceManagerFactoryInterface
 {
     /**
      * Создает экземпляр объекта

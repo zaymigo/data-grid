@@ -10,6 +10,7 @@ use Nnx\DataGrid\Column\GridColumnProviderInterface;
 use Nnx\DataGrid\Mutator\GridMutatorProviderInterface;
 use \Nnx\DataGrid\Button\GridButtonProviderInterface;
 use Nnx\DataGrid\Options\ModuleOptions;
+use Psr\Container\ContainerInterface;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
@@ -20,24 +21,24 @@ use Zend\ModuleManager\Listener\ServiceListenerInterface;
 use Zend\ModuleManager\ModuleManager;
 use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Class Module
  * @package Nnx\DataGrid
  */
 class Module
-    implements ServiceLocatorAwareInterface,
-    ConfigProviderInterface,
+    implements ConfigProviderInterface,
     AutoloaderProviderInterface,
     BootstrapListenerInterface,
     ServiceProviderInterface,
     InitProviderInterface
 {
-
-    use ServiceLocatorAwareTrait;
+    /**
+     * @var ContainerInterface
+     */
+    protected $serviceManager;
 
     /**
      * Имя секции в конфигах приложения, содержащей настройки модуля
@@ -93,7 +94,7 @@ class Module
     public function onBootstrap(EventInterface $e)
     {
         /** @var MvcEvent $e */
-        $this->setServiceLocator($e->getApplication()->getServiceManager());
+        $this->setServiceManager($e->getApplication()->getServiceManager());
     }
 
     /**
@@ -162,6 +163,26 @@ class Module
     public function getModuleOptions()
     {
         /** @var ModuleOptions $moduleOptions */
-        return $this->getServiceLocator()->get('GridModuleOptions');
+        return $this->getServiceManager()->get('GridModuleOptions');
     }
+
+    /**
+     * @return ServiceManager
+     */
+    public function getServiceManager(): ServiceManager
+    {
+        return $this->serviceManager;
+    }
+
+    /**
+     * @param ServiceManager $serviceManager
+     * @return $this
+     */
+    public function setServiceManager(ServiceManager $serviceManager)
+    {
+        $this->serviceManager = $serviceManager;
+        return $this;
+    }
+
+
 }

@@ -6,10 +6,14 @@
 
 namespace Nnx\DataGrid\Condition;
 
-use Nnx\DataGrid\FactoryInterface;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use Traversable;
 use ArrayAccess;
 use ReflectionClass;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class ConditionFactory
@@ -50,27 +54,29 @@ class Factory implements FactoryInterface
 
     /**
      * Создает критерий
-     * @param array|Traversable $spec
+     * @param array|Traversable $options
      * @return ConditionInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function create($spec)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->validate($spec);
-        if (!array_key_exists('criteria', $spec) || !$spec['criteria']) {
-            $spec['criteria'] = SimpleCondition::CRITERIA_TYPE_EQUAL;
+        $this->validate($options);
+        if (!array_key_exists('criteria', $options) || !$options['criteria']) {
+            $options['criteria'] = SimpleCondition::CRITERIA_TYPE_EQUAL;
         }
-        if (!class_exists($spec['type'])) {
-            throw new Exception\RuntimeException(sprintf('Класс condition\'a %s не найден', $spec['type']));
+        if (!class_exists($options['type'])) {
+            throw new Exception\RuntimeException(sprintf('Класс condition\'a %s не найден', $options['type']));
         }
-        $reflection = new ReflectionClass($spec['type']);
+        $reflection = new ReflectionClass($options['type']);
         if (!$reflection->isInstantiable()) {
-            throw new Exception\RuntimeException(sprintf('Невозможно создать экземпляр condition\'a %s', $spec['type']));
+            throw new Exception\RuntimeException(sprintf('Невозможно создать экземпляр condition\'a %s', $options['type']));
         }
         if (!$reflection->implementsInterface(ConditionInterface::class)) {
             throw new Exception\RuntimeException(sprintf('Condition должен реализовывать %s', ConditionInterface::class));
         }
-        return $reflection->newInstanceArgs([$spec['key'], $spec['criteria'], $spec['value']]);
+        return $reflection->newInstanceArgs([$options['key'], $options['criteria'], $options['value']]);
     }
+
+
 }

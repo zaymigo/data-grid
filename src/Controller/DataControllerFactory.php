@@ -1,24 +1,25 @@
 <?php
 /**
- * @company MTE Telecom, Ltd.
- * @author Roman Malashin <malashinr@mte-telecom.ru>
+ * @author: Deller <r.malashin@zaymigo.com>
+ * @copyright Copyright (c) 2017, Zaymigo
  */
 
-namespace Nnx\DataGrid\Mutator;
+namespace Nnx\DataGrid\Controller;
+
 
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Class LinkFactory
- * @package Nnx\DataGrid\Mutator
+ * Class DataControllerFactory
+ * @package Nnx\DataGrid\Controller
  */
-class LinkFactory implements FactoryInterface
+class DataControllerFactory implements FactoryInterface
 {
+
     /**
      * Create an object
      *
@@ -33,8 +34,7 @@ class LinkFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $helper = $container->get('ViewHelperManager')->get('Url');
-        $linkMutator = new Link($helper, $options);
-        return $linkMutator;
+        $controller = new DataController($container->get('GridManager'));
+        return $controller;
     }
 }

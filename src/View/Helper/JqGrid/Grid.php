@@ -8,6 +8,7 @@ namespace Nnx\DataGrid\View\Helper\JqGrid;
 
 use Nnx\DataGrid\Mutator\HighlightMutatorInterface;
 use Nnx\DataGrid\PaginatorGridInterface;
+use Nnx\DataGrid\SearchAwareInterface;
 use Zend\View\Helper\AbstractHelper;
 use Nnx\DataGrid\GridInterface;
 use Zend\View\Helper\EscapeHtml;
@@ -75,16 +76,31 @@ class Grid extends AbstractHelper
             $res .= "<div id='pager-grid-{$gridName}'>";
         }
 
+
+
         $options = \Zend\Json\Json::encode(
             $config,
             false,
             ['enableJsonExprFinder' => true]
         );
+        $searchOptions = '';
+        if ($grid instanceof SearchAwareInterface) {
+            $searchOptions .=  '$("#grid-' . $grid->getName() . '").jqGrid("filterToolbar",'
+                . \Zend\Json\Json::encode(
+                    $grid->getSearchOptions(),
+                    false,
+                    ['enableJsonExprFinder' => true]
+                ) .');';
+        }
 
         $view->headScript()->appendScript('$(function(){'
             . 'var grid = $("#grid-' . $grid->getName() . '").jqGrid('
             . str_replace('"%rowAttrFunction%"', $rowAttr, $options) . ');'
-            . str_replace('%gridName%', $grid->getName(), $buttonsJs) . '});');
+            . str_replace('%gridName%', $grid->getName(), $buttonsJs)
+            . $searchOptions
+            . '});');
+
+
         return $res;
     }
 
@@ -125,7 +141,8 @@ class Grid extends AbstractHelper
         $config = [
             'shrinkToFit' => false,
             'width' => $this->getConfigVal('width', $attributes, '100%'),
-            'datatype' => $this->getConfigVal('datatype', $attributes, 'local')
+            'datatype' => $this->getConfigVal('datatype', $attributes, 'local'),
+            'height' =>  $this->getConfigVal('height', $attributes, 'auto'),
         ];
         if (!array_key_exists('width', $attributes) && !array_key_exists('autowidth', $attributes)) {
             $config['autowidth'] = true;

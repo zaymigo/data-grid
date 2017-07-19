@@ -54,6 +54,7 @@ if (count($data) !== 0) {
 $total = 0;
 $page = 1;
 
+
 if ($grid instanceof \Nnx\DataGrid\PaginatorGridInterface) {
     /** @var \Nnx\DataGrid\PaginatorGridInterface $grid */
     $paginator = $grid->getPaginator();
@@ -65,5 +66,6 @@ if ($grid instanceof \Nnx\DataGrid\PaginatorGridInterface) {
 echo json_encode((object)[
     'rows' => $rows,
     'total' => $total,
-    'page' => $page
+    'page' => $page,
+    'records' => $grid->getAdapter()->getCount()
 ]);

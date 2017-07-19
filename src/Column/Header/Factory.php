@@ -6,10 +6,14 @@
 
 namespace Nnx\DataGrid\Column\Header;
 
-use Nnx\DataGrid\FactoryInterface;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use Nnx\DataGrid\Column\Header\Exception\NoValidSpecificationException;
 use Nnx\DataGrid\Column\Header\Exception\NoValidTemplateException;
 use Traversable;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Фабрика заголовков для колонок таблицы
@@ -49,19 +53,19 @@ class Factory implements FactoryInterface
 
     /**
      * Создает экземпляр класса фабрики
-     * @param array|Traversable $spec
+     * @param array|Traversable $options
      * @throws NoValidSpecificationException
      * @throws NoValidTemplateException
      * @return HeaderInterface
      */
-    public function create($spec)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->validate($spec);
-        $options = $this->checkOption('options', $spec);
-        $data = $this->checkOption('data', $spec);
-        $title = $this->checkOption('title', $spec);
-        $template = $this->checkOption('template', $spec);
-        $header = new SimpleHeader($title, $template, ($data ?: []), ($options ?: []));
+        $this->validate($options);
+        $specOptions = $this->checkOption('options', $options);
+        $data = $this->checkOption('data', $options);
+        $title = $this->checkOption('title', $options);
+        $template = $this->checkOption('template', $options);
+        $header = new SimpleHeader($title, $template, ($data ?: []), ($specOptions ?: []));
         return $header;
     }
 }

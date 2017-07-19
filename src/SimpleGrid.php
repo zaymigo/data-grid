@@ -58,6 +58,7 @@ class SimpleGrid extends AbstractGrid implements ColumHidebleProviderInterface
         $this->setColumsChanged(true);
         return parent::setColumns($columns);
     }
+
     /**
      * Добавление колонки в таблицу
      * @param ColumnInterface|array|ArrayAccess $column
@@ -152,6 +153,7 @@ class SimpleGrid extends AbstractGrid implements ColumHidebleProviderInterface
      */
     public function getColumns()
     {
+        $i = 0;
         $colums = parent::getColumns();
         if ($this->getUserHiddenColums() && $this->isColumsChanged()) {
             $newColums = [];

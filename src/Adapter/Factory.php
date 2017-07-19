@@ -7,21 +7,22 @@
 namespace Nnx\DataGrid\Adapter;
 
 use ArrayAccess;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
 use Nnx\DataGrid\Adapter\Exception\InvalidOptionsException;
-use Nnx\DataGrid\FactoryInterface;
 use ReflectionClass;
 use Traversable;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\Stdlib\InitializableInterface;
 
 /**
  * Class Factory
  * @package Nnx\DataGrid\Adapter
  */
-class Factory implements FactoryInterface, ServiceLocatorAwareInterface
+class Factory implements FactoryInterface
 {
-    use ServiceLocatorAwareTrait;
 
     /**
      * @param string $adapterClass
@@ -29,10 +30,10 @@ class Factory implements FactoryInterface, ServiceLocatorAwareInterface
      * @return AdapterInterface|EntityManagerAwareInterface
      * @throws Exception\RuntimeException
      */
-    protected function createAdapter($adapterClass, $spec)
+    protected function createAdapter(ContainerInterface $container, $adapterClass, $spec)
     {
-        if ($this->getServiceLocator()->has($adapterClass)) {
-            $adapter = $this->getServiceLocator()->get($adapterClass);
+        if ($container->has($adapterClass)) {
+            $adapter = $container->get($adapterClass);
         } else {
             $reflectionAdapter = new ReflectionClass($adapterClass);
             if (!$reflectionAdapter->implementsInterface(AdapterInterface::class)) {
@@ -48,45 +49,45 @@ class Factory implements FactoryInterface, ServiceLocatorAwareInterface
 
     /**
      * Создает экземпляр объекта
-     * @param array | Traversable | string $spec
+     * @param array | Traversable | string $options
      * @return AdapterInterface|null
      * @throws Exception\AdapterNotFoundException
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      * @throws InvalidOptionsException
      */
-    public function create($spec)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        if (!is_array($spec) && $spec instanceof ArrayAccess) {
+        if (!is_array($options) && !($options instanceof ArrayAccess)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('В фабрику для создания адаптера таблицы должен приходить массив или %s', ArrayAccess::class)
             );
         }
 
-        if (!array_key_exists('class', $spec) || !$spec['class']) {
+        if (!array_key_exists('class', $options) || !$options['class']) {
             throw new Exception\RuntimeException('Секция адаптера для таблицы существует, но не задан класс адаптера');
         }
-        $adapterClass =& $spec['class'];
+        $adapterClass =& $options['class'];
         if (!class_exists($adapterClass)) {
             throw new Exception\AdapterNotFoundException(sprintf('Adapter %s не найден.', $adapterClass));
         }
 
-        $adapter = $this->createAdapter($adapterClass, $spec);
-        if (array_key_exists('options', $spec) && $spec['options']) {
-            $options =& $spec['options'];
-            if (!$options instanceof ArrayAccess && !is_array($options)) {
+        $adapter = $this->createAdapter($container, $adapterClass, $options);
+        if (array_key_exists('options', $options) && $options['options']) {
+            $specOptions =& $options['options'];
+            if (!$specOptions instanceof ArrayAccess && !is_array($specOptions)) {
                 throw new InvalidOptionsException(
                     sprintf('Опции для адаптера должны быть массивом или реализовывать %s', ArrayAccess::class)
                 );
             }
-            $adapter->setOptions($options);
+            $adapter->setOptions($specOptions);
         }
 
         if ($adapter instanceof EntityManagerAwareInterface
-            && array_key_exists('doctrine_entity_manager', $spec)
-            && $spec['doctrine_entity_manager']
+            && array_key_exists('doctrine_entity_manager', $options)
+            && $options['doctrine_entity_manager']
         ) {
-            $adapter->setEntityManager($this->getServiceLocator()->get($spec['doctrine_entity_manager']));
+            $adapter->setEntityManager($container->get($options['doctrine_entity_manager']));
         }
 
         if ($adapter instanceof InitializableInterface) {
@@ -94,4 +95,6 @@ class Factory implements FactoryInterface, ServiceLocatorAwareInterface
         }
         return $adapter;
     }
+
+
 }

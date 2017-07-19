@@ -6,8 +6,11 @@
 
 namespace Nnx\DataGrid\Options;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Nnx\DataGrid\Module;
 use ArrayAccess;
 
@@ -19,15 +22,20 @@ class Factory implements FactoryInterface
 {
 
     /**
-     * Create service
+     * Create an object
      *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
-     * @throws Exception\RuntimeException
+     * @param  ContainerInterface $container
+     * @param  string $requestedName
+     * @param  null|array $options
+     * @return object
+     * @throws ServiceNotFoundException if unable to resolve the service.
+     * @throws ServiceNotCreatedException if an exception is raised when
+     *     creating a service.
+     * @throws ContainerException if any other error occurs
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config = $serviceLocator->get('config');
+        $config = $container->get('config');
         $options = [];
         if (array_key_exists(Module::CONFIG_KEY, $config) && $config[Module::CONFIG_KEY]) {
             if (!is_array($config[Module::CONFIG_KEY]) && $config[Module::CONFIG_KEY] instanceof ArrayAccess) {
