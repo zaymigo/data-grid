@@ -35,6 +35,11 @@ class Link extends AbstractMutator
      */
     protected $routeOptions = [];
 
+    /**
+     * @var array
+     */
+    protected $attributes = [];
+
 
     public function __construct(Url $urlHelper, array $options = [])
     {
@@ -50,6 +55,9 @@ class Link extends AbstractMutator
         if (array_key_exists('routeOptions', $options)) {
             $this->setRouteOptions($options['routeOptions']);
         }
+        if (array_key_exists('attributes', $options)) {
+            $this->setAttributes($options['attributes']);
+        }
     }
 
 
@@ -62,7 +70,11 @@ class Link extends AbstractMutator
     {
         $urlHelper = $this->getUrlHelper();
         $options = array_merge($this->getRouteOptions(), $this->getRowData());
-        return '<a href="'
+        $attributes = '';
+        foreach ($this->getAttributes() as $k => $attribute) {
+            $attributes .= htmlspecialchars($k) . '="' . htmlspecialchars($attribute) . '" ';
+        }
+        return '<a ' . $attributes . ' href="'
         . $this->getUrl($urlHelper($this->getRouteName(), $this->getRouteParams(), $options))
         . '">' . $value . '</a>';
     }
@@ -167,6 +179,24 @@ class Link extends AbstractMutator
     public function setRouteOptions($routeOptions)
     {
         $this->routeOptions = $routeOptions;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param array $attributes
+     * @return $this
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
         return $this;
     }
 }
