@@ -24,6 +24,9 @@ class Concat extends AbstractMutator
      */
     protected $separator = ' ';
 
+    /**
+     * @var bool
+     */
     protected $onlyNotEmptyFields = false;
 
     /**
