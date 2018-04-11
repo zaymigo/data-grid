@@ -7,11 +7,8 @@
 namespace Nnx\DataGrid\Middleware;
 
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use function MongoDB\is_string_array;
 use Nnx\DataGrid\Adapter\DoctrineDBAL;
-use Nnx\DataGrid\Column\ColumnInterface;
 use Nnx\DataGrid\Condition\Conditions;
 use Nnx\DataGrid\Condition\SimpleCondition;
 use Nnx\DataGrid\GridInterface;
@@ -25,7 +22,7 @@ use Zend\Stdlib\Parameters;
  * Class DataMiddleware
  * @package Nnx\DataGrid
  */
-class DataMiddleware implements MiddlewareInterface
+class DataMiddleware
 {
     /**
      * @var PaginatorGridInterface | GridInterface
@@ -42,15 +39,12 @@ class DataMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * to the next middleware component to create the response.
-     *
      * @param ServerRequestInterface $request
-     * @param DelegateInterface $delegate
-     *
-     * @return ResponseInterface
+     * @param ResponseInterface $response
+     * @param callable $next
+     * @return JsonResponse
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
         $queryParams = new Parameters($request->getQueryParams());
         $orderField = $queryParams->get('sidx', null);
