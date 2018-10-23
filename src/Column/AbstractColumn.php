@@ -64,7 +64,7 @@ abstract class AbstractColumn implements ColumnInterface
      * Предустановленные для данной колонки мутаторы
      * @var array|Traversable
      */
-    protected $invokableMutators;
+    protected $invokableMutators = [];
 
     /**
      * Устанавливает свойства класса
