@@ -90,8 +90,9 @@ class Factory implements FactoryInterface
     protected function prepareMutatorsSpecification(ColumnInterface $column, $spec)
     {
         $mutatorsNames = $column->getInvokableMutators();
+
         $mutatorsOptions = [];
-        if (count($mutatorsNames)) {
+        if (is_array($mutatorsNames) && count($mutatorsNames)) {
             if (array_key_exists('options', $spec)
                 && is_array($spec['options'])
                 && array_key_exists('mutatorsOptions', $spec['options'])
